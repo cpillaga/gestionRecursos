@@ -313,3 +313,5 @@ app.get('/empleado/buscar/:termino/:empresa', verificaToken, function(req, res) 
 });
 
 module.exports = app;
+
+//No olvidarse de poner la ruta en el index.js
