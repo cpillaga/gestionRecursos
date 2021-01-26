@@ -1,0 +1,133 @@
+<div class="col-1 col-sm-1 col-md-3">
+    <div class="info-box">
+        <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-check-double"></i></span>
+
+        <div class="info-box-content">
+            <span class="info-box-text">Total de Competencias</span>
+            <span class="info-box-number">
+               {{contComp}}
+        </span>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Competencias</h3>
+
+                <div class="card-tools">
+
+                    <form #buscar="ngForm" class="form-horizontal" (keyup)="searchComp(buscar)">
+
+                        <div id="zero_config_filter" class="dataTables_filter"><label><input type="text"  
+                            class="form-control float-right" placeholder="Buscar..." value="{{ buscarComp }}" 
+                            [ngModel]="buscarComp" id="buscarComp" name="buscarComp"  aria-controls="zero_config"></label></div>
+
+
+                    </form>
+                </div>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body table-responsive p-0">
+                <table class="table table-hover text-nowrap">
+                    <thead>
+                        <tr>
+                            <th>Descripción</th>
+                            <th style="text-align: right;" scope="col">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody *ngFor="let competencia of competencias">
+                        <tr>
+                            <td class="{{competencia.estado}}">{{competencia.descripcion}}</td>
+                            <td class="td-actions text-right">
+                                <a style="cursor: pointer; margin-right: 7px;" style="cursor: pointer; color:white;" rel="tooltip" title="Editar" (click)="getDataCompetencia(competencia)" data-toggle="modal" data-target="#modalupdCompetencia">
+                                    <a class="badge bg-primary"><i class="fas fa-edit"></i></a>
+                                    <!-- <i class="fa fa-edit"></i> -->
+                                </a>
+                                <a *ngIf="competencia.estado == 'true'" style="cursor: pointer; color:white;" rel="tooltip" title="Eliminar" (click)="eliminarCompetencia(competencia)">
+                                    <a class="badge bg-danger"><i class="fas fa-window-close"></i></a>
+                                </a>
+                                <a *ngIf="competencia.estado == 'false'" style="cursor: pointer; color: white;" rel="tooltip" title="Habilitar" (click)="habilitarCompetencia(competencia)">
+                                    <a class="badge bg-success"><i class="fas fa-check"></i></a>
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <caption>
+                    <a class="btn btn-success" data-toggle="modal" data-target="#modaladdCompetencias" style="position: fixed; bottom: 15px; right: 20px; border-radius: 100% !important; float: right;">
+                        <i style="color: white;" class="fa fa-plus"></i>
+                    </a>
+                </caption>
+            </div>
+            <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+    </div>
+</div>
+
+
+<!-- Modal para registros nuevos -->
+<div class="modal fade" id="modaladdCompetencias" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-sm" role="document">
+        <form #addCompetencia="ngForm" id="addC" (ngSubmit)="addCompetencias(addCompetencia); addCompetencia.reset()">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Agregar Competencias</h5>
+                    <button type="button" #closebuttonadd class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+                <div class="modal-body ">
+                    <div class="row">
+                        <label class="col-md-4 col-form-label" style="margin-top: 10px;">Descripción:</label>
+                        <div class="col-md-8">
+                            <div class="form-group has-default">
+                                <input type="text" id="desComp" name="desComp" [ngModel]=" desComp" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button type="submit" class="btn btn-success" id="add_Competencia" name="add_Competencia">Agregar</button>
+
+                </div>
+
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<!-- Modal para modificar nuevos -->
+<div class="modal fade" *ngIf="dataUpdComp == true" id="modalupdCompetencia" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-sm" role="document">
+        <form #updCompetencia="ngForm" id="updC" (ngSubmit)="updCompetencias(updCompetencia)">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modificar Competencias</h5>
+                    <button type="button" #closebuttonupd class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+                <div class="modal-body ">
+                    <div class="row">
+                        <label class="col-md-4 col-form-label" style="margin-top: 10px;">Descripción:</label>
+                        <div class="col-md-8">
+                            <div class="form-group has-default">
+                                <input type="text" id="desCompU" name="desCompU" [ngModel]="desCompU" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button type="submit" class="btn btn-success" id="updCompetencia" name="updCompetencia">Modificar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

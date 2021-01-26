@@ -1,0 +1,142 @@
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Empresa</h3>
+
+                <div class="card-tools">
+
+                    <form #buscar="ngForm" class="form-horizontal" (keyup)="searchEmpresa(buscar)">
+
+                        <div id="zero_config_filter" class="dataTables_filter"><label><input type="text"  
+                            class="form-control float-right" placeholder="Buscar..." value="{{ buscarEmpresa }}" 
+                            [ngModel]="buscarEmpresa" id="buscarEmpresa" name="buscarEmpresa"  aria-controls="zero_config"></label></div>
+
+                    </form>
+                </div>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body table-responsive p-0">
+                <table class="table table-hover text-nowrap">
+                    <thead>
+                        <tr>
+                            <th>Ruc</th>
+                            <th>Razon Social</th>
+                            <th>Telefono</th>
+                            <th>Direccion</th>
+                            <th>Ingreso</th>
+                            <th>Estado de pago</th>
+                            <th style="text-align: right;" scope="col">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody *ngFor="let emp of empresas">
+                        <tr>
+                            <td class="{{emp.estado}}">{{emp.ruc}}</td>
+                            <td class="{{emp.estado}}">{{emp.razonSocial}}</td>
+                            <td class="{{emp.estado}}">{{emp.telefono}}</td>
+                            <td class="{{emp.estado}}">{{emp.direccion}}</td>
+                            <td class="text-center">{{emp.fechaIngreso | date: 'dd/MM/yyyy'}}</td>
+                            <td class="{{emp.estado}}">{{emp.estadoPago}}</td>
+                            <td class="td-actions text-right">
+                                <a *ngIf="emp.estado == 'true'" style="cursor: pointer; color:white;" rel="tooltip" title="Eliminar" (click)="eliminarEmpresa(empresa)">
+                                    <a class="badge bg-danger"><i class="fas fa-window-close"></i></a>
+                                </a>
+                                <a *ngIf="emp.estado == 'false'" style="cursor: pointer; color: white;" rel="tooltip" title="Habilitar" (click)="habilitarEmpresa(empresa)">
+                                    <a class="badge bg-success"><i class="fas fa-check"></i></a>
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <caption>
+                    <a class="btn btn-success" data-toggle="modal" data-target="#modaladdEmpresas" style="position: fixed; bottom: 15px; right: 20px; border-radius: 100% !important; float: right;">
+                        <i style="color: white;" class="fa fa-plus"></i>
+                    </a>
+                </caption>
+            </div>
+            <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+    </div>
+</div>
+
+
+<!-- Modal para registros nuevos -->
+<div class="modal fade" id="modaladdEmpresas" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-sm" role="document">
+        <form #addEmpresas="ngForm" id="addC" (ngSubmit)="addEmpresas(addEmpresas); addEmpresas.reset()">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Agregar Empresas</h5>
+                    <button type="button" #closebuttonadd class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+                <div class="modal-body ">
+                    <div class="row">
+                        <label class="col-md-4 col-form-label" style="margin-top: 10px;">Ruc:</label>
+                        <div class="col-md-8">
+                            <div class="form-group has-default">
+                                <input type="text" id="ruc" name="ruc" [ngModel]="ruc" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label class="col-md-4 col-form-label" style="margin-top: 10px;">Razon Social:</label>
+                        <div class="col-md-8">
+                            <div class="form-group has-default">
+                                <input type="text" id="razonSocial" name="razonSocial" ngModel class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label class="col-md-4 col-form-label" style="margin-top: 10px;">Telefono:</label>
+                        <div class="col-md-8">
+                            <div class="form-group has-default">
+                                <input type="text" id="telefono" name="telefono" ngModel class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label class="col-md-4 col-form-label" style="margin-top: 10px;">Direccion:</label>
+                        <div class="col-md-8">
+                            <div class="form-group has-default">
+                                <input type="text" id="direccion" name="direccion" ngModel class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label class="col-md-4 col-form-label" style="margin-top: 10px;">Fecha de Ingreso:</label>
+                        <div class="col-md-8">
+                            <div class="form-group has-default">
+                                <input type="date" id="fechaIngreso" name="fechaIngreso" ngModel class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label class="col-md-4 col-form-label" style="margin-top: 10px;">Estado de Pago:</label>
+                        <div class="col-md-8">
+                            <div class="form-group has-default">
+                                <input type="text" id="estadoPago" name="estadoPago" ngModel class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label class="col-md-4 col-form-label" style="margin-top: 10px;">Imagen:</label>
+                        <div class="col-md-8">
+                            <div class="form-group has-default">
+                                <input type="text" id="imagen" name="imagen" ngModel class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button type="submit" class="btn btn-success" id="add_Empresa" name="add_Empresa">Agregar</button>
+
+                </div>
+
+            </div>
+        </form>
+    </div>
+</div>

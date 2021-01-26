@@ -1,0 +1,130 @@
+<aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <!-- Brand Logo -->
+    <a [routerLink]="['/inicio']" href="#" class="brand-link">
+        <img src="assets/dist/img/hmt_logo.png" alt="AdminLTE Logo" width="170" height="50" style="opacity: .8">
+        <p></p>
+        <span text- class="brand-text font-weight-light">{{nombreEmp}}</span>
+    </a>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <!-- Sidebar user panel (optional) -->
+        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+            <div class="image">
+                <img src="assets/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+            </div>
+            <div class="info">
+                <a href="#" class="d-block">{{usuario.usu}}</a>
+            </div>
+        </div>
+
+        <!-- Sidebar Menu -->
+        <nav class="mt-2">
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                <!-- Add icons to the links using the .nav-icon class
+               with font-awesome or any other icon font library -->
+                <li routerLinkActive="active" class="nav-item">
+                    <a [routerLink]="['/inicio']" href="#" class="nav-link">
+                        <i class="fas fa-th mr-2"></i>
+                        <p>
+                            Inicio
+                        </p>
+                    </a>
+                </li>
+                <li routerLinkActive="active" class="nav-item">
+                    <a [routerLink]="['/proceso']" href="#" class="nav-link">
+                        <i class="fas fa-cogs mr-2"></i>
+                        <p>
+                            Procesos
+                        </p>
+                    </a>
+                </li>
+                <li routerLinkActive="active" class="nav-item has-treeview">
+                    <a [routerLink]="['/actividad']" href="#" class="nav-link">
+                        <i class="fas fa-clipboard-list mr-2"></i>
+                        <p>
+                            Actividades
+                        </p>
+                    </a>
+
+                </li>
+
+
+                <li class="nav-item has-treeview">
+                    <a href="#" class="nav-link">
+                        <i class="fas fa-chalkboard-teacher mr-2"></i>
+                        <p>
+                            Puestos
+                            <i class="fas fa-angle-left right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a [routerLink]="['/puesto']" href="#" class="nav-link">
+                                <i class="fas fa-chalkboard-teacher mr-2"></i>
+                                <p>Puestos</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a [routerLink]="['/rol']" href="#" class="nav-link" type="submit">
+                                <i class="fas fa-diagnoses mr-2"></i>
+                                <p>Roles</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a [routerLink]="['/ambito']" href="#" class="nav-link" type="submit">
+                                <i class="fas fa-user-tie mr-2"></i>
+                                <p>Ambitos </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="pages/layout/collapsed-sidebar.html" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Experiencia</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li routerLinkActive="active" class="nav-item has-treeview">
+                    <a [routerLink]="['/competencia']" href="#" class="nav-link" type="submit">
+                        <i class="fas fa-users mr-2"></i>
+                        <p>
+                            Competencias
+                        </p>
+                    </a>
+
+                </li>
+                <li routerLinkActive="active" class="nav-item has-treeview">
+                    <a [routerLink]="['/grupoOcupacional']" href="#" class="nav-link" type="submit">
+                        <i class="fas fa-users mr-2"></i>
+                        <p>
+                            Grupo Ocupacional
+                        </p>
+                    </a>
+
+                </li>
+                <li routerLinkActive="active" class="nav-item has-treeview">
+                    <a [routerLink]="['/actividadPuesto']" href="#" class="nav-link" type="submit">
+
+                        <i class="fas fa-check-double mr-2"></i>
+                        <p>
+                            Actividades Puesto
+                        </p>
+                    </a>
+                </li>
+                <li routerLinkActive="active" class="nav-item has-treeview">
+                    <a [routerLink]="['/actividadPuesto']" href="#" class="nav-link" type="submit">
+
+                        <i class="fas fa-tasks mr-2"></i>
+                        <p>
+                            Valorización
+                        </p>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <!-- /.sidebar-menu -->
+    </div>
+    <!-- /.sidebar -->
+</aside>

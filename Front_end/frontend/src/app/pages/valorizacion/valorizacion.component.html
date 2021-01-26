@@ -1,0 +1,195 @@
+<div class="col-1 col-sm-1 col-md-3">
+    <div class="info-box">
+        <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-users-cog"></i></span>
+
+        <div class="info-box-content">
+            <span class="info-box-text">Total de Opciones</span>
+            <span class="info-box-text"> de Valorizacion</span>
+            <span class="info-box-number">
+               {{contVal}}
+        </span>
+        </div>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Opciones de Valorizacion</h3>
+
+                <div class="card-tools">
+
+                    <form #buscar="ngForm" class="form-horizontal" (keyup)="searchVal(buscar)">
+
+                        <div id="zero_config_filter" class="dataTables_filter"><label><input type="text"  
+                            class="form-control float-right" placeholder="Buscar..." value="{{ buscarVal }}" 
+                            [ngModel]="buscarVal" id="buscarVal" name="buscarVal"  aria-controls="zero_config"></label></div>
+
+
+                    </form>
+                </div>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body table-responsive p-0">
+                <table class="table table-hover text-nowrap">
+                    <thead>
+                        <tr>
+                            <th>Puesto</th>
+                            <th>Actividad</th>
+                            <th>Descripción</th>
+                            <th>Tipo</th>
+                            <th style="text-align: right;" scope="col">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody *ngFor="let actividadPuesto of actividadesPuestos">
+                        <tr>
+                            <td class="{{actividadPuesto.estado}}">{{actividadPuesto.puesto}}</td>
+                            <td class="{{actividadPuesto.estado}}">{{actividadPuesto.actividad}}</td>
+                            <td class="{{actividadPuesto.estado}}">{{actividadPuesto.descripcion}}</td>
+                            <td class="{{actividadPuesto.estado}}">{{actividadPuesto.tipo}}</td>
+                            <td class="td-actions text-right">
+                                <a style="cursor: pointer; margin-right: 7px;" style="cursor: pointer; color:white;" rel="tooltip" title="Editar" (click)="getDataActividadPuesto(actividadPuesto)" data-toggle="modal" data-target="#modalupdActividadPuesto">
+                                    <a class="badge bg-primary"><i class="fas fa-edit"></i></a>
+                                    <!-- <i class="fa fa-edit"></i> -->
+                                </a>
+                                <a *ngIf="actividadPuesto.estado == 'true'" style="cursor: pointer; color:white;" rel="tooltip" title="Eliminar" (click)="eliminarActividadPuesto(actividadPuesto)">
+                                    <a class="badge bg-danger"><i class="fas fa-window-close"></i></a>
+                                </a>
+                                <a *ngIf="actividadPuesto.estado == 'false'" style="cursor: pointer; color: white;" rel="tooltip" title="Habilitar" (click)="habilitarActividadPuesto(actividadPuesto)">
+                                    <a class="badge bg-success"><i class="fas fa-check"></i></a>
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <caption>
+                    <a class="btn btn-success" data-toggle="modal" data-target="#modaladdActividadesPuestos" style="position: fixed; bottom: 15px; right: 20px; border-radius: 100% !important; float: right;">
+                        <i style="color: white;" class="fa fa-plus"></i>
+                    </a>
+                </caption>
+            </div>
+            <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+    </div>
+</div>
+
+
+<!-- Modal para registros nuevos -->
+<div class="modal fade" id="modaladdActividadesPuestos" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-sm" role="document">
+        <form #addActividadPuesto="ngForm" id="addC" (ngSubmit)="addActividadesPuestos(addActividadPuesto); addActividadPuesto.reset()">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Agregar Actividades - Puesto</h5>
+                    <button type="button" #closebuttonadd class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+                <div class="modal-body ">
+                    <div class="row">
+                        <label class="col-md-4 col-form-label" style="margin-top: 10px;">Puesto:</label>
+                        <div class="col-md-8">
+                            <div class="form-group has-default">
+                                <input type="text" id="puestActPuest" name="puestActPuest" [ngModel]="puestActPuest" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label class="col-md-4 col-form-label" style="margin-top: 10px;">Actividad:</label>
+                        <div class="col-md-8">
+                            <div class="form-group has-default">
+                                <input type="text" id="actActPuest" name="actActPuest" [ngModel]="actActPuest" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label class="col-md-4 col-form-label" style="margin-top: 10px;">Descripción:</label>
+                        <div class="col-md-8">
+                            <div class="form-group has-default">
+                                <input type="text" id="desActPuest" name="desActPuest" [ngModel]="desActPuest" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label class="col-md-4 col-form-label" style="margin-top: 10px;">Tipo:</label>
+                        <div class="col-md-8">
+                            <div class="form-group has-default">
+                                <input type="text" id="tipoActPuest" name="tipoActPuest" [ngModel]="tipoActPuest" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button type="submit" class="btn btn-success" id="add_ActividadPuesto" name="add_ActividadPuesto">Agregar</button>
+
+                </div>
+
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<!-- Modal para modificar nuevos -->
+<div class="modal fade" *ngIf="dataUpdActPuest == true" id="modalupdActividadPuesto" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-sm" role="document">
+        <form #updActividPuesto="ngForm" id="updC" (ngSubmit)="updActividadesPuestos(updActividPuesto)">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modificar Actividades Puestos</h5>
+                    <button type="button" #closebuttonupd class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+                <div class="modal-body ">
+                    <div class="row">
+                        <label class="col-md-4 col-form-label" style="margin-top: 10px;">Puesto:</label>
+                        <div class="col-md-8">
+                            <div class="form-group has-default">
+                                <input type="text" id="puestActPuestU" name="puestActPuestU" [ngModel]="puestActPuestU" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-body ">
+                    <div class="row">
+                        <label class="col-md-4 col-form-label" style="margin-top: 10px;">Actividad:</label>
+                        <div class="col-md-8">
+                            <div class="form-group has-default">
+                                <input type="text" id="actActPuestU" name="actActPuestU" [ngModel]="actActPuestU" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-body ">
+                    <div class="row">
+                        <label class="col-md-4 col-form-label" style="margin-top: 10px;">Descripcion::</label>
+                        <div class="col-md-8">
+                            <div class="form-group has-default">
+                                <input type="text" id="desActPuestU" name="desActPuestU" [ngModel]="desActPuestU" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-body ">
+                    <div class="row">
+                        <label class="col-md-4 col-form-label" style="margin-top: 10px;">Tipo:</label>
+                        <div class="col-md-8">
+                            <div class="form-group has-default">
+                                <input type="text" id="tipoActPuestU" name="tipoActPuestU" [ngModel]="tipoActPuestU" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button type="submit" class="btn btn-success" id="updActividadPuesto" name="updActividadPuesto">Modificar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

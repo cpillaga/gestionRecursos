@@ -1,0 +1,142 @@
+<!-- <div class="col-1 col-sm-1 col-md-3">
+    <div class="info-box">
+        <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-diagnoses"></i></span>
+
+        <div class="info-box-content">
+            <span class="info-box-text">Total de Roles</span>
+            <span class="info-box-number">
+               {{contRol}}
+        </span>
+        </div>
+    </div>
+</div> -->
+<div class="col-1 col-sm-1 col-md-3">
+    <div class="info-box">
+        <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-diagnoses"></i></span>
+
+        <div class="info-box-content">
+            <span class="info-box-text">Total de Roles</span>
+            <span class="info-box-number">
+               {{contRol}}
+        </span>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Roles</h3>
+
+                <div class="card-tools">
+
+                    <form #buscar="ngForm" class="form-horizontal" (keyup)="searchRol(buscar)">
+
+                        <div id="zero_config_filter" class="dataTables_filter"><label><input type="text"  class="form-control float-right" placeholder="Buscar..." value="{{ buscarRol }}" [ngModel]="buscarRol" id="buscarRol" name="buscarRol"  aria-controls="zero_config"></label></div>
+
+                    </form>
+                </div>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body table-responsive p-0">
+                <table class="table table-hover text-nowrap">
+                    <thead>
+                        <tr>
+                            <th>Descripción</th>
+                            <th style="text-align: right;" scope="col">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody *ngFor="let rol of roles">
+                        <tr>
+                            <td class="{{rol.estado}}">{{rol.descripcion}}</td>
+                            <td class="td-actions text-right">
+                                <a style="cursor: pointer; margin-right: 7px;" style="cursor: pointer; color:white;" rel="tooltip" title="Editar" (click)="getData(rol)" data-toggle="modal" data-target="#modalupdRol">
+                                    <a class="badge bg-primary"><i class="fas fa-edit"></i></a>
+                                    <!-- <i class="fa fa-edit"></i> -->
+                                </a>
+                                <a *ngIf="rol.estado == 'true'" style="cursor: pointer; color:white;" rel="tooltip" title="Eliminar" (click)="eliminarRol(rol)">
+                                    <a class="badge bg-danger"><i class="fas fa-window-close"></i></a>
+                                </a>
+                                <a *ngIf="rol.estado == 'false'" style="cursor: pointer; color: white;" rel="tooltip" title="Habilitar" (click)="habilitarRol(rol)">
+                                    <a class="badge bg-success"><i class="fas fa-check"></i></a>
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <caption>
+                    <a class="btn btn-success" data-toggle="modal" data-target="#modaladdRol" style="position: fixed; bottom: 15px; right: 20px; border-radius: 100% !important; float: right;">
+                        <i style="color: white;" class="fa fa-plus"></i>
+                    </a>
+                </caption>
+            </div>
+            <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+    </div>
+</div>
+
+
+<!-- Modal para registros nuevos -->
+<div class="modal fade" id="modaladdRol" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-sm" role="document">
+        <form #addRol="ngForm" id="addC" (ngSubmit)="addRoles(addRol); addRol.reset()">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Agregar Roles</h5>
+                    <button type="button" #closebuttonadd class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+                <div class="modal-body ">
+                    <div class="row">
+                        <label class="col-md-4 col-form-label" style="margin-top: 10px;">Descripción:</label>
+                        <div class="col-md-8">
+                            <div class="form-group has-default">
+                                <input type="text" id="desRol" name="desRol" [ngModel]="desRol" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button type="submit" class="btn btn-success" id="add_Rol" name="add_Rol">Agregar</button>
+
+                </div>
+
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<!-- Modal para modificar nuevos -->
+<div class="modal fade" *ngIf="dataUpd == true" id="modalupdRol" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-sm" role="document">
+        <form #updRol="ngForm" id="updC" (ngSubmit)="updRoles(updRol)">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modificar Roles</h5>
+                    <button type="button" #closebuttonupd class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+                <div class="modal-body ">
+                    <div class="row">
+                        <label class="col-md-4 col-form-label" style="margin-top: 10px;">Descripción:</label>
+                        <div class="col-md-8">
+                            <div class="form-group has-default">
+                                <input type="text" id="desRolU" name="desRolU" [ngModel]="desRolU" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button type="submit" class="btn btn-success" id="updRol" name="updRol">Modificar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
