@@ -1,414 +1,159 @@
-<!-- 
-<div class="container-fluid" id="grad1">
-    <div class="row justify-content-center mt-0">
-        <div class="col-12 col-sm-12 col-md-12 col-lg-12 text-center p-0  mb-2">
-            <div class="card px-0 pt-4 pb-0  mb-3">
-                <h2><strong>Descripcion y Perfil </strong></h2>
-                <p>Puesto</p>
-                <div class="row">
-                    <div class="col-md-12 mx-0">
-                        <form id="msform">
-                        
-                            <ul id="progressbar">
-                                <li class="active" name="next" id="account"><strong>Account</strong></li>
-                                <li id="personal">
-                                    <a href="#personal">press</a> <strong>Personal</strong></li>
-                                <li id="payment"><strong>Payment</strong></li>
-                                <li id="confirm"><strong>Finish</strong></li>
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12 col-md-offset-2">
+                <div class="card card-wizard" id="wizardCard">
+                    <form id="wizardForm" method="" action="">
+
+                        <div class="header text-center">
+                            <h3 class="title">Awesome Wizard</h3>
+                            <p class="category">Split a complicated flow in multiple steps</p>
+                        </div>
+
+                        <div class="content">
+                            <ul class="nav">
+                                <li><a href="#tab1" data-toggle="tab">First Tab</a></li>
+                                <li><a href="#tab2" data-toggle="tab">Second Tab</a></li>
+                                <li><a href="#tab3" data-toggle="tab">Third Tab</a></li>
                             </ul>
-                            <fieldset>
 
-                                <h2 style="text-align: center;" class="fs-title">Account Information</h2>
-                                <div class="form-horizontal">
-                                    <div class="col-md-12 p-2 ">
-
-                                        <div class="row">
-                                            <div class="col-md-6 p-4">
-                                                <input type="email" class="form-control" name="email" placeholder="Email Id" />
-                                                <input type="text" class="form-control" name="uname" placeholder="UserName" />
+                            <div class="tab-content">
+                                <div class="tab-pane" id="tab1">
+                                    <h5 class="text-center">Please tell us more about yourself.</h5>
+                                    <div class="row">
+                                        <div class="col-md-5 col-md-offset-1">
+                                            <div class="form-group">
+                                                <label class="control-label">First Name</label>
+                                                <input class="form-control" type="text" name="first_name" placeholder="ex: Mike" />
                                             </div>
-                                            <div class="col-md-6 p-4">
-                                                <input type="password" class="form-control" name="pwd" placeholder="Password" />
-                                                <input type="password" class="form-control" name="cpwd" placeholder="Confirm Password" />
-                                          
+                                        </div>
+                                        <div class="col-md-5">
+                                            <div class="form-group">
+                                                <label class="control-label">Last Name</label>
+                                                <input class="form-control" type="text" name="last_name" required="true" placeholder="ex: Andrew" />
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <input type="button" name="next" class="next action-button" value="Next Step" />
-                            </fieldset>
-                            <fieldset>
-                                <div class="form-card">
-                                    <h2 class="fs-title">Personal Information</h2> <input type="text" name="fname" placeholder="First Name" /> <input type="text" name="lname" placeholder="Last Name" /> <input type="text" name="phno" placeholder="Contact No." /> <input type="text"
-                                        name="phno_2" placeholder="Alternate Contact No." />
-                                </div> <input type="button" name="previous" class="previous action-button-previous" value="Previous" /> <input type="button" name="next" class="next action-button" value="Next Step" />
-                            </fieldset>
-                            <fieldset>
-                                <div class="form-card">
-                                    <h2 class="fs-title">Payment Information</h2>
-                                    <div class="radio-group">
-                                        <div class='radio' data-value="credit"><img src="https://i.imgur.com/XzOzVHZ.jpg" width="200px" height="100px"></div>
-                                        <div class='radio' data-value="paypal"><img src="https://i.imgur.com/jXjwZlj.jpg" width="200px" height="100px"></div> <br>
-                                    </div> <label class="pay">Card Holder Name*</label> <input type="text" name="holdername" placeholder="" />
                                     <div class="row">
-                                        <div class="col-9"> <label class="pay">Card Number*</label> <input type="text" name="cardno" placeholder="" /> </div>
-                                        <div class="col-3"> <label class="pay">CVC*</label> <input type="password" name="cvcpwd" placeholder="***" /> </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-3"> <label class="pay">Expiry Date*</label> </div>
-                                        <div class="col-9"> <select class="list-dt" id="month" name="expmonth">
-                                                <option selected>Month</option>
-                                                <option>January</option>
-                                                <option>February</option>
-                                                <option>March</option>
-                                                <option>April</option>
-                                                <option>May</option>
-                                                <option>June</option>
-                                                <option>July</option>
-                                                <option>August</option>
-                                                <option>September</option>
-                                                <option>October</option>
-                                                <option>November</option>
-                                                <option>December</option>
-                                            </select> <select class="list-dt" id="year" name="expyear">
-                                                <option selected>Year</option>
-                                            </select> </div>
-                                    </div>
-                                </div> <input type="button" name="previous" class="previous action-button-previous" value="Previous" /> <input type="button" name="make_payment" class="next action-button" value="Confirm" />
-                            </fieldset>
-                            <fieldset>
-                                <div class="form-card">
-                                    <h2 class="fs-title text-center">Success !</h2> <br><br>
-                                    <div class="row justify-content-center">
-                                        <div class="col-3"> <img src="https://img.icons8.com/color/96/000000/ok--v2.png" class="fit-image"> </div>
-                                    </div> <br><br>
-                                    <div class="row justify-content-center">
-                                        <div class="col-7 text-center">
-                                            <h5>You Have Successfully Signed Up</h5>
+                                        <div class="col-md-10 col-md-offset-1">
+                                            <div class="form-group">
+                                                <label class="control-label">Email</label>
+                                                <input class="form-control" type="text" name="email" email="true" placeholder="ex: hello@creative-tim.com" />
+                                            </div>
                                         </div>
                                     </div>
+
                                 </div>
-                            </fieldset>
-                        </form>
-                    </div>
+
+                                <div class="tab-pane" id="tab2">
+                                    <h5 class="text-center">Please give us more details about your platform.</h5>
+                                    <div class="row">
+                                        <div class="col-md-10 col-md-offset-1">
+                                            <div class="form-group">
+                                                <label class="control-label">Your Website</label>
+                                                <input class="form-control" type="text" name="website" url="true" placeholder="ex: http://www.creative-tim.com" />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-5 col-md-offset-1">
+                                            <div class="form-group">
+                                                <label class="control-label">Framework Type</label>
+                                                <input class="form-control" type="text" name="framework" placeholder="ex: http://www.creative-tim.com" />
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-5">
+                                            <div class="form-group">
+                                                <label class="control-label">Language</label>
+
+                                                <!--     IMPORTANT! - the "bootstrap select picker" is not compatible with jquery.validation.js, that's why we use the "default select" inside this wizard. We will try to contact the guys who are responsibble for the "bootstrap select picker" to find a solution. Thank you for your patience.
+                                                 -->
+
+                                                <select name="cities" class="form-control">
+                                                    <option selected="" disabled="">- language -</option>
+                                                    <option value="ms">Bahasa Melayu</option>
+                                                    <option value="ca">Català</option>
+                                                    <option value="da">Dansk</option>
+                                                    <option value="de">Deutsch</option>
+                                                    <option value="en">English</option>
+                                                    <option value="es">Español</option>
+                                                    <option value="el">Eλληνικά</option>
+                                                    <option value="fr">Français</option>
+                                                    <option value="it">Italiano</option>
+                                                    <option value="hu">Magyar</option>
+                                                    <option value="nl">Nederlands</option>
+                                                    <option value="no">Norsk</option>
+                                                    <option value="pl">Polski</option>
+                                                    <option value="pt">Português</option>
+                                                    <option value="fi">Suomi</option>
+                                                    <option value="sv">Svenska</option>
+                                                    <option value="tr">Türkçe</option>
+                                                    <option value="is">Íslenska</option>
+                                                    <option value="cs">Čeština</option>
+                                                    <option value="ru">Русский</option>
+                                                    <option value="th">ภาษาไทย</option>
+                                                    <option value="zh">中文 (简体)</option>
+                                                    <option value="zh-TW">中文 (繁體)</option>
+                                                    <option value="ja">日本語</option>
+                                                    <option value="ko">한국어</option>
+                                                </select>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-5 col-md-offset-1">
+                                            <div class="form-group">
+                                                <label class="control-label">Bootstrap Version</label>
+
+                                                <!--     IMPORTANT! - the "bootstrap select picker" is not compatible with jquery.validation.js, that's why we use the "default select" inside this wizard. We will try to contact the guys who are responsibble for the "bootstrap select picker" to find a solution. Thank you for your patience.
+                                                 -->
+
+                                                <select name="cities" class="form-control">
+                                                    <option selected="" disabled="">- version -</option>
+                                                    <option value="1.1">Bootstrap 1.1</option>
+                                                    <option value="2.0">Bootstrap 2.0</option>
+                                                    <option value="3.0">Bootstrap 3.0</option>
+                                                    <option value="4.0">Bootstrap 4.0(alpha)</option>
+                                                </select>
+
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-5">
+                                            <div class="form-group">
+                                                <label class="control-label">Price</label>
+                                                <input class="form-control" type="text" name="price" placeholder="ex: 19.00" />
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                                <div class="tab-pane" id="tab3">
+                                    <h2 class="text-center text-space">Yuhuuu! <br><small> Click on "<b>Finish</b>" to join our community</small></h2>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="footer">
+                            <button type="button" class="btn btn-default btn-fill btn-wd btn-previous pull-left">Back</button>
+
+                            <button type="button" class="btn btn-info btn-fill btn-wd btn-next pull-right">Next</button>
+                            <button type="button" class="btn btn-info btn-fill btn-wd btn-finish pull-right" onclick="onFinishWizard()">Finish</button>
+
+                            <div class="clearfix"></div>
+                        </div>
+                    </form>
+
                 </div>
             </div>
         </div>
-    </div>
-</div> -->
 
-
-<!-- 
-<div class="row">
-    <div class="col-md-8 col-md-offset-2">
-        <div class="card card-wizard" id="wizardCard">
-            <form id="wizardForm" method="" action="">
-
-                <div class="header text-center">
-                    <h3 class="title">Awesome Wizard</h3>
-                    <p class="category">Split a complicated flow in multiple steps</p>
-                </div>
-
-                <div class="content">
-                    <ul class="nav">
-                        <li><a href="#tab1" data-toggle="tab">First Tab</a></li>
-                        <li><a href="#tab2" data-toggle="tab">Second Tab</a></li>
-                        <li><a href="#tab3" data-toggle="tab">Third Tab</a></li>
-                    </ul>
-
-                    <div class="tab-content">
-                        <div class="tab-pane" id="tab1">
-                            <h5 class="text-center">Please tell us more about yourself.</h5>
-                            <div class="row">
-                                <div class="col-md-5 col-md-offset-1">
-                                    <div class="form-group">
-                                        <label class="control-label">First Name</label>
-                                        <input class="form-control" type="text" name="first_name" placeholder="ex: Mike" />
-                                    </div>
-                                </div>
-                                <div class="col-md-5">
-                                    <div class="form-group">
-                                        <label class="control-label">Last Name</label>
-                                        <input class="form-control" type="text" name="last_name" required="true" placeholder="ex: Andrew" />
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-10 col-md-offset-1">
-                                    <div class="form-group">
-                                        <label class="control-label">Email</label>
-                                        <input class="form-control" type="text" name="email" email="true" placeholder="ex: hello@creative-tim.com" />
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-
-                        <div class="tab-pane" id="tab2">
-                            <h5 class="text-center">Please give us more details about your platform.</h5>
-                            <div class="row">
-                                <div class="col-md-10 col-md-offset-1">
-                                    <div class="form-group">
-                                        <label class="control-label">Your Website</label>
-                                        <input class="form-control" type="text" name="website" url="true" placeholder="ex: http://www.creative-tim.com" />
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-md-5 col-md-offset-1">
-                                    <div class="form-group">
-                                        <label class="control-label">Framework Type</label>
-                                        <input class="form-control" type="text" name="framework" placeholder="ex: http://www.creative-tim.com" />
-                                    </div>
-                                </div>
-
-                                <div class="col-md-5">
-                                    <div class="form-group">
-                                        <label class="control-label">Language</label>
-
-                                         -->
-
-<!-- <select name="cities" class="form-control">
-                                            <option selected="" disabled="">- language -</option>
-                                            <option value="ms">Bahasa Melayu</option>
-                                            <option value="ca">Català</option>
-                                            <option value="da">Dansk</option>
-                                            <option value="de">Deutsch</option>
-                                            <option value="en">English</option>
-                                            <option value="es">Español</option>
-                                            <option value="el">Eλληνικά</option>
-                                            <option value="fr">Français</option>
-                                            <option value="it">Italiano</option>
-                                            <option value="hu">Magyar</option>
-                                            <option value="nl">Nederlands</option>
-                                            <option value="no">Norsk</option>
-                                            <option value="pl">Polski</option>
-                                            <option value="pt">Português</option>
-                                            <option value="fi">Suomi</option>
-                                            <option value="sv">Svenska</option>
-                                            <option value="tr">Türkçe</option>
-                                            <option value="is">Íslenska</option>
-                                            <option value="cs">Čeština</option>
-                                            <option value="ru">Русский</option>
-                                            <option value="th">ภาษาไทย</option>
-                                            <option value="zh">中文 (简体)</option>
-                                            <option value="zh-TW">中文 (繁體)</option>
-                                            <option value="ja">日本語</option>
-                                            <option value="ko">한국어</option>
-                                        </select>
-
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-md-5 col-md-offset-1">
-                                    <div class="form-group">
-                                        <label class="control-label">Bootstrap Version</label>
-
-                              
-
-                                        <select name="cities" class="form-control">
-                                            <option selected="" disabled="">- version -</option>
-                                            <option value="1.1">Bootstrap 1.1</option>
-                                            <option value="2.0">Bootstrap 2.0</option>
-                                            <option value="3.0">Bootstrap 3.0</option>
-                                            <option value="4.0">Bootstrap 4.0(alpha)</option>
-                                        </select>
-
-                                    </div>
-                                </div>
-
-                                <div class="col-md-5">
-                                    <div class="form-group">
-                                        <label class="control-label">Price</label>
-                                        <input class="form-control" type="text" name="price" placeholder="ex: 19.00" />
-                                    </div>
-                                </div>
-
-                            </div>
-
-                        </div>
-
-                        <div class="tab-pane" id="tab3">
-                            <h2 class="text-center text-space">Yuhuuu! <br><small> Click on "<b>Finish</b>" to join our community</small></h2>
-                        </div>
-
-                    </div>
-                </div>
-
-                <div class="footer">
-                    <button type="button" class="btn btn-default btn-fill btn-wd btn-previous pull-left">Back</button>
-
-                    <button type="button" class="btn btn-info btn-fill btn-wd btn-next pull-right">Next</button>
-                    <button type="button" class="btn btn-info btn-fill btn-wd btn-finish pull-right" onclick="onFinishWizard()">Finish</button>
-
-                    <div class="clearfix"></div>
-                </div>
-            </form>
-
-        </div>
-    </div>
-</div> -->
-<!-- Please Subscribe My Youtube Channel
-https://www.youtube.com/channel/UCQM5ye1xR4vJgtga0ryud2Q/
--->
-<div class="content">
-    <!--content inner-->
-    <div class="content__inner">
-        <div class="container">
-            <!--content title-->
-            <h2 class="content__title content__title--m-sm">Pick animation type</h2>
-            <!--animations form-->
-            <form class="pick-animation my-4">
-                <div class="form-row">
-                    <div class="col-5 m-auto">
-                        <select class="pick-animation__select form-control">
-              <option value="scaleIn" selected="selected">ScaleIn</option>
-              <option value="scaleOut">ScaleOut</option>
-              <option value="slideHorz">SlideHorz</option>
-              <option value="slideVert">SlideVert</option>
-              <option value="fadeIn">FadeIn</option>
-            </select>
-                    </div>
-                </div>
-            </form>
-            <!--content title-->
-            <h2 class="content__title">Click on steps or 'Prev' and 'Next' buttons</h2>
-        </div>
-        <div class="container overflow-hidden">
-            <!--multisteps-form-->
-            <div class="multisteps-form">
-                <!--progress bar-->
-                <div class="row">
-                    <div class="col-12 col-lg-8 ml-auto mr-auto mb-4">
-                        <div class="multisteps-form__progress">
-                            <button class="multisteps-form__progress-btn js-active" type="button" title="User Info">User Info</button>
-                            <button class="multisteps-form__progress-btn" type="button" title="Address">Address</button>
-                            <button class="multisteps-form__progress-btn" type="button" title="Order Info">Order Info</button>
-                            <button class="multisteps-form__progress-btn" type="button" title="Comments">Comments        </button>
-                        </div>
-                    </div>
-                </div>
-                <!--form panels-->
-                <div class="row">
-                    <div class="col-12 col-lg-8 m-auto">
-                        <form class="multisteps-form__form">
-                            <!--single form panel-->
-                            <div class="multisteps-form__panel shadow p-4 rounded bg-white js-active" data-animation="scaleIn">
-                                <h3 class="multisteps-form__title">Your User Info</h3>
-                                <div class="multisteps-form__content">
-                                    <div class="form-row mt-4">
-                                        <div class="col-12 col-sm-6">
-                                            <input class="multisteps-form__input form-control" type="text" placeholder="First Name" />
-                                        </div>
-                                        <div class="col-12 col-sm-6 mt-4 mt-sm-0">
-                                            <input class="multisteps-form__input form-control" type="text" placeholder="Last Name" />
-                                        </div>
-                                    </div>
-                                    <div class="form-row mt-4">
-                                        <div class="col-12 col-sm-6">
-                                            <input class="multisteps-form__input form-control" type="text" placeholder="Login" />
-                                        </div>
-                                        <div class="col-12 col-sm-6 mt-4 mt-sm-0">
-                                            <input class="multisteps-form__input form-control" type="email" placeholder="Email" />
-                                        </div>
-                                    </div>
-                                    <div class="form-row mt-4">
-                                        <div class="col-12 col-sm-6">
-                                            <input class="multisteps-form__input form-control" type="password" placeholder="Password" />
-                                        </div>
-                                        <div class="col-12 col-sm-6 mt-4 mt-sm-0">
-                                            <input class="multisteps-form__input form-control" type="password" placeholder="Repeat Password" />
-                                        </div>
-                                    </div>
-                                    <div class="button-row d-flex mt-4">
-                                        <button class="btn btn-primary ml-auto js-btn-next" type="button" title="Next">Next</button>
-                                    </div>
-                                </div>
-                            </div>
-                            <!--single form panel-->
-                            <div class="multisteps-form__panel shadow p-4 rounded bg-white" data-animation="scaleIn">
-                                <h3 class="multisteps-form__title">Your Address</h3>
-                                <div class="multisteps-form__content">
-                                    <div class="form-row mt-4">
-                                        <div class="col">
-                                            <input class="multisteps-form__input form-control" type="text" placeholder="Address 1" />
-                                        </div>
-                                    </div>
-                                    <div class="form-row mt-4">
-                                        <div class="col">
-                                            <input class="multisteps-form__input form-control" type="text" placeholder="Address 2" />
-                                        </div>
-                                    </div>
-                                    <div class="form-row mt-4">
-                                        <div class="col-12 col-sm-6">
-                                            <input class="multisteps-form__input form-control" type="text" placeholder="City" />
-                                        </div>
-                                        <div class="col-6 col-sm-3 mt-4 mt-sm-0">
-                                            <select class="multisteps-form__select form-control">
-                        <option selected="selected">State...</option>
-                        <option>...</option>
-                      </select>
-                                        </div>
-                                        <div class="col-6 col-sm-3 mt-4 mt-sm-0">
-                                            <input class="multisteps-form__input form-control" type="text" placeholder="Zip" />
-                                        </div>
-                                    </div>
-                                    <div class="button-row d-flex mt-4">
-                                        <button class="btn btn-primary js-btn-prev" type="button" title="Prev">Prev</button>
-                                        <button class="btn btn-primary ml-auto js-btn-next" type="button" title="Next">Next</button>
-                                    </div>
-                                </div>
-                            </div>
-                            <!--single form panel-->
-                            <div class="multisteps-form__panel shadow p-4 rounded bg-white" data-animation="scaleIn">
-                                <h3 class="multisteps-form__title">Your Order Info</h3>
-                                <div class="multisteps-form__content">
-                                    <div class="row">
-                                        <div class="col-12 col-md-6 mt-4">
-                                            <div class="card shadow-sm">
-                                                <div class="card-body">
-                                                    <h5 class="card-title">Item Title</h5>
-                                                    <p class="card-text">Small and nice item description</p><a class="btn btn-primary" href="#" title="Item Link">Item Link</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-12 col-md-6 mt-4">
-                                            <div class="card shadow-sm">
-                                                <div class="card-body">
-                                                    <h5 class="card-title">Item Title</h5>
-                                                    <p class="card-text">Small and nice item description</p><a class="btn btn-primary" href="#" title="Item Link">Item Link</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="button-row d-flex mt-4 col-12">
-                                            <button class="btn btn-primary js-btn-prev" type="button" title="Prev">Prev</button>
-                                            <button class="btn btn-primary ml-auto js-btn-next" type="button" title="Next">Next</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!--single form panel-->
-                            <div class="multisteps-form__panel shadow p-4 rounded bg-white" data-animation="scaleIn">
-                                <h3 class="multisteps-form__title">Additional Comments</h3>
-                                <div class="multisteps-form__content">
-                                    <div class="form-row mt-4">
-                                        <textarea class="multisteps-form__textarea form-control" placeholder="Additional Comments and Requirements"></textarea>
-                                    </div>
-                                    <div class="button-row d-flex mt-4">
-                                        <button class="btn btn-primary js-btn-prev" type="button" title="Prev">Prev</button>
-                                        <button class="btn btn-success ml-auto" type="button" title="Send">Send</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
 </div>
