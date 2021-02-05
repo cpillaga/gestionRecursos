@@ -1,0 +1,175 @@
+<br>
+<div class="col-md-3">
+    <div class="card" style="background-color: #F59A3E; cursor: pointer;">
+        <div class="header">
+            <h5 class="title" style="font-weight: bold; color: white;"><i class="pe-7s-box2"></i>&nbsp; Grados de Experiencia</h5>
+        </div>
+        <div class="content" style="text-align: right;">
+            <a style="color: white; font-weight: bold; font-size: 22px;">{{contExp}}</a>
+        </div>
+
+    </div>
+</div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<div class="main-content">
+    <div class="card">
+        <div class="container-fluid">
+            <form #buscar="ngForm" class="form-horizontal" (keyup)="searchExp(buscar)">
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-xs-8 col-sm-8 col-md-8">
+                            <h4 class="card-title col-md-5"> Grados de Experiencia</h4>
+                        </div>
+                        <div class="col-xs-4 col-sm-4 col-md-4">
+                            <!-- <div class="input-group no-border" style="margin-top: 15px;"> -->
+                            <input type="text" class="form-control" style="margin-top: 25px;" value="{{ buscarExp }}" [ngModel]="buscarExp" id="buscarExp" name="buscarExp" placeholder="Buscar...">
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <i class="now-ui-icons ui-1_zoom-bold"></i>
+                                </div>
+                            </div>
+                            <!-- </div> -->
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="content table-responsive table-full-width">
+                        <p *ngIf="coincidencia == false">No se encontró ninguna coincidencia</p>
+                        <table class="table" *ngIf="coincidencia == true">
+                            <thead>
+                                <tr>
+                                    <th>descripcion</th>
+                                    <th>Grado</th>
+                                    <th class="text-right">Acción</th>
+                                </tr>
+                            </thead>
+                            <tbody *ngFor="let experiencia of experiencias">
+                                <tr>
+                                    <td class="{{experiencia.estado}}">{{experiencia.descripcion}}</td>
+                                    <td class="{{experiencia.estado}}">{{experiencia.grado}}</td>
+
+                                    <td class="td-actions text-right">
+
+                                        <a type="button" rel="tooltip" title="Editar" (click)="getDataExperiencia(experiencia)" data-toggle="modal" data-target="#modalupdExperiencia" class="btn btn-info btn-simple btn-xs">
+                                            <i class="fa fa-edit"></i>
+                                        </a>
+
+                                        <a type="button" *ngIf="experiencia.estado === 'true'" rel="tooltip" title="Eliminar" (click)="eliminarExperiencia(experiencia)" class="btn btn-danger btn-simple btn-xs">
+                                            <i class="fa fa-close"></i>
+                                        </a>
+
+                                        <a type="button" *ngIf="experiencia.estado === 'false'" rel="tooltip" title="Habilitar" (click)="habilitarExperiencia(experiencia)" class="btn btn-success btn-simple btn-xs">
+                                            <i class="fa fa-check"></i>
+                                        </a>
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<caption>
+    <a class="btn btn-success btn-fill" data-toggle="modal" data-target="#modaladdExperiencias" style=" position: fixed; bottom: 15px; right: 20px; border-radius: 100% !important; float: right; height: 45px; width: 45px; ">
+        <i style="color: white; padding-top: 6px; padding-right: 8px; " class="fa fa-plus "></i>
+    </a>
+</caption>
+
+
+<!-- Modal para registros nuevos -->
+<div class="modal fade" id="modaladdExperiencias" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-sm" role="document">
+        <form #addExperiencia="ngForm" id="addC" (ngSubmit)="addExperiencias(addExperiencia); addExperiencia.reset()">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Agregar Nivel de Experiencia</h5>
+                    <button type="button" #closebuttonadd class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+                <div class="modal-body ">
+                    <div class="row">
+                        <label class="col-md-4 col-form-label" style="margin-top: 10px;">Descripción:</label>
+                        <div class="col-md-8">
+                            <div class="form-group has-default">
+                                <input type="text" id="desExp" name="desExp" [ngModel]="desExp" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label class="col-md-4 col-form-label" style="margin-top: 10px;">Grado:</label>
+                        <div class="col-md-8">
+                            <div class="form-group has-default">
+                                <input type="text" id="gradExp" name="gradExp" [ngModel]="gradExp" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button type="submit" class="btn btn-success" id="add_Experiencia" name="add_Experiencia">Agregar</button>
+
+                </div>
+
+
+
+
+
+
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<!-- Modal para modificar nuevos -->
+<div class="modal fade" *ngIf="dataUpdExp == true" id="modalupdExperiencia" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-sm" role="document">
+        <form #updExperiencia="ngForm" id="updC" (ngSubmit)="updExperiencias(updExperiencia)">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modificar Grados de Experiencia</h5>
+                    <button type="button" #closebuttonupd class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+                <div class="modal-body ">
+                    <div class="row">
+                        <label class="col-md-4 col-form-label" style="margin-top: 10px;">Descripción:</label>
+                        <div class="col-md-8">
+                            <div class="form-group has-default">
+                                <input type="text" id="desExpU" name="desExpU" [ngModel]="desExpU" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <label class="col-md-4 col-form-label" style="margin-top: 10px;">Grado:</label>
+                        <div class="col-md-8">
+                            <div class="form-group has-default">
+                                <input type="text" id="gradExpU" name="gradExpU" [ngModel]="gradExpU" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button type="submit" class="btn btn-success" id="updExperiencias" name="updExperiencias">Modificar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

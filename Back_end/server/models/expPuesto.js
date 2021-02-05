@@ -5,25 +5,29 @@ let Schema = mongoose.Schema;
 let expPuestoSchema = new Schema({
     area: {
         type: String,
-        required: [true, 'El área es obligatorio']
+        required: false
     },
     tiempo: {
         type: String,
-        required: [true, 'El tiempo es obligatoria']
+        required: false
     },
     especificidad: {
         type: String,
-        required: [true, 'El especificidad es obligatoria']
+        required: false
     },
     experiencia: {
         type: Schema.Types.ObjectId,
         ref: 'Experiencia',
-        required: [true, 'La experiencia es obligatoria']
+        required: false
     },
     puesto: {
         type: Schema.Types.ObjectId,
         ref: 'Puesto',
         required: [true, 'El puesto es obligatorio']
+    },
+    estado: {
+        type: String,
+        default: true,
     },
     empresa: {
         type: Schema.Types.ObjectId,

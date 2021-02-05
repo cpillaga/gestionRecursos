@@ -189,7 +189,6 @@ app.get('/puesto/buscar/:termino/:empresa', verificaToken, function(req, res) {
     Puesto.find({ denominacion: regex, empresa: empresaB })
         .populate('empresa') //Se filtra todos los datos de las claves foraneas aquí se puede agregar varios populate
         .populate('ambito') //Se filtra todos los datos de las claves foraneas aquí se puede agregar varios populate
-        .populate('grupoOcupacional') //Se filtra todos los datos de las claves foraneas aquí se puede agregar varios populate
         .populate('rol')
         .exec((err, puesto) => {
             if (err) {

@@ -91,6 +91,77 @@ app.put('/experiencia/:id', verificaToken, function(req, res) {
 });
 
 
+
+/* 
+    Método para dar de baja a un proceso
+*/
+app.delete('/experiencia/:id', verificaToken, function(req, res) {
+    let id = req.params.id;
+
+    let cambiaEstado = {
+        estado: "false"
+    };
+
+    //  Usuario.findByIdAndRemove(id, (err, usuarioBorrado) => { Find>ByAndRemove elimina al campo se puede reemplazar por la linea de abajo
+    Experiencia.findByIdAndUpdate(id, cambiaEstado, { new: true }, (err, experienciaBorrado) => {
+        if (err) {
+            return res.status(400).json({
+                ok: false,
+                err
+            });
+        }
+
+        if (!experienciaBorrado) {
+            return res.status(400).json({
+                ok: false,
+                err: {
+                    message: 'Experiencia no encontrado'
+                }
+            });
+        }
+        res.json({
+            ok: true,
+            experiencia: experienciaBorrado
+        });
+    });
+});
+
+/* 
+    Método para habilitar un rol
+*/
+app.delete('/experiencia/habilitar/:id', verificaToken, function(req, res) {
+    let id = req.params.id;
+
+    let cambiaEstado = {
+        estado: "true"
+    };
+
+    //  Usuario.findByIdAndRemove(id, (err, usuarioBorrado) => {
+    Experiencia.findByIdAndUpdate(id, cambiaEstado, { new: true }, (err, experienciaActivado) => {
+        if (err) {
+            return res.status(400).json({
+                ok: false,
+                err
+            });
+        }
+
+        if (!experienciaActivado) {
+            return res.status(400).json({
+                ok: false,
+                err: {
+                    message: 'Experiencia no encontrado'
+                }
+            });
+        }
+
+        res.json({
+            ok: true,
+            experiencia: experienciaActivado
+        });
+    });
+});
+
+
 /* 
     Método para buscar los experiencias de una empresa
 */
@@ -116,6 +187,26 @@ app.get('/experiencia/buscar/:termino/:empresa', verificaToken, function(req, re
             });
         });
 });
+
+
+app.get("/experiencia/contar/:idEmp", verificaToken, (req, res) => {
+    let id = req.params.idEmp;
+
+    Experiencia.count({ estado: true }).exec((err, total) => {
+        if (err) {
+            return res.status(500).json({
+                ok: false,
+                err,
+            });
+        }
+        res.json({
+            ok: true,
+            total,
+        });
+    });
+
+});
+
 
 module.exports = app;
 

@@ -1,130 +1,235 @@
-<aside class="main-sidebar sidebar-dark-primary elevation-4">
-    <!-- Brand Logo -->
-    <a [routerLink]="['/inicio']" href="#" class="brand-link">
-        <img src="assets/dist/img/hmt_logo.png" alt="AdminLTE Logo" width="170" height="50" style="opacity: .8">
-        <p></p>
-        <span text- class="brand-text font-weight-light">{{nombreEmp}}</span>
-    </a>
+<div class="sidebar ps-scrollbar-y" data-color="orange" data-image="assets/dist/img/full-screen-image-3.jpg">
+    <!--
+                Tip 1: you can change the color of the sidebar using: data-color="blue | azure | green | orange | red | purple"
+                Tip 2: you can also add an image using data-image tag
+    
+            -->
 
-    <!-- Sidebar -->
-    <div class="sidebar">
-        <!-- Sidebar user panel (optional) -->
-        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-            <div class="image">
-                <img src="assets/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
-            </div>
+    <div class="logo">
+        <a href="http://www.creative-tim.com" class="simple-text logo-mini">
+                    Ct
+                </a>
+
+
+        <a href="http://www.creative-tim.com" class="simple-text logo-normal">
+                    Creative Tim
+                </a>
+    </div>
+
+    <div class="sidebar-wrapper">
+        <div class="user">
             <div class="info">
-                <a href="#" class="d-block">{{usuario.usu}}</a>
-            </div>
-        </div>
+                <div class="photo">
+                    <img src="assets/dist/img/default-avatar.png" />
+                </div>
 
-        <!-- Sidebar Menu -->
-        <nav class="mt-2">
-            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-                <!-- Add icons to the links using the .nav-icon class
-               with font-awesome or any other icon font library -->
-                <li routerLinkActive="active" class="nav-item">
-                    <a [routerLink]="['/inicio']" href="#" class="nav-link">
-                        <i class="fas fa-th mr-2"></i>
-                        <p>
-                            Inicio
-                        </p>
-                    </a>
-                </li>
-                <li routerLinkActive="active" class="nav-item">
-                    <a [routerLink]="['/proceso']" href="#" class="nav-link">
-                        <i class="fas fa-cogs mr-2"></i>
-                        <p>
-                            Procesos
-                        </p>
-                    </a>
-                </li>
-                <li routerLinkActive="active" class="nav-item has-treeview">
-                    <a [routerLink]="['/actividad']" href="#" class="nav-link">
-                        <i class="fas fa-clipboard-list mr-2"></i>
-                        <p>
-                            Actividades
-                        </p>
-                    </a>
+                <a data-toggle="collapse" href="#collapseExample" class="collapsed">
+                    <span>
+                        {{usuario.usu}}
+                                <b class="caret"></b>
+                            </span>
+                </a>
 
-                </li>
-
-
-                <li class="nav-item has-treeview">
-                    <a href="#" class="nav-link">
-                        <i class="fas fa-chalkboard-teacher mr-2"></i>
-                        <p>
-                            Puestos
-                            <i class="fas fa-angle-left right"></i>
-                        </p>
-                    </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a [routerLink]="['/puesto']" href="#" class="nav-link">
-                                <i class="fas fa-chalkboard-teacher mr-2"></i>
-                                <p>Puestos</p>
+                <div class="collapse" id="collapseExample">
+                    <ul class="nav">
+                        <li>
+                            <a href="#pablo">
+                                <span class="sidebar-mini">MP</span>
+                                <span class="sidebar-normal">My Profile</span>
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a [routerLink]="['/rol']" href="#" class="nav-link" type="submit">
-                                <i class="fas fa-diagnoses mr-2"></i>
-                                <p>Roles</p>
+
+                        <li>
+                            <a href="#pablo">
+                                <span class="sidebar-mini">EP</span>
+                                <span class="sidebar-normal">Edit Profile</span>
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a [routerLink]="['/ambito']" href="#" class="nav-link" type="submit">
-                                <i class="fas fa-user-tie mr-2"></i>
-                                <p>Ambitos </p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="pages/layout/collapsed-sidebar.html" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Experiencia</p>
+
+                        <li>
+                            <a href="#pablo">
+                                <span class="sidebar-mini">S</span>
+                                <span class="sidebar-normal">Settings</span>
                             </a>
                         </li>
                     </ul>
-                </li>
+                </div>
+            </div>
+        </div>
 
-                <li routerLinkActive="active" class="nav-item has-treeview">
-                    <a [routerLink]="['/competencia']" href="#" class="nav-link" type="submit">
-                        <i class="fas fa-users mr-2"></i>
-                        <p>
-                            Competencias
-                        </p>
-                    </a>
+        <ul class="nav">
+            <li>
+                <a [routerLink]="['/inicio']" href="#" class="nav-link">
+                    <i class="pe-7s-graph"></i>
+                    <p>Inicio</p>
+                </a>
+            </li>
+            <li>
+                <a data-toggle="collapse" href="#componentsExamples">
+                    <i class="pe-7s-plugin"></i>
+                    <p>Puestos
+                        <b class="caret"></b>
+                    </p>
+                </a>
+                <div class="collapse" id="componentsExamples">
+                    <ul class="nav">
+                        <li>
+                            <a [routerLink]="['/puesto']" href="#" class="nav-link">
+                                <span class="sidebar-mini">P</span>
+                                <span class="sidebar-normal">Puestos</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a [routerLink]="['/rol']" href="#" class="nav-link" type="submit">
+                                <span class="sidebar-mini">R</span>
+                                <span class="sidebar-normal">Roles</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a [routerLink]="['/ambito']" href="#" class="nav-link" type="submit">
+                                <span class="sidebar-mini">A</span>
+                                <span class="sidebar-normal">Ambitos</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a [routerLink]="['/actividadesCargo']" href="#" class="nav-link" type="submit">
+                                <span class="sidebar-mini">AC</span>
+                                <span class="sidebar-normal">Actividades Cargo</span>
+                            </a>
+                        </li>
 
-                </li>
-                <li routerLinkActive="active" class="nav-item has-treeview">
-                    <a [routerLink]="['/grupoOcupacional']" href="#" class="nav-link" type="submit">
-                        <i class="fas fa-users mr-2"></i>
-                        <p>
-                            Grupo Ocupacional
-                        </p>
-                    </a>
+                        <li>
+                            <a data-toggle="collapse" href="#actividadesEsenciales">
+                                <i class="pe-7s-plugin"></i>
+                                <p>Actividades Esenciales
+                                    <b class="caret"></b>
+                                </p>
+                            </a>
+                            <div class="collapse" id="actividadesEsenciales">
+                                <ul class="nav">
+                                    <li>
+                                        <a [routerLink]="['/actividadesEsenciales']" href="#" class="nav-link">
+                                            <span class="sidebar-mini">AE</span>
+                                            <span class="sidebar-normal">Actividades Esenciales</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a [routerLink]="['/conocimiento']" href="#" class="nav-link" type="submit">
+                                            <span class="sidebar-mini">CA</span>
+                                            <span class="sidebar-normal">Concomimientso Adicional</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li>
+                            <a data-toggle="collapse" href="#experienciaLaboral">
+                                <i class="pe-7s-plugin"></i>
+                                <p>Experiencia Laboral
+                                    <b class="caret"></b>
+                                </p>
+                            </a>
+                            <div class="collapse" id="experienciaLaboral">
+                                <ul class="nav">
+                                    <li>
+                                        <a [routerLink]="['/experienciaPuesto']" href="#" class="nav-link" type="submit">
+                                            <span class="sidebar-mini">ExP</span>
+                                            <span class="sidebar-normal">Experiencia Puestos</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a [routerLink]="['/experiencia']" href="#" class="nav-link">
+                                            <span class="sidebar-mini">ExL</span>
+                                            <span class="sidebar-normal">Experiencia Laboral</span>
+                                        </a>
+                                    </li>
 
-                </li>
-                <li routerLinkActive="active" class="nav-item has-treeview">
-                    <a [routerLink]="['/actividadPuesto']" href="#" class="nav-link" type="submit">
+                                </ul>
+                            </div>
+                        </li>
+                        <li>
+                            <a data-toggle="collapse" href="#competencias">
+                                <i class="pe-7s-plugin"></i>
+                                <p>Competencias
+                                    <b class="caret"></b>
+                                </p>
+                            </a>
+                            <div class="collapse" id="competencias">
+                                <ul class="nav">
+                                    <li>
+                                        <a [routerLink]="['/competenciaTecnica']" href="#" class="nav-link" type="submit">
+                                            <span class="sidebar-mini">CT</span>
+                                            <span class="sidebar-normal">Competencia Tecnica</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a [routerLink]="['/competenciaConductual']" href="#" class="nav-link">
+                                            <span class="sidebar-mini">CC</span>
+                                            <span class="sidebar-normal">Competencia Conductual</span>
+                                        </a>
+                                    </li>
 
-                        <i class="fas fa-check-double mr-2"></i>
-                        <p>
-                            Actividades Puesto
-                        </p>
-                    </a>
-                </li>
-                <li routerLinkActive="active" class="nav-item has-treeview">
-                    <a [routerLink]="['/actividadPuesto']" href="#" class="nav-link" type="submit">
+                                </ul>
+                            </div>
+                        </li>
+                        <!-- <li>
+                            <a data-toggle="collapse" href="#ExperienciaLaboral">
+                                <i class="pe-7s-plugin"></i>
+                                <p>Experienca Laboral
+                                    <b class="caret"></b>
+                                </p>
+                            </a>
+                            <div class="collapse" id="ExperienciaLaboral">
+                                <ul class="nav">
+                                    <li>
+                                        <a [routerLink]="['/experiencia]" href="#" class="nav-link">
+                                            <span class="sidebar-mini">EX</span>
+                                            <span class="sidebar-normal">Experiencias</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a [routerLink]="['/conocimiento']" href="#" class="nav-link" type="submit">
+                                            <span class="sidebar-mini">CA</span>
+                                            <span class="sidebar-normal">Concomimientso Adicional</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li> -->
+                    </ul>
+                </div>
+            </li>
+            <li>
+                <a data-toggle="collapse" href="#formsExamples">
+                    <i class="pe-7s-note2"></i>
+                    <p>Valoriacion
+                        <b class="caret"></b>
+                    </p>
+                </a>
+                <div class="collapse" id="formsExamples">
+                    <ul class="nav">
+                        <li>
+                            <a href="../forms/regular.html">
+                                <span class="sidebar-mini">V</span>
+                                <span class="sidebar-normal">Valorizacion</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a [routerLink]="['/grupoOcupacional']" href="#" class="nav-link" type="submit">
+                                <span class="sidebar-mini">GR</span>
+                                <span class="sidebar-normal">Grupo Ocupacional</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a [routerLink]="['/grupoOcupacional']" href="#" class="nav-link" type="submit">
+                                <span class="sidebar-mini">GR</span>
+                                <span class="sidebar-normal">descripcion val</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
 
-                        <i class="fas fa-tasks mr-2"></i>
-                        <p>
-                            Valorización
-                        </p>
-                    </a>
-                </li>
-            </ul>
-        </nav>
-        <!-- /.sidebar-menu -->
+        </ul>
     </div>
-    <!-- /.sidebar -->
-</aside>
+</div>

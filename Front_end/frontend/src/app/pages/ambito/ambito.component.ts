@@ -20,7 +20,7 @@ export class AmbitoComponent implements OnInit {
   empRol: Usuario;
   getDataAmb: Ambito;
   dataUpdAmb:Boolean= false;
-  coincidencia:Boolean= false;
+  coincidencia:Boolean= true;
   buscarAmb: string = "";
   contAmb: string = "";
 
@@ -60,7 +60,24 @@ getAmbito(){
 addAmbitos(ambito:NgForm){
   for (let i = 0; i < this.ambitos.length; i++) {
  if (ambito.value.desAmb === this.ambitos[i].descripcion) {
-   alert("ya Existe el Ambito");
+  Swal.fire({
+    title: 'ya exise el Ambito!',
+     icon: 'error',
+     showCancelButton: true,
+     confirmButtonColor: '#23CCEF',
+     cancelButtonColor: '#d33',
+     cancelButtonText: 'Cancelar',
+     confirmButtonText: 'Confirmar',
+     width: '450px',
+     heightAuto: true,
+     showClass: {
+       popup: 'animated fadeInDown faster'
+     },
+     hideClass: {
+       popup: 'animated fadeOutUp faster'
+     }
+   });
+return;
    return;
  }
 }
@@ -112,13 +129,21 @@ updAmbitos(form: NgForm){
     
       
     habilitarAmbito(form: Ambito){
-    Swal.fire({
-      title: 'Esta seguro?',
-      text: 'desea Habilitar el registro!',
-      icon: 'warning',
+      Swal.fire({icon: 'error',
+      title: "¿Seguro desea eliminar a " + form.descripcion + "?",
       showCancelButton: true,
-      confirmButtonText: 'Si, Habilitar!',
-      cancelButtonText: 'No, Cancelar'
+      confirmButtonColor: '#23CCEF',
+      cancelButtonColor: '#d33',
+      cancelButtonText: 'Cancelar',
+      confirmButtonText: 'Confirmar',
+      width: '450px',
+      heightAuto: true,
+      showClass: {
+        popup: 'animated fadeInDown faster'
+      },
+      hideClass: {
+        popup: 'animated fadeOutUp faster'
+      }
     }).then((result) => {
       if (result.value) {
         this._ambito.habAmb(form._id).subscribe(resp =>{

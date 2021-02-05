@@ -5,7 +5,7 @@ let Schema = mongoose.Schema;
 let ambitoSchema = new Schema({
     descripcion: {
         type: String,
-        required: [true, 'La descripción es obligatoria']
+        required: false
     },
     estado: {
         type: String,

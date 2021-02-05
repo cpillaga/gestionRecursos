@@ -1,0 +1,268 @@
+<br>
+<div class="col-md-3">
+    <div class="card" style="background-color: #F59A3E; cursor: pointer;" routerLink="/puesto">
+        <div class="header">
+            <h5 class="title" style="font-weight: bold; color: white;"><i class="pe-7s-box2"></i>&nbsp; Experiencias por puesto</h5>
+        </div>
+        <div class="content" style="text-align: right;">
+            <a style="color: white; font-weight: bold; font-size: 22px;">{{countExpPuest}}</a>
+        </div>
+
+    </div>
+</div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<div class="main-content">
+    <div class="card">
+        <div class="container-fluid">
+            <form #buscar="ngForm" class="form-horizontal" (keyup)="searchExpPuest(buscar)">
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-xs-8 col-sm-8 col-md-8">
+                            <h4 class="card-title col-md-5"> Experiencias por Puestos</h4>
+                        </div>
+                        <div class="col-xs-4 col-sm-4 col-md-4">
+                            <!-- <div class="input-group no-border" style="margin-top: 15px;"> -->
+                            <input type="text" class="form-control" style="margin-top: 25px;" value="{{ buscarExpPuest }}" [ngModel]="buscarExpPuest" id="buscarExpPuest" name="buscarExpPuest" placeholder="Buscar...">
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <i class="now-ui-icons ui-1_zoom-bold"></i>
+                                </div>
+                            </div>
+                            <!-- </div> -->
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="content table-responsive table-full-width">
+                        <p *ngIf="coincidencia == false">No se encontró ninguna coincidencia</p>
+                        <table class="table" *ngIf="coincidencia == true">
+                            <thead>
+                                <tr>
+                                    <th>Puesto</th>
+                                    <th>Area</th>
+                                    <th>Tiempo</th>
+                                    <th>especificidad</th>
+                                    <th>Nivel de Experiencia</th>
+                                    <th class="text-right">Acción</th>
+                                </tr>
+                            </thead>
+                            <tbody *ngFor="let experienciaPuesto of experienciasPuestos">
+                                <tr>
+                                    <td class="{{experienciaPuesto.estado}}">{{experienciaPuesto.puesto.denominacion}}</td>
+                                    <td class="{{experienciaPuesto.estado}}">{{experienciaPuesto.area}}</td>
+                                    <td class="{{experienciaPuesto.estado}}">{{experienciaPuesto.tiempo}}</td>
+                                    <td class="{{experienciaPuesto.estado}}">{{experienciaPuesto.especificidad}}</td>
+                                    <td class="{{experienciaPuesto.estado}}">{{experienciaPuesto.experiencia.descripcion}}</td>
+
+                                    <td class="td-actions text-right">
+
+                                        <a type="button" rel="tooltip" title="Editar" (click)="getDataExperienciaPuesto(experienciaPuesto)" data-toggle="modal" data-target="#modalupdExperienciaPuesto" class="btn btn-info btn-simple btn-xs">
+                                            <i class="fa fa-edit"></i>
+                                        </a>
+
+                                        <a type="button" *ngIf="experienciaPuesto.estado === 'true'" rel="tooltip" title="Eliminar" (click)="eliminarExperienciaPuesto(experienciaPuesto)" class="btn btn-danger btn-simple btn-xs">
+                                            <i class="fa fa-close"></i>
+                                        </a>
+
+                                        <a type="button" *ngIf="experienciaPuesto.estado === 'false'" rel="tooltip" title="Habilitar" (click)="habilitarExperienciaPuesto(experienciaPuesto)" class="btn btn-success btn-simple btn-xs">
+                                            <i class="fa fa-check"></i>
+                                        </a>
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<caption>
+    <a class="btn btn-success btn-fill" data-toggle="modal" data-target="#modaladdExperienciasPuestos" style=" position: fixed; bottom: 15px; right: 20px; border-radius: 100% !important; float: right; height: 45px; width: 45px; ">
+        <i style="color: white; padding-top: 6px; padding-right: 8px; " class="fa fa-plus "></i>
+    </a>
+</caption>
+
+
+<!-- Modal para registros nuevos -->
+<div class="modal fade" id="modaladdExperienciasPuestos" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-sm" role="document">
+        <form #addExperienciaPuesto="ngForm" id="addC" (ngSubmit)="addExperienciasPuestos(addExperienciaPuesto); addExperienciaPuesto.reset()">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Agregar Experiencias de Puestos</h5>
+                    <button type="button" #closebuttonadd class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+                <div class="modal-body ">
+                    <div class="row">
+                        <label class="col-md-4 col-form-label" style="margin-top: 10px;">Puesto:</label>
+                        <div class="col-md-8">
+
+                            <div class="form-group has-default">
+                                <div class="input-group">
+                                    <select id="puestoExp" class="form-control " name="puestoExp" ngModel data-title="Seleccionar" data-style="btn-default btn-block" data-menu-style="dropdown-blue">
+                <!-- <option [value]="pidProv" hidden>{{pnomProv}}</option> -->
+                <option  *ngFor="let puesto of puestos"  [value]="puesto._id">{{puesto.denominacion}}</option>
+            </select>
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-plus" data-toggle="modal" data-target="#modaladdProv" style="cursor: pointer; color: #78b414;"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <label class="col-md-4 col-form-label" style="margin-top: 10px;">Area:</label>
+                        <div class="col-md-8">
+                            <div class="form-group has-default">
+                                <input type="text" id="areaExp" name="areaExp" [ngModel]="areaExp" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label class="col-md-4 col-form-label" style="margin-top: 10px;">Tiempo:</label>
+                        <div class="col-md-8">
+                            <div class="form-group has-default">
+                                <input type="text" id="tiempoExp" name="tiempoExp" [ngModel]="tiempoExp" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label class="col-md-4 col-form-label" style="margin-top: 10px;">Especificidad:</label>
+                        <div class="col-md-8">
+                            <div class="form-group has-default">
+                                <input type="text" id="especificidadExp" name="especificidadExp" [ngModel]="especificidadExp" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label class="col-md-4 col-form-label" style="margin-top: 10px;">Nivel de Experiencia:</label>
+                        <div class="col-md-8">
+
+                            <div class="form-group has-default">
+                                <div class="input-group">
+                                    <select id="experienciaExp" class="form-control " name="experienciaExp" ngModel data-title="Seleccionar" data-style="btn-default btn-block" data-menu-style="dropdown-blue">
+                <!-- <option [value]="pidProv" hidden>{{pnomProv}}</option> -->
+                <option  *ngFor="let experiencia of experiencias"  [value]="experiencia._id" >{{experiencia.descripcion}}</option>
+            </select>
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-plus" data-toggle="modal" data-target="#modaladdProv" style="cursor: pointer; color: #78b414;"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button type="submit" class="btn btn-success" id="add_ExperienciaPuesto" name="add_ExperienciaPuesto">Agregar</button>
+
+                </div>
+
+
+
+
+
+
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<!-- Modal para modificar nuevos -->
+<div class="modal fade" *ngIf="dataUpdExpPuest == true" id="modalupdExperienciaPuesto" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-sm" role="document">
+        <form #updExperienciaPuesto="ngForm" id="updC" (ngSubmit)="updExperienciasPuestos(updExperienciaPuesto)">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modificar Experiencias por Puesto</h5>
+                    <button type="button" #closebuttonupd class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+                <div class="modal-body ">
+
+                    <div class="row">
+                        <label class="col-md-4 col-form-label" style="margin-top: 10px;">Puesto:</label>
+                        <div class="col-md-8">
+
+                            <div class="form-group has-default">
+                                <div class="input-group">
+                                    <select id="puestoExpU" class="form-control " name="puestoExpU" ngModel data-title="Seleccionar" data-style="btn-default btn-block" data-menu-style="dropdown-blue">
+                <!-- <option [value]="pidProv" hidden>{{pnomProv}}</option> -->
+                <option  *ngFor="let puesto of puestos"  [value]="puesto._id">{{puesto.denominacion}}</option>
+            </select>
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-plus" data-toggle="modal" data-target="#modaladdProv" style="cursor: pointer; color: #78b414;"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <label class="col-md-4 col-form-label" style="margin-top: 10px;">Area:</label>
+                        <div class="col-md-8">
+                            <div class="form-group has-default">
+                                <input type="text" id="areaExpU" name="areaExpU" [ngModel]="areaExpU" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label class="col-md-4 col-form-label" style="margin-top: 10px;">tiempo:</label>
+                        <div class="col-md-8">
+                            <div class="form-group has-default">
+                                <input type="text" id="tiempoExpU" name="tiempoExpU" [ngModel]="tiempoExpU" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label class="col-md-4 col-form-label" style="margin-top: 10px;">especificidad:</label>
+                        <div class="col-md-8">
+                            <div class="form-group has-default">
+                                <input type="text" id="especificidadExpU" name="especificidadExpU" [ngModel]="especificidadExpU" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label class="col-md-4 col-form-label" style="margin-top: 10px;">Nivel de Experiencia:</label>
+                        <div class="col-md-8">
+
+                            <div class="form-group has-default">
+                                <div class="input-group">
+                                    <select id="experienciaExpU" class="form-control " name="experienciaExpU" ngModel data-title="Seleccionar" data-style="btn-default btn-block" data-menu-style="dropdown-blue">
+                <!-- <option [value]="pidProv" hidden>{{pnomProv}}</option> -->
+                <option  *ngFor="let experiencia of experiencias"  [value]="experiencia._id" >{{experiencia.descripcion}}</option>
+            </select>
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-plus" data-toggle="modal" data-target="#modaladdProv" style="cursor: pointer; color: #78b414;"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button type="submit" class="btn btn-success" id="updActividadesEsenciales" name="updActividadesEsenciales">Modificar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
