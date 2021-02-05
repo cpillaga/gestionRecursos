@@ -1,0 +1,262 @@
+<br>
+<div class="col-md-3">
+    <div class="card" style="background-color: #F59A3E; cursor: pointer;">
+        <div class="header">
+            <h5 class="title" style="font-weight: bold; color: white;"><i class="pe-7s-box2"></i>&nbsp; Total de Actividades de Puesto</h5>
+        </div>
+        <div class="content" style="text-align: right;">
+            <a style="color: white; font-weight: bold; font-size: 22px;">{{contActCarg}}</a>
+        </div>
+
+    </div>
+</div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<div class="main-content">
+    <div class="card">
+        <div class="container-fluid">
+            <form #buscar="ngForm" class="form-horizontal" (keyup)="searchActCarg(buscar)">
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-xs-8 col-sm-8 col-md-8">
+                            <h4 class="card-title col-md-5"> Actividades Puesto</h4>
+                        </div>
+                        <div class="col-xs-4 col-sm-4 col-md-4">
+                            <!-- <div class="input-group no-border" style="margin-top: 15px;"> -->
+                            <input type="text" class="form-control" style="margin-top: 25px;" value="{{ buscarActCarg }}" [ngModel]="buscarActCarg" id="buscarActCarg" name="buscarActCarg" placeholder="Buscar...">
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <i class="now-ui-icons ui-1_zoom-bold"></i>
+                                </div>
+                            </div>
+                            <!-- </div> -->
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="content table-responsive table-full-width">
+                        <p *ngIf="coincidencia == false">No se encontró ninguna coincidencia</p>
+                        <table class="table" *ngIf="coincidencia == true">
+                            <thead>
+                                <tr>
+                                    <th>Puesto</th>
+                                    <th>Descripcion</th>
+                                    <th>FR</th>
+                                    <th>CO</th>
+                                    <th>CM</th>
+                                    <th>Total</th>
+                                    <th class="text-right">Acción</th>
+                                </tr>
+                            </thead>
+                            <tbody *ngFor="let actividadCargo of actividadesCargos">
+                                <tr>
+                                    <td class="{{actividadCargo.estado}}">{{actividadCargo.puesto.denominacion}}</td>
+                                    <td class="{{actividadCargo.estado}}">{{actividadCargo.descripcion}}</td>
+                                    <td class="{{actividadCargo.estado}}">{{actividadCargo.fr}}</td>
+                                    <td class="{{actividadCargo.estado}}">{{actividadCargo.co}}</td>
+                                    <td class="{{actividadCargo.estado}}">{{actividadCargo.cm}}</td>
+                                    <td class="{{actividadCargo.estado}}">{{actividadCargo.total}}</td>
+
+                                    <td class="td-actions text-right">
+
+                                        <a type="button" rel="tooltip" title="Editar" (click)="getDataActividadCargo(actividadCargo)" data-toggle="modal" data-target="#modalupdActividadCargo" class="btn btn-info btn-simple btn-xs">
+                                            <i class="fa fa-edit"></i>
+                                        </a>
+
+                                        <a type="button" *ngIf="actividadCargo.estado === 'true'" rel="tooltip" title="Eliminar" (click)="eliminarActividadCargo(actividadCargo)" class="btn btn-danger btn-simple btn-xs">
+                                            <i class="fa fa-close"></i>
+                                        </a>
+
+                                        <a type="button" *ngIf="actividadCargo.estado === 'false'" rel="tooltip" title="Habilitar" (click)="habilitarActividadCargo(actividadCargo)" class="btn btn-success btn-simple btn-xs">
+                                            <i class="fa fa-check"></i>
+                                        </a>
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<caption>
+    <a class="btn btn-success btn-fill" data-toggle="modal" data-target="#modaladdActividadesCargos" style="position: fixed; bottom: 15px; right: 20px; border-radius: 100% !important; float: right; height: 45px; width: 45px;">
+        <i style="color: white; padding-top: 6px; padding-right: 8px;" class="fa fa-plus"></i>
+    </a>
+</caption>
+
+
+<!-- Modal para registros nuevos -->
+<div class="modal fade" id="modaladdActividadesCargos" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-sm" role="document">
+        <form #addActividadCargo="ngForm" id="addC" (ngSubmit)="addActividadesCargos(addActividadCargo); addActividadCargo.reset()">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Agregar Actividades Cargo</h5>
+                    <button type="button" #closebuttonadd class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+                <div class="modal-body ">
+                    <div class="row">
+                        <label class="col-md-4 col-form-label" style="margin-top: 10px;">Puesto:</label>
+                        <div class="col-md-8">
+
+                            <div class="form-group has-default">
+                                <div class="input-group">
+                                    <select id="puestoActCarg" class="form-control " name="puestoActCarg" ngModel data-title="Seleccionar" data-style="btn-default btn-block" data-menu-style="dropdown-blue">
+                                      <option  *ngFor="let puesto of puestos"  [value]="puesto._id">{{puesto.denominacion}}</option>
+                                    </select>
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-plus" data-toggle="modal" data-target="#modaladdProv" style="cursor: pointer; color: #78b414;"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label class="col-md-4 col-form-label" style="margin-top: 10px;">descripcion:</label>
+                        <div class="col-md-8">
+                            <div class="form-group has-default">
+                                <input type="text" id="desActCarg" name="desActCarg" [ngModel]="desActCarg" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label class="col-md-4 col-form-label" style="margin-top: 10px;">FR:</label>
+                        <div class="col-md-8">
+                            <div class="form-group has-default">
+                                <input type="text" id="frActCarg" name="frActCarg" [ngModel]="frActCarg" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label class="col-md-4 col-form-label" style="margin-top: 10px;">CO:</label>
+                        <div class="col-md-8">
+                            <div class="form-group has-default">
+                                <input type="text" id="coActCarg" name="coActCarg" [ngModel]="coActCarg" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label class="col-md-4 col-form-label" style="margin-top: 10px;">CM:</label>
+                        <div class="col-md-8">
+                            <div class="form-group has-default">
+                                <input type="text" id="cmActCarg" name="cmActCarg" [ngModel]="cmActCarg" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label class="col-md-4 col-form-label" style="margin-top: 10px;">Total:</label>
+                        <div class="col-md-8">
+                            <div class="form-group has-default">
+                                <input type="text" id="totalActCarg" name="totalActCarg" [ngModel]="totalActCarg" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button type="submit" class="btn btn-success" id="add_ActividadCargo" name="add_ActividadCargo">Agregar</button>
+
+                </div>
+
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<!-- Modal para modificar nuevos -->
+<div class="modal fade" *ngIf="dataUpdActCarg == true" id="modalupdActividadCargo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-sm" role="document">
+        <form #updActividadCargo="ngForm" id="updC" (ngSubmit)="updActividadesCargos(updActividadCargo)">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modificar Actividades Cargo</h5>
+                    <button type="button" #closebuttonupd class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+                <div class="modal-body ">
+
+                    <div class="row">
+                        <label class="col-md-4 col-form-label" style="margin-top: 10px;">Puesto:</label>
+                        <div class="col-md-8">
+
+                            <div class="form-group has-default">
+                                <div class="input-group">
+                                    <select id="puestoActCargU" class="form-control " name="puestoActCargU" ngModel data-title="Seleccionar" data-style="btn-default btn-block" data-menu-style="dropdown-blue">
+                                      <option  *ngFor="let puesto of puestos"  [value]="puesto._id">{{puesto.denominacion}}</option>
+                                    </select>
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-plus" data-toggle="modal" data-target="#modaladdProv" style="cursor: pointer; color: #78b414;"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-body ">
+                    <div class="row">
+                        <label class="col-md-4 col-form-label" style="margin-top: 10px;">descripcion:</label>
+                        <div class="col-md-8">
+                            <div class="form-group has-default">
+                                <input type="text" id="desActCargU" name="desActCargU" [ngModel]="desActCargU" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-body ">
+                    <div class="row">
+                        <label class="col-md-4 col-form-label" style="margin-top: 10px;">FR:</label>
+                        <div class="col-md-8">
+                            <div class="form-group has-default">
+                                <input type="text" id="frActCargU" name="frActCargU" [ngModel]="frActCargU" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label class="col-md-4 col-form-label" style="margin-top: 10px;">CO:</label>
+                        <div class="col-md-8">
+                            <div class="form-group has-default">
+                                <input type="text" id="coActCargU" name="coActCargU" [ngModel]="coActCargU" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label class="col-md-4 col-form-label" style="margin-top: 10px;">CM:</label>
+                        <div class="col-md-8">
+                            <div class="form-group has-default">
+                                <input type="text" id="cmActCargU" name="cmActCargU" [ngModel]="cmActCargU" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label class="col-md-4 col-form-label" style="margin-top: 10px;">Total:</label>
+                        <div class="col-md-8">
+                            <div class="form-group has-default">
+                                <input type="text" id="totalActCargU" name="totalActCargU" [ngModel]="totalActCargU" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button type="submit" class="btn btn-success" id="updActividadesCargos" name="updActividadesCargos">Modificar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

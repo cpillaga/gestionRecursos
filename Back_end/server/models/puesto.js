@@ -7,32 +7,31 @@ let puestoSchema = new Schema({
     codigo: {
         type: String,
         // unique: true,
-        required: [true, 'El código es obligatorio']
+        required: false
     },
     denominacion: {
         type: String,
-        required: [true, 'La denominacion es obligatorio']
+        required: false
     },
     estado: {
         type: String,
-        default: true,
-        required: [true, 'El estado es obligatorio']
+        default: true
     },
     mision: {
         type: String,
-        required: [true, 'La mision es obligatoria']
+        required: false
     },
     nivel: {
         type: String,
-        required: [true, 'El nivel es obligatorio']
+        required: false
     },
     unidadAdmin: {
         type: String,
-        required: [true, 'La unidad de administrativa es obligatoria']
+        required: false
     },
     RIE: {
         type: String,
-        required: [true, 'Relaciones Internas y Externas es obligatorio']
+        required: false
     },
     capacitacion: {
         type: String,
@@ -41,7 +40,7 @@ let puestoSchema = new Schema({
     rol: {
         type: Schema.Types.ObjectId,
         ref: 'Rol',
-        required: [true, 'El rol es obligatorio']
+        required: false
     },
     grupoOcupacional: {
         type: String,
@@ -50,7 +49,7 @@ let puestoSchema = new Schema({
     ambito: {
         type: Schema.Types.ObjectId,
         ref: 'Ambito',
-        required: [true, 'El ámbito es obligatorio']
+        required: false
     },
     empresa: {
         type: Schema.Types.ObjectId,

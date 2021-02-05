@@ -5,11 +5,15 @@ let Schema = mongoose.Schema;
 let experienciaSchema = new Schema({
     descripcion: {
         type: String,
-        required: [true, 'La descripción es obligatoria']
+        required: false
     },
     grado: {
         type: String,
-        required: [true, 'El grado es obligatoria']
+        required: false
+    },
+    estado: {
+        type: String,
+        default: true,
     },
     empresa: {
         type: Schema.Types.ObjectId,

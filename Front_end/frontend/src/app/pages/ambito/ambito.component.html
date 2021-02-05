@@ -1,73 +1,88 @@
-<div class="col-1 col-sm-1 col-md-3">
-    <div class="info-box">
-        <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-user-tie"></i></span>
-
-        <div class="info-box-content">
-            <span class="info-box-text">Total de Ambitos</span>
-            <span class="info-box-number">
-               {{contAmb}}
-        </span>
+<br>
+<div class="col-md-3">
+    <div class="card" style="background-color: #F59A3E; cursor: pointer;" routerLink="/rol">
+        <div class="header">
+            <h5 class="title" style="font-weight: bold; color: white;"><i class="pe-7s-box2"></i>&nbsp; Total de Ambitos </h5>
         </div>
+        <div class="content" style="text-align: right;">
+            <a style="color: white; font-weight: bold; font-size: 22px;"> {{contAmb}}</a>
+        </div>
+
     </div>
 </div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<div class="main-content">
+    <div class="card">
+        <div class="container-fluid">
+            <form #buscar="ngForm" class="form-horizontal" (keyup)="searchAmb(buscar)">
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-xs-8 col-sm-8 col-md-8">
+                            <h4 class="card-title col-md-5"> Roles</h4>
+                        </div>
+                        <div class="col-xs-4 col-sm-4 col-md-4">
+                            <!-- <div class="input-group no-border" style="margin-top: 15px;"> -->
+                            <input type="text" class="form-control" style="margin-top: 25px;" value="{{ buscarAmb }}" [ngModel]="buscarAmb" id="buscarAmb" name="buscarAmb" placeholder="Buscar...">
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <i class="now-ui-icons ui-1_zoom-bold"></i>
+                                </div>
+                            </div>
+                            <!-- </div> -->
+                        </div>
+                    </div>
+                </div>
+            </form>
 
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="content table-responsive table-full-width">
+                        <p *ngIf="coincidencia == false">No se encontró ninguna coincidencia</p>
+                        <table class="table" *ngIf="coincidencia == true">
+                            <thead>
+                                <tr>
+                                    <th>Descripción</th>
+                                    <th class="text-right">Acción</th>
+                                </tr>
+                            </thead>
+                            <tbody *ngFor="let ambito of ambitos">
+                                <tr>
+                                    <td class="{{ambito.estado}}">{{ambito.descripcion}}</td>
 
-<div class="row">
-    <div class="col-12">
-        <div class="card">
-            <div class="card-header">
-                <h3 class="card-title">Ambitos</h3>
+                                    <td class="td-actions text-right">
 
-                <div class="card-tools">
+                                        <a type="button" rel="tooltip" title="Editar" (click)="getData(ambito)" data-toggle="modal" data-target="#modalupdAmbito" class="btn btn-info btn-simple btn-xs">
+                                            <i class="fa fa-edit"></i>
+                                        </a>
 
-                    <form #buscar="ngForm" class="form-horizontal" (keyup)="searchAmb(buscar)">
+                                        <a type="button" *ngIf="ambito.estado === 'true'" rel="tooltip" title="Eliminar" (click)="eliminarAmbito(ambito)" class="btn btn-danger btn-simple btn-xs">
+                                            <i class="fa fa-close"></i>
+                                        </a>
 
-                        <div id="zero_config_filter" class="dataTables_filter"><label><input type="text"  
-                            class="form-control float-right" placeholder="Buscar..." value="{{ buscarAmb }}" 
-                            [ngModel]="buscarAmb" id="buscarAmb" name="buscarAmb"  aria-controls="zero_config"></label></div>
+                                        <a type="button" *ngIf="ambito.estado === 'false'" rel="tooltip" title="Habilitar" (click)="habilitaAambito(ambito)" class="btn btn-success btn-simple btn-xs">
+                                            <i class="fa fa-check"></i>
+                                        </a>
 
-
-                    </form>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
-            <!-- /.card-header -->
-            <div class="card-body table-responsive p-0">
-                <table class="table table-hover text-nowrap">
-                    <thead>
-                        <tr>
-                            <th>Descripción</th>
-                            <th style="text-align: right;" scope="col">Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody *ngFor="let ambito of ambitos">
-                        <tr>
-                            <td class="{{ambito.estado}}">{{ambito.descripcion}}</td>
-                            <td class="td-actions text-right">
-                                <a style="cursor: pointer; margin-right: 7px;" style="cursor: pointer; color:white;" rel="tooltip" title="Editar" (click)="getDataAmbito(ambito)" data-toggle="modal" data-target="#modalupdAmbito">
-                                    <a class="badge bg-primary"><i class="fas fa-edit"></i></a>
-                                    <!-- <i class="fa fa-edit"></i> -->
-                                </a>
-                                <a *ngIf="ambito.estado == 'true'" style="cursor: pointer; color:white;" rel="tooltip" title="Eliminar" (click)="eliminarAmbito(ambito)">
-                                    <a class="badge bg-danger"><i class="fas fa-window-close"></i></a>
-                                </a>
-                                <a *ngIf="ambito.estado == 'false'" style="cursor: pointer; color: white;" rel="tooltip" title="Habilitar" (click)="habilitarAmbito(ambito)">
-                                    <a class="badge bg-success"><i class="fas fa-check"></i></a>
-                                </a>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-                <caption>
-                    <a class="btn btn-success" data-toggle="modal" data-target="#modaladdAmbitos" style="position: fixed; bottom: 15px; right: 20px; border-radius: 100% !important; float: right;">
-                        <i style="color: white;" class="fa fa-plus"></i>
-                    </a>
-                </caption>
-            </div>
-            <!-- /.card-body -->
         </div>
-        <!-- /.card -->
     </div>
 </div>
+
+<caption>
+    <a class="btn btn-success btn-fill" data-toggle="modal" data-target="#modaladdRol" style="position: fixed; bottom: 15px; right: 20px; border-radius: 100% !important; float: right; height: 45px; width: 45px;">
+        <i style="color: white; padding-top: 6px; padding-right: 8px;" class="fa fa-plus"></i>
+    </a>
+</caption>
 
 
 <!-- Modal para registros nuevos -->

@@ -27,7 +27,7 @@ export class PuestoComponent implements OnInit {
   ambitoPuest: String = ""
   codigoPuestU: String = "";
   denominacionPuestU: String = "";
- misionPuestU: String = "";
+  misionPuestU: String = "";
   nivelPuestU: String = "";
   unidadAdminPuestU: String = "";
   RIEPuestU: String = "";
@@ -37,7 +37,7 @@ export class PuestoComponent implements OnInit {
   ambitoPuestU: String = ""
   getDataPuest: Puesto;
   dataUpdPuest:Boolean= false;
-  coincidencia:Boolean= false;
+  coincidencia:Boolean= true;
   buscarPuest: string = "";
   contPuest: string = "";
   @ViewChild('closebuttonadd',  {static: false}) closebuttonadd;
@@ -76,7 +76,23 @@ export class PuestoComponent implements OnInit {
   addPuestos(puesto:NgForm){
     for (let i = 0; i < this.puestos.length; i++) {
    if (puesto.value.desGrup === this.puestos[i].denominacion) {
-     alert("ya Existe el Puesto");
+    Swal.fire({
+      title: 'ya exise el Puesto!',
+       icon: 'error',
+       showCancelButton: true,
+       confirmButtonColor: '#23CCEF',
+       cancelButtonColor: '#d33',
+       cancelButtonText: 'Cancelar',
+       confirmButtonText: 'Confirmar',
+       width: '450px',
+       heightAuto: true,
+       showClass: {
+         popup: 'animated fadeInDown faster'
+       },
+       hideClass: {
+         popup: 'animated fadeOutUp faster'
+       }
+     });
      return;
    }
  }
@@ -139,13 +155,21 @@ updPuestos(form: NgForm){
 
     
   eliminarPuesto(form:Puesto){
-    Swal.fire({
-      title: 'Esta seguro?',
-      text: 'desea elimniar el registro!',
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonText: 'Si, eliminar!',
-      cancelButtonText: 'No, Cancelar'
+    Swal.fire({icon: 'error',
+    title: "¿Seguro desea eliminar a " + form.denominacion + "?",
+    showCancelButton: true,
+    confirmButtonColor: '#23CCEF',
+    cancelButtonColor: '#d33',
+    cancelButtonText: 'Cancelar',
+    confirmButtonText: 'Confirmar',
+    width: '450px',
+    heightAuto: true,
+    showClass: {
+      popup: 'animated fadeInDown faster'
+    },
+    hideClass: {
+      popup: 'animated fadeOutUp faster'
+    }
     }).then((result) => {
       if (result.value) {
       this._puesto.delPuest(form._id).subscribe(resp =>{
@@ -161,12 +185,21 @@ updPuestos(form: NgForm){
       
     habilitarPuesto(form: Puesto){
     Swal.fire({
-      title: 'Esta seguro?',
-      text: 'desea Habilitar el registro!',
-      icon: 'warning',
+      icon: 'error',
+      title: "¿Seguro desea habilitar",
       showCancelButton: true,
-      confirmButtonText: 'Si, Habilitar!',
-      cancelButtonText: 'No, Cancelar'
+      confirmButtonColor: '#23CCEF',
+      cancelButtonColor: '#d33',
+      cancelButtonText: 'Cancelar',
+      confirmButtonText: 'Confirmar',
+      width: '450px',
+      heightAuto: true,
+      showClass: {
+        popup: 'animated fadeInDown faster'
+      },
+      hideClass: {
+        popup: 'animated fadeOutUp faster'
+      }
     }).then((result) => {
       if (result.value) {
         this._puesto.habPuest(form._id).subscribe(resp =>{

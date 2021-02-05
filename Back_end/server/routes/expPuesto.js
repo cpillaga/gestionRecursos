@@ -79,7 +79,7 @@ app.post('/expPuesto', verificaToken, function(req, res) {
 app.put('/expPuesto/:id', verificaToken, function(req, res) {
     let id = req.params.id;
 
-    let body = _.pick(req.body, ['area', 'tiempo', 'especificidad']); //Dentro de los corchetes va los campos a modificarse
+    let body = _.pick(req.body, ['area', 'tiempo', 'especificidad, experiencia, puesto']); //Dentro de los corchetes va los campos a modificarse
 
     //Condicion para saber si la clave se esta modificando
 
@@ -97,6 +97,78 @@ app.put('/expPuesto/:id', verificaToken, function(req, res) {
         });
     });
 });
+
+
+/* 
+    Método para dar de baja a un proceso
+*/
+app.delete('/expPuesto/:id', verificaToken, function(req, res) {
+    let id = req.params.id;
+
+    let cambiaEstado = {
+        estado: "false"
+    };
+
+    //  Usuario.findByIdAndRemove(id, (err, usuarioBorrado) => { Find>ByAndRemove elimina al campo se puede reemplazar por la linea de abajo
+    ExpPuesto.findByIdAndUpdate(id, cambiaEstado, { new: true }, (err, expPuestoBorrado) => {
+        if (err) {
+            return res.status(400).json({
+                ok: false,
+                err
+            });
+        }
+
+        if (!expPuestoBorrado) {
+            return res.status(400).json({
+                ok: false,
+                err: {
+                    message: 'expPuesto no encontrado'
+                }
+            });
+        }
+        res.json({
+            ok: true,
+            expPuesto: expPuestoBorrado
+        });
+    });
+});
+
+/* 
+    Método para habilitar un rol
+*/
+app.delete('/expPuesto/habilitar/:id', verificaToken, function(req, res) {
+    let id = req.params.id;
+
+    let cambiaEstado = {
+        estado: "true"
+    };
+
+    //  Usuario.findByIdAndRemove(id, (err, usuarioBorrado) => {
+    ExpPuesto.findByIdAndUpdate(id, cambiaEstado, { new: true }, (err, expPuestoActivado) => {
+        if (err) {
+            return res.status(400).json({
+                ok: false,
+                err
+            });
+        }
+
+        if (!expPuestoActivado) {
+            return res.status(400).json({
+                ok: false,
+                err: {
+                    message: 'expPuesto no encontrado'
+                }
+            });
+        }
+
+        res.json({
+            ok: true,
+            expPuesto: expPuestoActivado
+        });
+    });
+});
+
+
 
 
 /* 
@@ -125,6 +197,25 @@ app.get('/expPuesto/buscar/:termino/:empresa', verificaToken, function(req, res)
                 expPuesto
             });
         });
+});
+
+
+app.get("/expPuesto/contar/:idEmp", verificaToken, (req, res) => {
+    let id = req.params.idEmp;
+
+    ExpPuesto.count({ estado: true }).exec((err, total) => {
+        if (err) {
+            return res.status(500).json({
+                ok: false,
+                err,
+            });
+        }
+        res.json({
+            ok: true,
+            total,
+        });
+    });
+
 });
 
 module.exports = app;

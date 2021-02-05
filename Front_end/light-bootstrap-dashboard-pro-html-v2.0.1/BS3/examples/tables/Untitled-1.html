@@ -1,0 +1,386 @@
+<aside class="main-sidebar sidebar-dark-primary elevation-4">
+
+    <a [routerLink]="['/inicio']" href="#" class="brand-link">
+        <img src="assets/dist/img/hmt_logo.png" alt="AdminLTE Logo" width="170" height="50" style="opacity: .8">
+        <p></p>
+        <span text- class="brand-text font-weight-light">{{nombreEmp}}</span>
+    </a>
+
+    <div class="sidebar">
+        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+            <div class="image">
+                <img src="assets/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+            </div>
+            <div class="info">
+                <a href="#" class="d-block">{{usuario.usu}}</a>
+            </div>
+        </div>
+
+        <nav class="mt-2">
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                <li routerLinkActive="active" class="nav-item">
+                    <a [routerLink]="['/inicio']" href="#" class="nav-link">
+                        <i class="fas fa-th mr-2"></i>
+                        <p>
+                            Inicio
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item has-treeview">
+                    <a href="#" class="nav-link">
+                        <i class="fas fa-chalkboard-teacher mr-2"></i>
+                        <p>
+                            Puestos
+                            <i class="fas fa-angle-left right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a [routerLink]="['/puesto']" href="#" class="nav-link">
+                                <i class="fas fa-chalkboard-teacher mr-2"></i>
+                                <p>Puestos</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a [routerLink]="['/rol']" href="#" class="nav-link" type="submit">
+                                <i class="fas fa-diagnoses mr-2"></i>
+                                <p>Roles</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a [routerLink]="['/ambito']" href="#" class="nav-link" type="submit">
+                                <i class="fas fa-user-tie mr-2"></i>
+                                <p>Ambitos </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a [routerLink]="['/actividadesCargo']" href="#" class="nav-link" type="submit">
+                                <i class="fas fa-user-tie mr-2"></i>
+                                <p>Actividades del Puesto </p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item has-treeview">
+                            <a href="#" class="nav-link">
+                                <i class="fas fa-chalkboard-teacher mr-2"></i>
+                                <p>
+                                    Actividades Esenciales
+                                    <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a [routerLink]="['/actividadesEsenciales']" href="#" class="nav-link" type="submit">
+                                        <i class="fas fa-user-tie mr-2"></i>
+                                        <p>Actividades Esenciales </p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a [routerLink]="['/conocimiento']" href="#" class="nav-link" type="submit">
+                                        <i class="fas fa-user-tie mr-2"></i>
+                                        <p>Conocimientos Adicionales </p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a href="pages/layout/collapsed-sidebar.html" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Experiencia</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-item has-treeview">
+                    <a href="#" class="nav-link">
+                        <i class="fas fa-tasks mr-2"></i>
+                        <p>
+                            Valoriacion
+                            <i class="fas fa-angle-left right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a [routerLink]="['/actividadPuesto']" href="#" class="nav-link">
+                                <i class="fas fa-tasks mr-2"></i>
+                                <p>Valorizacion</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a [routerLink]="['/grupoOcupacional']" href="#" class="nav-link" type="submit">
+                                <i class="fas fa-users mr-2"></i>
+                                <p>Grupo Ocupacional</p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="pages/layout/collapsed-sidebar.html" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Experiencia</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+            </ul>
+        </nav>
+    </div>
+</aside>
+
+
+<div class="sidebar-wrapper">
+    <div class="user">
+        <div class="info">
+            <div class="photo">
+                <img src="../assets/img/default-avatar.png" />
+            </div>
+
+            <a data-toggle="collapse" href="#collapseExample" class="collapsed">
+                <span>
+							Tania Andrew
+	                        <b class="caret"></b>
+						</span>
+            </a>
+
+            <div class="collapse" id="collapseExample">
+                <ul class="nav">
+                    <li>
+                        <a href="#pablo">
+                            <span class="sidebar-mini">MP</span>
+                            <span class="sidebar-normal">My Profile</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#pablo">
+                            <span class="sidebar-mini">EP</span>
+                            <span class="sidebar-normal">Edit Profile</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#pablo">
+                            <span class="sidebar-mini">S</span>
+                            <span class="sidebar-normal">Settings</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <ul class="nav">
+        <li class="active">
+            <a href="dashboard.html">
+                <i class="pe-7s-graph"></i>
+                <p>Dashboard</p>
+            </a>
+        </li>
+        <li>
+            <a data-toggle="collapse" href="#componentsExamples">
+                <i class="pe-7s-plugin"></i>
+                <p>Components
+                    <b class="caret"></b>
+                </p>
+            </a>
+            <div class="collapse" id="componentsExamples">
+                <ul class="nav">
+                    <li>
+                        <a href="components/buttons.html">
+                            <span class="sidebar-mini">B</span>
+                            <span class="sidebar-normal">Buttons</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="components/grid.html">
+                            <span class="sidebar-mini">GS</span>
+                            <span class="sidebar-normal">Grid System</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="components/panels.html">
+                            <span class="sidebar-mini">P</span>
+                            <span class="sidebar-normal">Panels</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="components/sweet-alert.html">
+                            <span class="sidebar-mini">SA</span>
+                            <span class="sidebar-normal">Sweet Alert</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="components/notifications.html">
+                            <span class="sidebar-mini">N</span>
+                            <span class="sidebar-normal">Notifications</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="components/icons.html">
+                            <span class="sidebar-mini">I</span>
+                            <span class="sidebar-normal">Icons</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="components/typography.html">
+                            <span class="sidebar-mini">T</span>
+                            <span class="sidebar-normal">Typography</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </li>
+        <li>
+            <a data-toggle="collapse" href="#formsExamples">
+                <i class="pe-7s-note2"></i>
+                <p>Forms
+                    <b class="caret"></b>
+                </p>
+            </a>
+            <div class="collapse" id="formsExamples">
+                <ul class="nav">
+                    <li>
+                        <a href="forms/regular.html">
+                            <span class="sidebar-mini">Rf</span>
+                            <span class="sidebar-normal">Regular Forms</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="forms/extended.html">
+                            <span class="sidebar-mini">Ef</span>
+                            <span class="sidebar-normal">Extended Forms</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="forms/validation.html">
+                            <span class="sidebar-mini">Vf</span>
+                            <span class="sidebar-normal">Validation Forms</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="forms/wizard.html">
+                            <span class="sidebar-mini">W</span>
+                            <span class="sidebar-normal">Wizard</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </li>
+        <li>
+            <a data-toggle="collapse" href="#tablesExamples">
+                <i class="pe-7s-news-paper"></i>
+                <p>Tables
+                    <b class="caret"></b>
+                </p>
+            </a>
+            <div class="collapse" id="tablesExamples">
+                <ul class="nav">
+                    <li>
+                        <a href="tables/regular.html">
+                            <span class="sidebar-mini">RT</span>
+                            <span class="sidebar-normal">Regular Tables</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="tables/extended.html">
+                            <span class="sidebar-mini">ET</span>
+                            <span class="sidebar-normal">Extended Tables</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="tables/bootstrap-table.html">
+                            <span class="sidebar-mini">BT</span>
+                            <span class="sidebar-normal">Bootstrap Table</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="tables/datatables.net.html">
+                            <span class="sidebar-mini">DT</span>
+                            <span class="sidebar-normal">DataTables.net</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </li>
+        <li>
+            <a data-toggle="collapse" href="#mapsExamples">
+                <i class="pe-7s-map-marker"></i>
+                <p>Maps
+                    <b class="caret"></b>
+                </p>
+            </a>
+            <div class="collapse" id="mapsExamples">
+                <ul class="nav">
+                    <li>
+                        <a href="maps/google.html">
+                            <span class="sidebar-mini">GM</span>
+                            <span class="sidebar-normal">Google Maps</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="maps/vector.html">
+                            <span class="sidebar-mini">VM</span>
+                            <span class="sidebar-normal">Vector maps</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="maps/fullscreen.html">
+                            <span class="sidebar-mini">FSM</span>
+                            <span class="sidebar-normal">Full Screen Map</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </li>
+        <li>
+            <a href="charts.html">
+                <i class="pe-7s-graph1"></i>
+                <p>Charts</p>
+            </a>
+        </li>
+
+        <li>
+            <a href="calendar.html">
+                <i class="pe-7s-date"></i>
+                <p>Calendar</p>
+            </a>
+        </li>
+        <li>
+            <a data-toggle="collapse" href="#pagesExamples">
+                <i class="pe-7s-gift"></i>
+                <p>Pages
+                    <b class="caret"></b>
+                </p>
+            </a>
+            <div class="collapse" id="pagesExamples">
+                <ul class="nav">
+                    <li>
+                        <a href="pages/user.html">
+                            <span class="sidebar-mini">UP</span>
+                            <span class="sidebar-normal">User Page</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="pages/login.html">
+                            <span class="sidebar-mini">LP</span>
+                            <span class="sidebar-normal">Login Page</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="pages/register.html">
+                            <span class="sidebar-mini">RP</span>
+                            <span class="sidebar-normal">Register Page</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="pages/lock.html">
+                            <span class="sidebar-mini">LSP</span>
+                            <span class="sidebar-normal">Lock Screen Page</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </li>
+    </ul>
+</div>

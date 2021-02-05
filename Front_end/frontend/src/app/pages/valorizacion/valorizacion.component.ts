@@ -5,8 +5,6 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Valorizacion } from '../../models/valorizacion.models';
 import { NgForm } from '@angular/forms';
-import { Actpuescomp } from '../../models/expPuesto.models';
-import { ActividadPuesto } from '../../models/actividadPuesto.models';
 import Swal from 'sweetalert2';
 
 
@@ -71,7 +69,11 @@ export class ValorizacionComponent implements OnInit {
   addValorizacion(valorizacion:NgForm){
     for (let i = 0; i < this.valorizaciones.length; i++) {
    if (valorizacion.value.desVal === this.valorizaciones[i].descripcion) {
-     alert("ya Existe la Valorizacion");
+    Swal.fire({
+      title: 'ya exise la valorizacion!',
+       icon: 'warning'
+     });
+return;
      return;
    }
  }

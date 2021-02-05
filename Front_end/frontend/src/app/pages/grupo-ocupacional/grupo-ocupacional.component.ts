@@ -65,8 +65,11 @@ export class GrupoOcupacionalComponent implements OnInit {
   addGruposOcupacionales(grupoOcupacional:NgForm){
        for (let i = 0; i < this.gruposOcupacionales.length; i++) {
       if (grupoOcupacional.value.desGrup === this.gruposOcupacionales[i].descripcion) {
-        alert("ya Existe el Grupo");
-        return;
+        Swal.fire({
+          title: 'ya exise el grupo Ocupacional!',
+           icon: 'warning'
+         });
+          return;
       }
     }
     this._grupoOcupacional.agregarGrupoOcupacional(grupoOcupacional.value.desGrup, grupoOcupacional.value.minval, grupoOcupacional.value.maxval).subscribe(resp => {

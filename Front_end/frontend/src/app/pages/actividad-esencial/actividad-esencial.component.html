@@ -1,0 +1,233 @@
+<br>
+<div class="col-md-3">
+    <div class="card" style="background-color: #F59A3E; cursor: pointer;" routerLink="/puesto">
+        <div class="header">
+            <h5 class="title" style="font-weight: bold; color: white;"><i class="pe-7s-box2"></i>&nbsp; Actividades de Esenciales</h5>
+        </div>
+        <div class="content" style="text-align: right;">
+            <a style="color: white; font-weight: bold; font-size: 22px;">{{contActvEs}}</a>
+        </div>
+
+    </div>
+</div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<div class="main-content">
+    <div class="card">
+        <div class="container-fluid">
+            <form #buscar="ngForm" class="form-horizontal" (keyup)="searchActEsen(buscar)">
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-xs-8 col-sm-8 col-md-8">
+                            <h4 class="card-title col-md-5"> Actividades Esenciales</h4>
+                        </div>
+                        <div class="col-xs-4 col-sm-4 col-md-4">
+                            <!-- <div class="input-group no-border" style="margin-top: 15px;"> -->
+                            <input type="text" class="form-control" style="margin-top: 25px;" value="{{ buscarActEsen }}" [ngModel]="buscarActEsen" id="buscarActEsen" name="buscarActEsen" placeholder="Buscar...">
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <i class="now-ui-icons ui-1_zoom-bold"></i>
+                                </div>
+                            </div>
+                            <!-- </div> -->
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="content table-responsive table-full-width">
+                        <p *ngIf="coincidencia == false">No se encontró ninguna coincidencia</p>
+                        <table class="table" *ngIf="coincidencia == true">
+                            <thead>
+                                <tr>
+                                    <th>Puesto</th>
+                                    <th>descripcion</th>
+                                    <th>Conocimiento Adicional</th>
+                                    <th class="text-right">Acción</th>
+                                </tr>
+                            </thead>
+                            <tbody *ngFor="let actividadEsencial of actividadesEsenciales">
+                                <tr>
+                                    <td class="{{actividadEsencial.estado}}">{{actividadEsencial.puesto.denominacion}}</td>
+                                    <td class="{{actividadEsencial.estado}}">{{actividadEsencial.descripcion}}</td>
+                                    <td class="{{actividadEsencial.estado}}">{{actividadEsencial.conocimientoAdicional.descripcion}}</td>
+
+                                    <td class="td-actions text-right">
+
+                                        <a type="button" rel="tooltip" title="Editar" (click)="getDataActividadEsencial(actividadEsencial)" data-toggle="modal" data-target="#modalupdActividadEsencial" class="btn btn-info btn-simple btn-xs">
+                                            <i class="fa fa-edit"></i>
+                                        </a>
+
+                                        <a type="button" *ngIf="actividadEsencial.estado === 'true'" rel="tooltip" title="Eliminar" (click)="eliminarActividadEsencial(actividadEsencial)" class="btn btn-danger btn-simple btn-xs">
+                                            <i class="fa fa-close"></i>
+                                        </a>
+
+                                        <a type="button" *ngIf="actividadEsencial.estado === 'false'" rel="tooltip" title="Habilitar" (click)="habilitarActividadEsencial(actividadEsencial)" class="btn btn-success btn-simple btn-xs">
+                                            <i class="fa fa-check"></i>
+                                        </a>
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<caption>
+    <a class="btn btn-success btn-fill" data-toggle="modal" data-target="#modaladdActividadesEsenciales" style=" position: fixed; bottom: 15px; right: 20px; border-radius: 100% !important; float: right; height: 45px; width: 45px; ">
+        <i style="color: white; padding-top: 6px; padding-right: 8px; " class="fa fa-plus "></i>
+    </a>
+</caption>
+
+
+<!-- Modal para registros nuevos -->
+<div class="modal fade" id="modaladdActividadesEsenciales" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-sm" role="document">
+        <form #addActividadEsencial="ngForm" id="addC" (ngSubmit)="addGruposActividadesEsenciales(addActividadEsencial); addActividadEsencial.reset()">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Agregar Actividades Esenciales</h5>
+                    <button type="button" #closebuttonadd class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+                <div class="modal-body ">
+                    <div class="row">
+                        <label class="col-md-4 col-form-label" style="margin-top: 10px;">Descripción:</label>
+                        <div class="col-md-8">
+                            <div class="form-group has-default">
+                                <input type="text" id="desActEse" name="desActEse" [ngModel]="desActEse" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="row">
+                        <label class="col-md-4 col-form-label" style="margin-top: 10px;">Conocimiento Adicional:</label>
+                        <div class="col-md-8">
+                            <div class="form-group has-default">
+                                <input type="text" id="concimientoActEse" name="concimientoActEse" [ngModel]="concimientoActEse" class="form-control">
+                            </div>
+                        </div>
+                    </div> -->
+
+                    <div class="row">
+                        <label class="col-md-4 col-form-label" style="margin-top: 10px;">Conocimiento Adicional:</label>
+                        <div class="col-md-8">
+
+                            <div class="form-group has-default">
+                                <div class="input-group">
+                                    <select id="concimientoActEse" class="form-control " name="concimientoActEse" ngModel data-title="Seleccionar" data-style="btn-default btn-block" data-menu-style="dropdown-blue">
+                <!-- <option [value]="pidProv" hidden>{{pnomProv}}</option> -->
+                <option  *ngFor="let conocimiento of conocimientos"  [value]="conocimiento._id">{{conocimiento.descripcion}}</option>
+            </select>
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-plus" data-toggle="modal" data-target="#modaladdProv" style="cursor: pointer; color: #78b414;"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- <div class="row">
+                        <label class="col-md-4 col-form-label" style="margin-top: 10px;">Puesto:</label>
+                        <div class="col-md-8">
+                            <div class="form-group has-default">
+                                <input type="text" id="puestActEse" name="puestActEse" [ngModel]="puestActEse" class="form-control">
+                            </div>
+                        </div>
+                    </div> -->
+                    <div class="row">
+                        <label class="col-md-4 col-form-label" style="margin-top: 10px;">Puesto:</label>
+                        <div class="col-md-8">
+
+                            <div class="form-group has-default">
+                                <div class="input-group">
+                                    <select id="puestActEse" class="form-control " name="puestActEse" ngModel data-title="Seleccionar" data-style="btn-default btn-block" data-menu-style="dropdown-blue">
+                <!-- <option [value]="pidProv" hidden>{{pnomProv}}</option> -->
+                <option  *ngFor="let puesto of puestos"  [value]="puesto._id">{{puesto.denominacion}}</option>
+            </select>
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-plus" data-toggle="modal" data-target="#modaladdProv" style="cursor: pointer; color: #78b414;"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button type="submit" class="btn btn-success" id="add_ActividadEsencial" name="add_ActividadEsencial">Agregar</button>
+
+                </div>
+
+
+
+
+
+
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<!-- Modal para modificar nuevos -->
+<div class="modal fade" *ngIf="dataUpdActEsen == true" id="modalupdActividadEsencial" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-sm" role="document">
+        <form #updActividadEsencial="ngForm" id="updC" (ngSubmit)="updActividadesEsenciales(updActividadEsencial)">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modificar Actividades Esenciales</h5>
+                    <button type="button" #closebuttonupd class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+                <div class="modal-body ">
+                    <div class="row">
+                        <label class="col-md-4 col-form-label" style="margin-top: 10px;">Descripción:</label>
+                        <div class="col-md-8">
+                            <div class="form-group has-default">
+                                <input type="text" id="desActEseU" name="desActEseU" [ngModel]="desActEseU" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-body ">
+                    <div class="row">
+                        <label class="col-md-4 col-form-label" style="margin-top: 10px;">Conocimiento Adicional:</label>
+                        <div class="col-md-8">
+                            <div class="form-group has-default">
+                                <input type="text" id="concimientoActEseU" name="concimientoActEseU" [ngModel]="concimientoActEseU" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-body ">
+                    <div class="row">
+                        <label class="col-md-4 col-form-label" style="margin-top: 10px;">Puesto:</label>
+                        <div class="col-md-8">
+                            <div class="form-group has-default">
+                                <input type="text" id="puestActEseU" name="puestActEseU" [ngModel]="puestActEseU" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button type="submit" class="btn btn-success" id="updActividadesEsenciales" name="updActividadesEsenciales">Modificar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

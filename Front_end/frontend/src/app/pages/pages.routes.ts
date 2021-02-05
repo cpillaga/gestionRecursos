@@ -4,11 +4,15 @@ import { RouterModule, Routes } from '@angular/router';
 import { RolComponent } from './rol/rol.component';
 import { GrupoOcupacionalComponent } from './grupo-ocupacional/grupo-ocupacional.component';
 import { AmbitoComponent } from './ambito/ambito.component';
-import { CompetenciaComponent } from './competencia/competencia.component';
-import { ProcesoComponent } from './proceso/proceso.component';
-import { ActividadComponent } from './actividad/actividad.component';
 import { PuestoComponent } from './puesto/puesto.component';
-import { ActividadPuestoComponent } from './actividad-puesto/actividad-puesto.component';
+import { ConocimientoAdicionalComponent } from './conocimiento-adicional/conocimiento-adicional.component';
+import { ActividadEsencialComponent } from './actividad-esencial/actividad-esencial.component';
+import { ActividadCargoComponent } from './actividad-cargo/actividad-cargo.component';
+import { PuestoAddComponent } from './puesto-add/puesto-add.component';
+import { ExperienciaComponent } from './experiencia/experiencia.component';
+import { ExperienciaPuestoComponent } from './experiencia-puesto/experiencia-puesto.component';
+import { CompetenciaTecnicaComponent } from './competencia-tecnica/competencia-tecnica.component';
+import { CompetenciaConductualComponent } from './competencia-conductual/competencia-conductual.component';
 
 
 
@@ -20,12 +24,16 @@ const pagesRoutes: Routes = [
         { path: 'inicio', component: HomeComponent },
         { path: 'rol', component: RolComponent },
         { path: 'grupoOcupacional', component: GrupoOcupacionalComponent }, 
-        { path: 'competencia', component: CompetenciaComponent }, 
         { path: 'ambito', component: AmbitoComponent },
-        { path: 'proceso', component: ProcesoComponent },
-        { path: 'actividad', component: ActividadComponent },
-        { path: 'puesto', component: PuestoComponent },
-        { path: 'actividadPuesto', component: ActividadPuestoComponent },
+        { path: 'puesto', component: PuestoComponent }, 
+        { path: 'conocimiento', component: ConocimientoAdicionalComponent},  
+        { path: 'actividadesEsenciales', component: ActividadEsencialComponent},
+        { path: 'actividadesCargo', component: ActividadCargoComponent},
+        { path: 'addpuesto', component: PuestoAddComponent},
+        { path: 'experiencia', component: ExperienciaComponent},
+        { path: 'experienciaPuesto', component: ExperienciaPuestoComponent},
+        { path: 'competenciaTecnica', component: CompetenciaTecnicaComponent},
+        { path: 'competenciaConductual', component: CompetenciaConductualComponent},
         { path: '', redirectTo: '/login', pathMatch: 'full' }
         ]
     }

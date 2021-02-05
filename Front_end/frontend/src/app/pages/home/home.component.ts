@@ -5,11 +5,7 @@ import { Rol } from '../../models/rol.models';
 import { RolService } from '../../services/rol.service';
 import { GrupoOcupacionalService } from '../../services/grupo-ocupacional.service';
 import { AmbitoService } from '../../services/ambito.service';
-import { CompetenciaService } from 'src/app/services/competencia.service';
-import { ProcesoService } from '../../services/proceso.service';
-import { ActividadService } from '../../services/actividad.service';
 import { PuestoService } from '../../services/puesto.service';
-import { ActividadPuestoService } from '../../services/actividad-puesto.service';
 
 @Component({
   selector: 'app-home',
@@ -32,11 +28,7 @@ export class HomeComponent implements OnInit {
     public _rolService:RolService,
     public _grupoOcupacionalService:GrupoOcupacionalService,
     public _ambitoService: AmbitoService,
-    public _competenciaService: CompetenciaService,
-    public _procesoService: ProcesoService,
-    public _actividadService: ActividadService,
     public _puestoService: PuestoService,
-    public _actividadPuesto: ActividadPuestoService,
   ) { }
 
   ngOnInit(): void {
@@ -57,12 +49,7 @@ export class HomeComponent implements OnInit {
     this.ContarRol();
     this.ContarGrupo();
     this.ContarAmbito();
-    this.ContarCompetencia();
-    this.ContarProceso();
-    this.ContarActividad();
     this.ContarPuestos();
-    this.ContarActividadPuesto();
-
   }
 
 ContarRol(){
@@ -83,22 +70,6 @@ ContarAmbito(){
   })
 }
 
-ContarCompetencia(){
-  this._competenciaService.countComp().subscribe(resp=>{
-    this.contComp = resp.total;
-  })
-}
-
-ContarProceso(){
-  this._procesoService.countPro().subscribe(resp=>{
-    this.contPro = resp.total;
-  })
-}
-ContarActividad(){
-  this._actividadService.countAct().subscribe(resp=>{
-    this.contAct = resp.total;
-  })
-}
 
 ContarPuestos(){
   this._puestoService.countPuest().subscribe(resp=>{
@@ -106,10 +77,5 @@ ContarPuestos(){
   })
 }
 
-ContarActividadPuesto(){
-  this._actividadPuesto.countActPuest().subscribe(resp=>{
-    this.contActPuest = resp.total;
-  })
-}
 
 }

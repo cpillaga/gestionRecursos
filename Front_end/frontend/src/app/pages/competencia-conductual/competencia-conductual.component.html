@@ -1,0 +1,194 @@
+<br>
+<div class="col-md-3">
+    <div class="card" style="background-color: #F59A3E; cursor: pointer;" routerLink="/puesto">
+        <div class="header">
+            <h5 class="title" style="font-weight: bold; color: white;"><i class="pe-7s-box2"></i>&nbsp; Competencias Conductuales</h5>
+        </div>
+        <div class="content" style="text-align: right;">
+            <a style="color: white; font-weight: bold; font-size: 22px;">{{contComCond}}</a>
+        </div>
+
+    </div>
+</div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<div class="main-content">
+    <div class="card">
+        <div class="container-fluid">
+            <form #buscar="ngForm" class="form-horizontal" (keyup)="searchComCond(buscar)">
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-xs-8 col-sm-8 col-md-8">
+                            <h4 class="card-title col-md-5">Competencias Conductuales</h4>
+                        </div>
+                        <div class="col-xs-4 col-sm-4 col-md-4">
+                            <!-- <div class="input-group no-border" style="margin-top: 15px;"> -->
+                            <input type="text" class="form-control" style="margin-top: 25px;" value="{{ buscarComCond }}" [ngModel]="buscarComCond" id="buscarComCond" name="buscarComCond" placeholder="Buscar...">
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <i class="now-ui-icons ui-1_zoom-bold"></i>
+                                </div>
+                            </div>
+                            <!-- </div> -->
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="content table-responsive table-full-width">
+                        <p *ngIf="coincidencia == false">No se encontró ninguna coincidencia</p>
+                        <table class="table" *ngIf="coincidencia == true">
+                            <thead>
+                                <tr>
+                                    <th>numero</th>
+                                    <th>denominacion</th>
+                                    <th>definicion</th>
+                                    <th class="text-right">Acción</th>
+                                </tr>
+                            </thead>
+                            <tbody *ngFor="let competenciaConductual of competenciasConductuales">
+                                <tr>
+                                    <td class="{{competenciaConductual.estado}}">{{competenciaConductual.numero}}</td>
+                                    <td class="{{competenciaConductual.estado}}">{{competenciaConductual.denominacion}}</td>
+                                    <td class="{{competenciaConductual.estado}}">{{competenciaConductual.definicion}}</td>
+
+                                    <td class="td-actions text-right">
+
+                                        <a type="button" rel="tooltip" title="Editar" (click)="getDataCompetenciaConductual(competenciaConductual)" data-toggle="modal" data-target="#modalupdCompetenciaConductual" class="btn btn-info btn-simple btn-xs">
+                                            <i class="fa fa-edit"></i>
+                                        </a>
+
+                                        <a type="button" *ngIf="competenciaConductual.estado === 'true'" rel="tooltip" title="Eliminar" (click)="eliminarCompetenciConductual(competenciaConductual)" class="btn btn-danger btn-simple btn-xs">
+                                            <i class="fa fa-close"></i>
+                                        </a>
+
+                                        <a type="button" *ngIf="competenciaConductual.estado === 'false'" rel="tooltip" title="Habilitar" (click)="habilitarCompetenciaConductual(competenciaConductual)" class="btn btn-success btn-simple btn-xs">
+                                            <i class="fa fa-check"></i>
+                                        </a>
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<caption>
+    <a class="btn btn-success btn-fill" data-toggle="modal" data-target="#modaladdCompetenciasConductuales" style=" position: fixed; bottom: 15px; right: 20px; border-radius: 100% !important; float: right; height: 45px; width: 45px; ">
+        <i style="color: white; padding-top: 6px; padding-right: 8px; " class="fa fa-plus "></i>
+    </a>
+</caption>
+
+
+<!-- Modal para registros nuevos -->
+<div class="modal fade" id="modaladdCompetenciasConductuales" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-sm" role="document">
+        <form #addCompetenciaConductual="ngForm" id="addC" (ngSubmit)="addCompetenciasConductuales(addCompetenciaConductual); addCompetenciaConductual.reset()">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Agregar Competencias Conductual</h5>
+                    <button type="button" #closebuttonadd class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+                <div class="modal-body ">
+                    <div class="row">
+                        <label class="col-md-4 col-form-label" style="margin-top: 10px;">Numero:</label>
+                        <div class="col-md-8">
+                            <div class="form-group has-default">
+                                <input type="text" id="numeroCond" name="numeroCond" [ngModel]="numeroCond" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label class="col-md-4 col-form-label" style="margin-top: 10px;">Denominacion:</label>
+                        <div class="col-md-8">
+                            <div class="form-group has-default">
+                                <input type="text" id="denominacionCond" name="denominacionCond" [ngModel]="denominacionCond" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label class="col-md-4 col-form-label" style="margin-top: 10px;">Definicion:</label>
+                        <div class="col-md-8">
+                            <div class="form-group has-default">
+                                <input type="text" id="definicionCond" name="definicionCond" [ngModel]="definicionCond" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button type="submit" class="btn btn-success" id="add_CompetenciaConductual" name="add_CompetenciaConductual">Agregar</button>
+
+                </div>
+
+
+
+
+
+
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<!-- Modal para modificar nuevos -->
+<div class="modal fade" *ngIf="dataUpdComCond == true" id="modalupdCompetenciaConductual" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-sm" role="document">
+        <form #updCompetenciaCondcnica="ngForm" id="updC" (ngSubmit)="updCompetenciaConductual(updCompetenciaCondcnica)">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modificar Actividades Esenciales</h5>
+                    <button type="button" #closebuttonupd class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+                <div class="modal-body ">
+                    <div class="row">
+                        <label class="col-md-4 col-form-label" style="margin-top: 10px;">Numero:</label>
+                        <div class="col-md-8">
+                            <div class="form-group has-default">
+                                <input type="text" id="numeroCondU" name="numeroCondU" [ngModel]="numeroCondU" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-body ">
+                    <div class="row">
+                        <label class="col-md-4 col-form-label" style="margin-top: 10px;">Denominacion:</label>
+                        <div class="col-md-8">
+                            <div class="form-group has-default">
+                                <input type="text" id="denominacionCondU" name="denominacionCondU" [ngModel]="denominacionCondU" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-body ">
+                    <div class="row">
+                        <label class="col-md-4 col-form-label" style="margin-top: 10px;">Definicion:</label>
+                        <div class="col-md-8">
+                            <div class="form-group has-default">
+                                <input type="text" id="definicionCondU" name="definicionCondU" [ngModel]="definicionCondU" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button type="submit" class="btn btn-success" id="updCompetenciasConductuales" name="updCompetenciasConductuales">Modificar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

@@ -19,7 +19,7 @@ export class RolComponent implements OnInit {
   getDataRol: Rol;
   desRolU: string;
   dataUpd:Boolean= false;
-  coincidencia:Boolean= false;
+  coincidencia:Boolean= true;
   buscarRol: string = "";
   empRol: Usuario;
   contRol: string = "";
@@ -60,7 +60,24 @@ export class RolComponent implements OnInit {
   addRoles(rol:NgForm){
     for (let i = 0; i < this.roles.length; i++) {
       if (rol.value.desRol === this.roles[i].descripcion) {
-        alert("ya Existe el Rol");
+        Swal.fire({
+          title: 'ya exise el Rol!',
+           icon: 'error',
+           showCancelButton: true,
+           confirmButtonColor: '#23CCEF',
+           cancelButtonColor: '#d33',
+           cancelButtonText: 'Cancelar',
+           confirmButtonText: 'Confirmar',
+           width: '450px',
+           heightAuto: true,
+           showClass: {
+             popup: 'animated fadeInDown faster'
+           },
+           hideClass: {
+             popup: 'animated fadeOutUp faster'
+           }
+         });
+return;
         return;
       }
     }
@@ -90,12 +107,20 @@ export class RolComponent implements OnInit {
   
 eliminarRol(form: Rol){
 Swal.fire({
-  title: 'Esta seguro?',
-  text: 'desea elimniar el registro!',
-  icon: 'warning',
+  title: "¿Seguro desea eliminar a " + form.descripcion + "?",
   showCancelButton: true,
-  confirmButtonText: 'Si, eliminar!',
-  cancelButtonText: 'No, Cancelar'
+  confirmButtonColor: '#23CCEF',
+  cancelButtonColor: '#d33',
+  cancelButtonText: 'Cancelar',
+  confirmButtonText: 'Confirmar',
+  width: '450px',
+  heightAuto: true,
+  showClass: {
+    popup: 'animated fadeInDown faster'
+  },
+  hideClass: {
+    popup: 'animated fadeOutUp faster'
+  }
 }).then((result) => {
   if (result.value) {
     this._rol.delRol(form._id).subscribe(resp =>{
@@ -111,12 +136,21 @@ Swal.fire({
   
 habilitarRol(form: Rol){
 Swal.fire({
-  title: 'Esta seguro?',
-  text: 'desea Habilitar el registro!',
-  icon: 'warning',
+  icon: 'error',
+  title: "¿Seguro desea habilitar",
   showCancelButton: true,
-  confirmButtonText: 'Si, Habilitar!',
-  cancelButtonText: 'No, Cancelar'
+  confirmButtonColor: '#23CCEF',
+  cancelButtonColor: '#d33',
+  cancelButtonText: 'Cancelar',
+  confirmButtonText: 'Confirmar',
+  width: '450px',
+  heightAuto: true,
+  showClass: {
+    popup: 'animated fadeInDown faster'
+  },
+  hideClass: {
+    popup: 'animated fadeOutUp faster'
+  }
 }).then((result) => {
   if (result.value) {
     this._rol.habRol(form._id).subscribe(resp =>{

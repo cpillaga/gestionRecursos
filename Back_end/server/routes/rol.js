@@ -46,7 +46,6 @@ app.get('/rol/:idEmp', verificaToken, function(req, res) {
 */
 app.post('/rol', verificaToken, function(req, res) {
     let body = req.body;
-    console.log(body);
     let rol = new Rol({
         descripcion: body.descripcion,
         estado: body.estado,

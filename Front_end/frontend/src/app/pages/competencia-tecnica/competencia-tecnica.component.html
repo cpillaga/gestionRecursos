@@ -1,0 +1,194 @@
+<br>
+<div class="col-md-3">
+    <div class="card" style="background-color: #F59A3E; cursor: pointer;" routerLink="/puesto">
+        <div class="header">
+            <h5 class="title" style="font-weight: bold; color: white;"><i class="pe-7s-box2"></i>&nbsp; Competencias Tecnicas</h5>
+        </div>
+        <div class="content" style="text-align: right;">
+            <a style="color: white; font-weight: bold; font-size: 22px;">{{contComTec}}</a>
+        </div>
+
+    </div>
+</div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<div class="main-content">
+    <div class="card">
+        <div class="container-fluid">
+            <form #buscar="ngForm" class="form-horizontal" (keyup)="searchComTec(buscar)">
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-xs-8 col-sm-8 col-md-8">
+                            <h4 class="card-title col-md-5">Competencias Tecnicas</h4>
+                        </div>
+                        <div class="col-xs-4 col-sm-4 col-md-4">
+                            <!-- <div class="input-group no-border" style="margin-top: 15px;"> -->
+                            <input type="text" class="form-control" style="margin-top: 25px;" value="{{ buscarComTec }}" [ngModel]="buscarComTec" id="buscarComTec" name="buscarComTec" placeholder="Buscar...">
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <i class="now-ui-icons ui-1_zoom-bold"></i>
+                                </div>
+                            </div>
+                            <!-- </div> -->
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="content table-responsive table-full-width">
+                        <p *ngIf="coincidencia == false">No se encontró ninguna coincidencia</p>
+                        <table class="table" *ngIf="coincidencia == true">
+                            <thead>
+                                <tr>
+                                    <th>numero</th>
+                                    <th>denominacion</th>
+                                    <th>definicion</th>
+                                    <th class="text-right">Acción</th>
+                                </tr>
+                            </thead>
+                            <tbody *ngFor="let competenciaTecnica of competenciasTecnicas">
+                                <tr>
+                                    <td class="{{competenciaTecnica.estado}}">{{competenciaTecnica.numero}}</td>
+                                    <td class="{{competenciaTecnica.estado}}">{{competenciaTecnica.denominacion}}</td>
+                                    <td class="{{competenciaTecnica.estado}}">{{competenciaTecnica.definicion}}</td>
+
+                                    <td class="td-actions text-right">
+
+                                        <a type="button" rel="tooltip" title="Editar" (click)="getDataCompetenciaTecnica(competenciaTecnica)" data-toggle="modal" data-target="#modalupdCompetenciaTecnica" class="btn btn-info btn-simple btn-xs">
+                                            <i class="fa fa-edit"></i>
+                                        </a>
+
+                                        <a type="button" *ngIf="competenciaTecnica.estado === 'true'" rel="tooltip" title="Eliminar" (click)="eliminarCompetenciTecnica(competenciaTecnica)" class="btn btn-danger btn-simple btn-xs">
+                                            <i class="fa fa-close"></i>
+                                        </a>
+
+                                        <a type="button" *ngIf="competenciaTecnica.estado === 'false'" rel="tooltip" title="Habilitar" (click)="habilitarCompetenciaTecnica(competenciaTecnica)" class="btn btn-success btn-simple btn-xs">
+                                            <i class="fa fa-check"></i>
+                                        </a>
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<caption>
+    <a class="btn btn-success btn-fill" data-toggle="modal" data-target="#modaladdCompetenciasTecnicas" style=" position: fixed; bottom: 15px; right: 20px; border-radius: 100% !important; float: right; height: 45px; width: 45px; ">
+        <i style="color: white; padding-top: 6px; padding-right: 8px; " class="fa fa-plus "></i>
+    </a>
+</caption>
+
+
+<!-- Modal para registros nuevos -->
+<div class="modal fade" id="modaladdCompetenciasTecnicas" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-sm" role="document">
+        <form #addCompetenciaTecnica="ngForm" id="addC" (ngSubmit)="addCompetenciasTecnicas(addCompetenciaTecnica); addCompetenciaTecnica.reset()">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Agregar Competencias Tecnica</h5>
+                    <button type="button" #closebuttonadd class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+                <div class="modal-body ">
+                    <div class="row">
+                        <label class="col-md-4 col-form-label" style="margin-top: 10px;">Numero:</label>
+                        <div class="col-md-8">
+                            <div class="form-group has-default">
+                                <input type="text" id="numeroTec" name="numeroTec" [ngModel]="numeroTec" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label class="col-md-4 col-form-label" style="margin-top: 10px;">Denominacion:</label>
+                        <div class="col-md-8">
+                            <div class="form-group has-default">
+                                <input type="text" id="denominacionTec" name="denominacionTec" [ngModel]="denominacionTec" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label class="col-md-4 col-form-label" style="margin-top: 10px;">Definicion:</label>
+                        <div class="col-md-8">
+                            <div class="form-group has-default">
+                                <input type="text" id="definicionTec" name="definicionTec" [ngModel]="definicionTec" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button type="submit" class="btn btn-success" id="add_CompetenciaTecnica" name="add_CompetenciaTecnica">Agregar</button>
+
+                </div>
+
+
+
+
+
+
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<!-- Modal para modificar nuevos -->
+<div class="modal fade" *ngIf="dataUpdComTec == true" id="modalupdCompetenciaTecnica" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-sm" role="document">
+        <form #updCompetenciaTeccnica="ngForm" id="updC" (ngSubmit)="updCompetenciaTecnica(updCompetenciaTeccnica)">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modificar Actividades Esenciales</h5>
+                    <button type="button" #closebuttonupd class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+                <div class="modal-body ">
+                    <div class="row">
+                        <label class="col-md-4 col-form-label" style="margin-top: 10px;">Numero:</label>
+                        <div class="col-md-8">
+                            <div class="form-group has-default">
+                                <input type="text" id="numeroTecU" name="numeroTecU" [ngModel]="numeroTecU" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-body ">
+                    <div class="row">
+                        <label class="col-md-4 col-form-label" style="margin-top: 10px;">Denominacion:</label>
+                        <div class="col-md-8">
+                            <div class="form-group has-default">
+                                <input type="text" id="denominacionTecU" name="denominacionTecU" [ngModel]="denominacionTecU" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-body ">
+                    <div class="row">
+                        <label class="col-md-4 col-form-label" style="margin-top: 10px;">Definicion:</label>
+                        <div class="col-md-8">
+                            <div class="form-group has-default">
+                                <input type="text" id="definicionTecU" name="definicionTecU" [ngModel]="definicionTecU" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button type="submit" class="btn btn-success" id="updCompetenciasTecnicas" name="updCompetenciasTecnicas">Modificar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

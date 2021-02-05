@@ -1,4 +1,4 @@
-export class Actpuescomp{ 
+export class ExperienciaPuesto{ 
     constructor(
         public area: string,
         public tiempo: string,
@@ -6,6 +6,7 @@ export class Actpuescomp{
         public experiencia: string,
         public puesto: string,
         public empresa: string,
+        public estado: string,
         public _id?: string
     ){}
 }

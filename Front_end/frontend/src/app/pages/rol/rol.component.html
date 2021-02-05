@@ -1,81 +1,85 @@
-<!-- <div class="col-1 col-sm-1 col-md-3">
-    <div class="info-box">
-        <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-diagnoses"></i></span>
-
-        <div class="info-box-content">
-            <span class="info-box-text">Total de Roles</span>
-            <span class="info-box-number">
-               {{contRol}}
-        </span>
+<!-- <br>
+<div class="col-md-3">
+    <div class="card" style="background-color: #F59A3E; cursor: pointer;" routerLink="/rol">
+        <div class="header">
+            <h5 class="title" style="font-weight: bold; color: white;"><i class="pe-7s-box2"></i>&nbsp; Total de Roles </h5>
         </div>
+        <div class="content" style="text-align: right;">
+            <a style="color: white; font-weight: bold; font-size: 22px;">{{contRol}}</a>
+        </div>
+
     </div>
 </div> -->
-<div class="col-1 col-sm-1 col-md-3">
-    <div class="info-box">
-        <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-diagnoses"></i></span>
 
-        <div class="info-box-content">
-            <span class="info-box-text">Total de Roles</span>
-            <span class="info-box-number">
-               {{contRol}}
-        </span>
-        </div>
-    </div>
-</div>
+<br>
+<div class="main-content ps-scrollbar-y">
+    <div class="card">
+        <div class="container-fluid">
+            <form #buscar="ngForm" class="form-horizontal" (keyup)="searchRol(buscar)">
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-xs-8 col-sm-8 col-md-8">
+                            <h4 class="card-title col-md-5"> Roles: {{contRol}}</h4>
+                        </div>
+                        <div class="col-xs-4 col-sm-4 col-md-4">
+                            <!-- <div class="input-group no-border" style="margin-top: 15px;"> -->
+                            <input type="text" class="form-control" style="margin-top: 25px;" value="{{ buscarRol }}" [ngModel]="buscarRol" id="buscarRol" name="buscarRol" placeholder="Buscar...">
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <i class="now-ui-icons ui-1_zoom-bold"></i>
+                                </div>
+                            </div>
+                            <!-- </div> -->
+                        </div>
+                    </div>
+                </div>
+            </form>
 
-<div class="row">
-    <div class="col-12">
-        <div class="card">
-            <div class="card-header">
-                <h3 class="card-title">Roles</h3>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="content table-responsive table-full-width" id="prueba">
+                        <p *ngIf="coincidencia == false">No se encontró ninguna coincidencia</p>
+                        <table class="table" *ngIf="coincidencia == true">
+                            <thead>
+                                <tr>
+                                    <th>Descripcion</th>
+                                    <th class="text-right">Acción</th>
+                                </tr>
+                            </thead>
+                            <tbody *ngFor="let rol of roles">
+                                <tr>
+                                    <td class="{{rol.estado}}">{{rol.descripcion}}</td>
 
-                <div class="card-tools">
+                                    <td class="td-actions text-right">
 
-                    <form #buscar="ngForm" class="form-horizontal" (keyup)="searchRol(buscar)">
+                                        <a type="button" rel="tooltip" title="Editar" (click)="getData(rol)" data-toggle="modal" data-target="#modalupdRol" class="btn btn-info btn-simple btn-xs">
+                                            <i class="fa fa-edit"></i>
+                                        </a>
 
-                        <div id="zero_config_filter" class="dataTables_filter"><label><input type="text"  class="form-control float-right" placeholder="Buscar..." value="{{ buscarRol }}" [ngModel]="buscarRol" id="buscarRol" name="buscarRol"  aria-controls="zero_config"></label></div>
+                                        <a type="button" *ngIf="rol.estado === 'true'" rel="tooltip" title="Eliminar" (click)="eliminarRol(rol)" class="btn btn-danger btn-simple btn-xs">
+                                            <i class="fa fa-close"></i>
+                                        </a>
 
-                    </form>
+                                        <a type="button" *ngIf="rol.estado === 'false'" rel="tooltip" title="Habilitar" (click)="habilitarRol(rol)" class="btn btn-success btn-simple btn-xs">
+                                            <i class="fa fa-check"></i>
+                                        </a>
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
-            <!-- /.card-header -->
-            <div class="card-body table-responsive p-0">
-                <table class="table table-hover text-nowrap">
-                    <thead>
-                        <tr>
-                            <th>Descripción</th>
-                            <th style="text-align: right;" scope="col">Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody *ngFor="let rol of roles">
-                        <tr>
-                            <td class="{{rol.estado}}">{{rol.descripcion}}</td>
-                            <td class="td-actions text-right">
-                                <a style="cursor: pointer; margin-right: 7px;" style="cursor: pointer; color:white;" rel="tooltip" title="Editar" (click)="getData(rol)" data-toggle="modal" data-target="#modalupdRol">
-                                    <a class="badge bg-primary"><i class="fas fa-edit"></i></a>
-                                    <!-- <i class="fa fa-edit"></i> -->
-                                </a>
-                                <a *ngIf="rol.estado == 'true'" style="cursor: pointer; color:white;" rel="tooltip" title="Eliminar" (click)="eliminarRol(rol)">
-                                    <a class="badge bg-danger"><i class="fas fa-window-close"></i></a>
-                                </a>
-                                <a *ngIf="rol.estado == 'false'" style="cursor: pointer; color: white;" rel="tooltip" title="Habilitar" (click)="habilitarRol(rol)">
-                                    <a class="badge bg-success"><i class="fas fa-check"></i></a>
-                                </a>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-                <caption>
-                    <a class="btn btn-success" data-toggle="modal" data-target="#modaladdRol" style="position: fixed; bottom: 15px; right: 20px; border-radius: 100% !important; float: right;">
-                        <i style="color: white;" class="fa fa-plus"></i>
-                    </a>
-                </caption>
-            </div>
-            <!-- /.card-body -->
         </div>
-        <!-- /.card -->
     </div>
 </div>
+
+<caption>
+    <a class="btn btn-success btn-fill" data-toggle="modal" data-target="#modaladdRol" style="position: fixed; bottom: 15px; right: 20px; border-radius: 100% !important; float: right; height: 45px; width: 45px;">
+        <i style="color: white; padding-top: 6px; padding-right: 8px;" class="fa fa-plus"></i>
+    </a>
+</caption>
 
 
 <!-- Modal para registros nuevos -->
