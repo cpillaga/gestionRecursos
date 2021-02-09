@@ -6,6 +6,14 @@ import { ToastrService } from 'ngx-toastr';
 import { Puesto } from '../../models/puesto.models';
 import { NgForm } from '@angular/forms';
 import Swal from 'sweetalert2';
+import { Rol } from '../../models/rol.models';
+import { RolService } from '../../services/rol.service';
+import { Ambito } from '../../models/ambito.models';
+import { AmbitoService } from '../../services/ambito.service';
+import { CompCondObs } from '../../models/compCondObs.models';
+import { CccomportamientoObsService } from '../../services/cccomportamiento-obs.service';
+import { CompTecObs } from '../../models/compTecObs.models';
+import { CTcomportamientoObsService } from '../../services/ctcomportamiento-obs.service';
 
 @Component({
   selector: 'app-puesto',
@@ -14,7 +22,12 @@ import Swal from 'sweetalert2';
 })
 export class PuestoComponent implements OnInit {
   puestos:Puesto[] = [];
+  roles:Rol[] = [];
+  ambitos:Ambito[] = [];
+  // ctcomportamientos: CompTecObs[] = [];
+  // cccomportamientos: CompCondObs[] = [];
   empRol: Usuario;
+
   codigoPuest: String = "";
   denominacionPuest: String = "";
   misionPuest: String = "";
@@ -25,6 +38,12 @@ export class PuestoComponent implements OnInit {
   rolPuest: String = "";
   grupoOcupacionalPuest: String = "";
   ambitoPuest: String = ""
+  // compeCondObs: String = "";
+  // compeTecObs: String = "";
+  gradoPuest: String = "";
+
+  // compeCondObsU: String = "";
+  // compeTecObsU: String = "";
   codigoPuestU: String = "";
   denominacionPuestU: String = "";
   misionPuestU: String = "";
@@ -35,6 +54,8 @@ export class PuestoComponent implements OnInit {
   rolPuestU: String = "";
   grupoOcupacionalPuestU: String = "";
   ambitoPuestU: String = ""
+  gradoPuestU: String = "";
+
   getDataPuest: Puesto;
   dataUpdPuest:Boolean= false;
   coincidencia:Boolean= true;
@@ -44,6 +65,10 @@ export class PuestoComponent implements OnInit {
    @ViewChild('closebuttonupd',  {static: false}) closebuttonupd;
   constructor(
     public _puesto: PuestoService,
+    public _rol: RolService,
+    public _ambito: AmbitoService,
+    // public _cccomportamiento: CccomportamientoObsService,
+    // public _ctcomportamiento: CTcomportamientoObsService,
     public router:Router,
     public toastr: ToastrService,
   ) { }
@@ -63,6 +88,10 @@ export class PuestoComponent implements OnInit {
       return;
     }
     this.getPuesto();
+    this.getRol();
+    this.getAmbito();
+    // this.getCcComportamiento()
+    // this.getCtComportamiento();
     this.ContarPuestos();
   }
 
@@ -72,7 +101,38 @@ export class PuestoComponent implements OnInit {
       this.puestos = resp.puesto;
     })
   }
+  getRol(){
+    this._rol.getRol().subscribe(resp => {
+      console.log(resp);
+      this.roles = resp.rol;
+    })
+  }
+  getAmbito(){
+    this._ambito.getAmbito().subscribe(resp => {
+      console.log(resp);
+      this.ambitos = resp.ambito;
+    })
+  }
 
+  
+  Carga(){
+    this.router.navigate(['/addpuesto'])
+  .then(()=> {
+    window.location.reload();
+  })
+  }
+  // getCcComportamiento(){
+  //   this._cccomportamiento.getCcComportamiento().subscribe(resp => {
+  //     console.log(resp);
+  //     this.cccomportamientos = resp.compCondObs;
+  //   })
+  // }
+  // getCtComportamiento(){
+  //   this._ctcomportamiento.getCtComportamiento().subscribe(resp => {
+  //     console.log(resp);
+  //     this.ctcomportamientos = resp.compTecObs;
+  //   })
+  // }
   addPuestos(puesto:NgForm){
     for (let i = 0; i < this.puestos.length; i++) {
    if (puesto.value.desGrup === this.puestos[i].denominacion) {
@@ -105,6 +165,11 @@ export class PuestoComponent implements OnInit {
                             puesto.value.RIEPuest,
                             puesto.value.capacitacionPuest,
                             puesto.value.rolPuest,
+
+                            puesto.value.gradoPuest,
+                            // puesto.value.compeCondObs,
+                            // puesto.value.compeTecObs,
+                            
                             puesto.value.grupoOcupacionalPuest,
                             puesto.value.ambitoPuest)
                                                     .subscribe(resp => {
@@ -127,6 +192,9 @@ getDataPuesto(puesto: Puesto){
  this.RIEPuestU = puesto.RIE;
  this.capacitacionPuestU = puesto.capacitacion;
  this.rolPuestU = puesto.rol;
+ this.gradoPuestU = puesto.grado;
+//  this.compeCondObsU = puesto.compeCondObs;
+//  this.compeTecObsU = puesto.compeTecObs;
  this.grupoOcupacionalPuestU = puesto.grupoOcupacional;
  this.ambitoPuestU = puesto.ambito;
  this.dataUpdPuest = true;
@@ -144,6 +212,9 @@ updPuestos(form: NgForm){
                             form.value.RIEPuestU,
                             form.value.capacitacionPuestU,
                             form.value.rolPuestU,
+                            form.value.gradoPuestU,
+                            // form.value.compeCondObsU,
+                            // form.value.compeTecObsU,
                             form.value.grupoOcupacionalPuestU,
                             form.value.ambitoPuestU,
                             this.getDataPuest._id).subscribe(correcto => {
@@ -237,3 +308,4 @@ ContarPuestos(){
 }
 
 }
+

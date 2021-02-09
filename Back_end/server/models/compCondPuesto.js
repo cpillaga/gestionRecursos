@@ -2,23 +2,16 @@ const mongoose = require('mongoose');
 
 let Schema = mongoose.Schema;
 
-let compCondObsSchema = new Schema({
-    numero: {
-        type: String,
-        required: false
-    },
-    nivel: {
-        type: String,
-        required: false
-    },
-    comportamiento: {
-        type: String,
-        required: false
-    },
+let compCondPuestoSchema = new Schema({
     empresa: {
         type: Schema.Types.ObjectId,
         ref: 'Empresa',
         required: [true, 'La empresa es obligatoria']
+    },
+    puesto: {
+        type: Schema.Types.ObjectId,
+        ref: 'Puesto',
+        required: false
     },
     estado: {
         type: String,
@@ -31,4 +24,4 @@ let compCondObsSchema = new Schema({
     }
 });
 
-module.exports = mongoose.model('CompCondObs', compCondObsSchema);
+module.exports = mongoose.model('CompCondPuesto', compCondPuestoSchema);

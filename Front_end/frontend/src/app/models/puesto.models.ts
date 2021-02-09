@@ -9,6 +9,7 @@ export class Puesto{
         public RIE: string,
         public capacitacion: string,
         public rol: string,
+        public grado: string,
         public grupoOcupacional: string,
         public ambito: string,
         public empresa: string,

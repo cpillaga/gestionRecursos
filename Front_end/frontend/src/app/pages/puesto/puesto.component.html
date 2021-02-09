@@ -97,8 +97,10 @@
 </div>
 
 <caption>
-    <a class="btn btn-success btn-fill" data-toggle="modal" data-target="#modaladdPuestos" style="position: fixed; bottom: 15px; right: 20px; border-radius: 100% !important; float: right; height: 45px; width: 45px;">
+    <a class="btn btn-success btn-fill" (click)="Carga()" data-toggle="modal" style="position: fixed; bottom: 15px; right: 20px; border-radius: 100% !important; float: right; height: 45px; width: 45px;">
+        <!-- <a [routerLink]="['/addpuesto']" href="#" class="nav-link"> -->
         <i style="color: white; padding-top: 6px; padding-right: 8px;" class="fa fa-plus"></i>
+
     </a>
 </caption>
 
@@ -181,6 +183,14 @@
                         <div class="col-md-8">
                             <div class="form-group has-default">
                                 <input type="text" id="grupoOcupacionalPuest" name="grupoOcupacionalPuest" [ngModel]="grupoOcupacionalPuest" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label class="col-md-4 col-form-label" style="margin-top: 10px;">Grado</label>
+                        <div class="col-md-8">
+                            <div class="form-group has-default">
+                                <input type="text" id="gradoPuest" name="gradoPuest" [ngModel]="gradoPuest" class="form-control">
                             </div>
                         </div>
                     </div>

@@ -5,7 +5,7 @@ import { URL_SERVICE } from '../config/config';
 @Injectable({
   providedIn: 'root'
 })
-export class CTcomportamientoObsService {
+export class CccomportamientoObsService {
 
   idEmp = localStorage.getItem('empresaFact');
   constructor(
@@ -13,14 +13,14 @@ export class CTcomportamientoObsService {
   ) { }
 
   
-  getCtComportamiento(){
+  getCcComportamiento(){
     const token = localStorage.getItem('tokenFact');
     const headers = new HttpHeaders({
         'Content-Type': 'application/x-www-form-urlencoded',
         token
     });
 
-    const url = URL_SERVICE.url + '/compTecObs/'+this.idEmp;
+    const url = URL_SERVICE.url + '/compCondObs/'+this.idEmp;
 
 
     return this.http.get( url, {headers} )
@@ -30,7 +30,7 @@ export class CTcomportamientoObsService {
 }
 
 
-agregarCtComportamiento(numero: string, nivel: string, comportamiento: string,competenciaTecnica: string ) {
+agregarCcComportamiento(numero: string, nivel: string, comportamiento: string,competenciaConductual: string ) {
 
   const grup = {
     comportamiento:comportamiento,
@@ -38,7 +38,7 @@ agregarCtComportamiento(numero: string, nivel: string, comportamiento: string,co
     estado:'true',
     numero:numero,
     nivel:nivel,
-    competenciaTecnica:competenciaTecnica
+    competenciaConductual:competenciaConductual
 
   
   }
@@ -47,7 +47,7 @@ agregarCtComportamiento(numero: string, nivel: string, comportamiento: string,co
          token
   });
   
-  const url = URL_SERVICE.url + '/compTecObs';
+  const url = URL_SERVICE.url + '/compCondObs';
 
   return this.http.post( url, grup, {headers} )
           .map( (resp: any) =>
@@ -56,20 +56,20 @@ agregarCtComportamiento(numero: string, nivel: string, comportamiento: string,co
 }
 
 
-updCtComportamiento(comportamiento: string, id: string, numero: string, nivel: string, competenciaTecnica: string){
+updCcComportamiento(comportamiento: string, id: string, numero: string, nivel: string, competenciaConductual: string){
   let token = localStorage.getItem('tokenFact');
   const headers = new HttpHeaders({
     token
   });
 
-  const url = URL_SERVICE.url + '/compTecObs/' + id;
+  const url = URL_SERVICE.url + '/compCondObs/' + id;
 
   const grup = {
       descripcomportamientocion: comportamiento,
       empresa: this.idEmp,
       numero: numero,
       nivel: nivel,
-      competenciaTecnica: competenciaTecnica
+      competenciaConductual: competenciaConductual
   };
 
   return this.http.put( url, grup, { headers} )
@@ -79,13 +79,13 @@ updCtComportamiento(comportamiento: string, id: string, numero: string, nivel: s
 }
 
 
-delCtComportamiento(id: string){
+delCcComportamiento(id: string){
   let token = localStorage.getItem('tokenFact');
   const headers = new HttpHeaders({
     token
   });
 
-  const url = URL_SERVICE.url + '/compTecObs/' + id;
+  const url = URL_SERVICE.url + '/compCondObs/' + id;
 
 
   return this.http.delete( url, { headers} )
@@ -94,13 +94,13 @@ delCtComportamiento(id: string){
     );
 }
 
-habCtComportamiento(id: string){
+habCcComportamiento(id: string){
   let token = localStorage.getItem('tokenFact');
   const headers = new HttpHeaders({
     token
   });
 
-  const url = URL_SERVICE.url + '/compTecObs/habilitar/' + id;
+  const url = URL_SERVICE.url + '/compCondObs/habilitar/' + id;
 
 
   return this.http.delete( url, { headers} )
@@ -109,29 +109,29 @@ habCtComportamiento(id: string){
     );
 }
  
-searchCtComportamiento(termino: string){
+searchCcComportamiento(termino: string){
   let token = localStorage.getItem('tokenFact');
   const headers = new HttpHeaders({
     token
   });
 
-  const url = URL_SERVICE.url + '/compTecObs/buscar/' + termino + "/" + this.idEmp;
+  const url = URL_SERVICE.url + '/compCondObs/buscar/' + termino + "/" + this.idEmp;
 
   return this.http.get( url, {headers} )
               .map( (resp: any) =>
-                  resp.compTecObs
+                  resp.compCondObs
               );
 }
 
 
-countCtComportamiento(){
+countCcComportamiento(){
   const token = localStorage.getItem('tokenFact');
   const headers = new HttpHeaders({
       'Content-Type': 'application/x-www-form-urlencoded',
       token
   });
 
-  const url = URL_SERVICE.url + '/compTecObs/contar/'+this.idEmp;
+  const url = URL_SERVICE.url + '/compCondObs/contar/'+this.idEmp;
 
 
   return this.http.get( url, {headers} )
@@ -142,3 +142,4 @@ countCtComportamiento(){
 
 
 }
+

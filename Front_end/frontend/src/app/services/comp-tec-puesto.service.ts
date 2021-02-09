@@ -5,7 +5,7 @@ import { URL_SERVICE } from '../config/config';
 @Injectable({
   providedIn: 'root'
 })
-export class CTcomportamientoObsService {
+export class CompTecPuestoService {
 
   idEmp = localStorage.getItem('empresaFact');
   constructor(
@@ -13,14 +13,14 @@ export class CTcomportamientoObsService {
   ) { }
 
   
-  getCtComportamiento(){
+  getCompTecPuesto(){
     const token = localStorage.getItem('tokenFact');
     const headers = new HttpHeaders({
         'Content-Type': 'application/x-www-form-urlencoded',
         token
     });
 
-    const url = URL_SERVICE.url + '/compTecObs/'+this.idEmp;
+    const url = URL_SERVICE.url + '/compTecPuesto/'+this.idEmp;
 
 
     return this.http.get( url, {headers} )
@@ -30,24 +30,23 @@ export class CTcomportamientoObsService {
 }
 
 
-agregarCtComportamiento(numero: string, nivel: string, comportamiento: string,competenciaTecnica: string ) {
+agregarCompTecPuesto(puesto: string, competenciaTecnica: string ) {
 
+  console.log(puesto);
   const grup = {
-    comportamiento:comportamiento,
+    
+    puesto: puesto,
+    competenciaTecnica:competenciaTecnica,
     empresa: this.idEmp,
-    estado:'true',
-    numero:numero,
-    nivel:nivel,
-    competenciaTecnica:competenciaTecnica
+    estado:'true'
 
-  
   }
   const token = localStorage.getItem('tokenFact');
   const headers = new HttpHeaders({
          token
   });
   
-  const url = URL_SERVICE.url + '/compTecObs';
+  const url = URL_SERVICE.url + '/compTecPuesto';
 
   return this.http.post( url, grup, {headers} )
           .map( (resp: any) =>
@@ -56,19 +55,17 @@ agregarCtComportamiento(numero: string, nivel: string, comportamiento: string,co
 }
 
 
-updCtComportamiento(comportamiento: string, id: string, numero: string, nivel: string, competenciaTecnica: string){
+updCompTecPuesto(id: string, puesto: string, competenciaTecnica: string){
   let token = localStorage.getItem('tokenFact');
   const headers = new HttpHeaders({
     token
   });
 
-  const url = URL_SERVICE.url + '/compTecObs/' + id;
+  const url = URL_SERVICE.url + '/compTecPuesto/' + id;
 
   const grup = {
-      descripcomportamientocion: comportamiento,
       empresa: this.idEmp,
-      numero: numero,
-      nivel: nivel,
+      puesto: puesto,
       competenciaTecnica: competenciaTecnica
   };
 
@@ -78,14 +75,13 @@ updCtComportamiento(comportamiento: string, id: string, numero: string, nivel: s
     );
 }
 
-
-delCtComportamiento(id: string){
+delCompTecPuesto(id: string){
   let token = localStorage.getItem('tokenFact');
   const headers = new HttpHeaders({
     token
   });
 
-  const url = URL_SERVICE.url + '/compTecObs/' + id;
+  const url = URL_SERVICE.url + '/compTecPuesto/' + id;
 
 
   return this.http.delete( url, { headers} )
@@ -94,13 +90,14 @@ delCtComportamiento(id: string){
     );
 }
 
-habCtComportamiento(id: string){
+
+habCompTecPuesto(id: string){
   let token = localStorage.getItem('tokenFact');
   const headers = new HttpHeaders({
     token
   });
 
-  const url = URL_SERVICE.url + '/compTecObs/habilitar/' + id;
+  const url = URL_SERVICE.url + '/compTecPuesto/habilitar/' + id;
 
 
   return this.http.delete( url, { headers} )
@@ -108,30 +105,31 @@ habCtComportamiento(id: string){
         resp
     );
 }
+
  
-searchCtComportamiento(termino: string){
+searchCompTecPuesto(termino: string){
   let token = localStorage.getItem('tokenFact');
   const headers = new HttpHeaders({
     token
   });
 
-  const url = URL_SERVICE.url + '/compTecObs/buscar/' + termino + "/" + this.idEmp;
+  const url = URL_SERVICE.url + '/compTecPuesto/buscar/' + termino + "/" + this.idEmp;
 
   return this.http.get( url, {headers} )
               .map( (resp: any) =>
-                  resp.compTecObs
+                  resp.compTecPuesto
               );
 }
 
 
-countCtComportamiento(){
+countCompTecPuesto(){
   const token = localStorage.getItem('tokenFact');
   const headers = new HttpHeaders({
       'Content-Type': 'application/x-www-form-urlencoded',
       token
   });
 
-  const url = URL_SERVICE.url + '/compTecObs/contar/'+this.idEmp;
+  const url = URL_SERVICE.url + '/compTecPuesto/contar/'+this.idEmp;
 
 
   return this.http.get( url, {headers} )

@@ -2,10 +2,10 @@
 <div class="col-md-3">
     <div class="card" style="background-color: #F59A3E; cursor: pointer;" routerLink="/puesto">
         <div class="header">
-            <h5 class="title" style="font-weight: bold; color: white;"><i class="pe-7s-box2"></i>&nbsp; Competencias Tecnicas</h5>
+            <h5 class="title" style="font-weight: bold; color: white;"><i class="pe-7s-box2"></i>&nbsp; Competencias Conductuales</h5>
         </div>
         <div class="content" style="text-align: right;">
-            <a style="color: white; font-weight: bold; font-size: 22px;">{{contCtComp}}</a>
+            <a style="color: white; font-weight: bold; font-size: 22px;">{{contCcComp}}</a>
         </div>
 
     </div>
@@ -18,15 +18,15 @@
 <div class="main-content">
     <div class="card">
         <div class="container-fluid">
-            <form #buscar="ngForm" class="form-horizontal" (keyup)="searchCtComportamiento(buscar)">
+            <form #buscar="ngForm" class="form-horizontal" (keyup)="searchCcComportamiento(buscar)">
                 <div class="col-md-12">
                     <div class="row">
                         <div class="col-xs-8 col-sm-8 col-md-8">
-                            <h4 class="card-title col-md-5"> Competencias Tecnicas</h4>
+                            <h4 class="card-title col-md-5"> Competencias Conductuales</h4>
                         </div>
                         <div class="col-xs-4 col-sm-4 col-md-4">
                             <!-- <div class="input-group no-border" style="margin-top: 15px;"> -->
-                            <input type="text" class="form-control" style="margin-top: 25px;" value="{{ buscarCtComp }}" [ngModel]="buscarCtComp" id="buscarCtComp" name="buscarCtComp" placeholder="Buscar...">
+                            <input type="text" class="form-control" style="margin-top: 25px;" value="{{ buscarCcComp }}" [ngModel]="buscarCcComp" id="buscarCcComp" name="buscarCcComp" placeholder="Buscar...">
                             <div class="input-group-append">
                                 <div class="input-group-text">
                                     <i class="now-ui-icons ui-1_zoom-bold"></i>
@@ -52,24 +52,24 @@
                                     <th class="text-right">Acción</th>
                                 </tr>
                             </thead>
-                            <tbody *ngFor="let ctcompotamiento of ctcomportamientos">
+                            <tbody *ngFor="let cccompotamiento of cccomportamientos">
                                 <tr>
-                                    <td class="{{ctcompotamiento.estado}}">{{ctcompotamiento.numero}}</td>
-                                    <td class="{{ctcompotamiento.estado}}">{{ctcompotamiento.nivel}}</td>
-                                    <td class="{{ctcompotamiento.estado}}">{{ctcompotamiento.comportamiento}}</td>
-                                    <td class="{{ctcompotamiento.estado}}">{{ctcompotamiento.competenciaTecnica.denominacion}}</td>
+                                    <td class="{{cccompotamiento.estado}}">{{cccompotamiento.numero}}</td>
+                                    <td class="{{cccompotamiento.estado}}">{{cccompotamiento.nivel}}</td>
+                                    <td class="{{cccompotamiento.estado}}">{{cccompotamiento.comportamiento}}</td>
+                                    <td class="{{cccompotamiento.estado}}">{{cccompotamiento.competenciaConductual.denominacion}}</td>
 
                                     <td class="td-actions text-right">
 
-                                        <a type="button" rel="tooltip" title="Editar" (click)="getDataCtComportamiento(ctcompotamiento)" data-toggle="modal" data-target="#modalupdCtcompotamiento" class="btn btn-info btn-simple btn-xs">
+                                        <a type="button" rel="tooltip" title="Editar" (click)="getDataCcComportamiento(cccompotamiento)" data-toggle="modal" data-target="#modalupdCccompotamiento" class="btn btn-info btn-simple btn-xs">
                                             <i class="fa fa-edit"></i>
                                         </a>
 
-                                        <a type="button" *ngIf="ctcompotamiento.estado === 'true'" rel="tooltip" title="Eliminar" (click)="eliminarCtComportamiento(ctcompotamiento)" class="btn btn-danger btn-simple btn-xs">
+                                        <a type="button" *ngIf="cccompotamiento.estado === 'true'" rel="tooltip" title="Eliminar" (click)="eliminarCcComportamiento(cccompotamiento)" class="btn btn-danger btn-simple btn-xs">
                                             <i class="fa fa-close"></i>
                                         </a>
 
-                                        <a type="button" *ngIf="ctcompotamiento.estado === 'false'" rel="tooltip" title="Habilitar" (click)="habilitarCtComportamiento(ctcompotamiento)" class="btn btn-success btn-simple btn-xs">
+                                        <a type="button" *ngIf="cccompotamiento.estado === 'false'" rel="tooltip" title="Habilitar" (click)="habilitarCcComportamiento(cccompotamiento)" class="btn btn-success btn-simple btn-xs">
                                             <i class="fa fa-check"></i>
                                         </a>
 
@@ -85,16 +85,16 @@
 </div>
 
 <caption>
-    <a class="btn btn-success btn-fill" data-toggle="modal" data-target="#modaladdCtcompotamientos" style=" position: fixed; bottom: 15px; right: 20px; border-radius: 100% !important; float: right; height: 45px; width: 45px; ">
+    <a class="btn btn-success btn-fill" data-toggle="modal" data-target="#modaladdCccompotamientos" style=" position: fixed; bottom: 15px; right: 20px; border-radius: 100% !important; float: right; height: 45px; width: 45px; ">
         <i style="color: white; padding-top: 6px; padding-right: 8px; " class="fa fa-plus "></i>
     </a>
 </caption>
 
 
 <!-- Modal para registros nuevos -->
-<div class="modal fade" id="modaladdCtcompotamientos" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade" id="modaladdCccompotamientos" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog modal-sm" role="document">
-        <form #addCtComportamiento="ngForm" id="addC" (ngSubmit)="addCtComportamientos(addCtComportamiento); addCtComportamiento.reset()">
+        <form #addCtComportamiento="ngForm" id="addC" (ngSubmit)="addCcComportamientos(addCtComportamiento); addCtComportamiento.reset()">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Agregar Comportamientos</h5>
@@ -107,7 +107,7 @@
                         <label class="col-md-4 col-form-label" style="margin-top: 10px;">Numero:</label>
                         <div class="col-md-8">
                             <div class="form-group has-default">
-                                <input type="text" id="numeroCt" name="numeroCt" [ngModel]="numeroCt" class="form-control">
+                                <input type="text" id="numeroCc" name="numeroCc" [ngModel]="numeroCc" class="form-control">
                             </div>
                         </div>
                     </div>
@@ -115,7 +115,7 @@
                         <label class="col-md-4 col-form-label" style="margin-top: 10px;">Nivel:</label>
                         <div class="col-md-8">
                             <div class="form-group has-default">
-                                <input type="text" id="nivelCt" name="nivelCt" [ngModel]="nivelCt" class="form-control">
+                                <input type="text" id="nivelCc" name="nivelCc" [ngModel]="nivelCc" class="form-control">
                             </div>
                         </div>
                     </div>
@@ -123,7 +123,7 @@
                         <label class="col-md-4 col-form-label" style="margin-top: 10px;">Comportamiento:</label>
                         <div class="col-md-8">
                             <div class="form-group has-default">
-                                <input type="text" id="comportamientoCt" name="comportamientoCt" [ngModel]="comportamientoCt" class="form-control">
+                                <input type="text" id="comportamientoCc" name="comportamientoCc" [ngModel]="comportamientoCc" class="form-control">
                             </div>
                         </div>
                     </div>
@@ -134,9 +134,9 @@
 
                             <div class="form-group has-default">
                                 <div class="input-group">
-                                    <select id="competenciaCt" class="form-control " name="competenciaCt" ngModel data-title="Seleccionar" data-style="btn-default btn-block" data-menu-style="dropdown-blue">
+                                    <select id="competenciaCc" class="form-control " name="competenciaCc" ngModel data-title="Seleccionar" data-style="btn-default btn-block" data-menu-style="dropdown-blue">
                 <!-- <option [value]="pidProv" hidden>{{pnomProv}}</option> -->
-                <option  *ngFor="let competenciaTecnica of competenciasTecnicas"  [value]="competenciaTecnica._id">{{competenciaTecnica.denominacion}}</option>
+                <option  *ngFor="let competenciaConductual of competenciasConductuals"  [value]="competenciaConductual._id">{{competenciaConductual.denominacion}}</option>
             </select>
                                     <div class="input-group-addon">
                                         <i class="fa fa-plus" data-toggle="modal" data-target="#modaladdProv" style="cursor: pointer; color: #78b414;"></i>
@@ -148,7 +148,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                    <button type="submit" class="btn btn-success" id="add_CtComportamiento" name="add_CtComportamiento">Agregar</button>
+                    <button type="submit" class="btn btn-success" id="add_CcComportamiento" name="add_CcComportamiento">Agregar</button>
 
                 </div>
             </div>
@@ -158,9 +158,9 @@
 
 
 <!-- Modal para modificar nuevos -->
-<div class="modal fade" *ngIf="dataUpdCtComp == true" id="modalupdCtcompotamiento" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade" *ngIf="dataUpdCcComp == true" id="modalupdCccompotamiento" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog modal-sm" role="document">
-        <form #updCtComportamiento="ngForm" id="updC" (ngSubmit)="updCtComportamientos(updCtComportamiento)">
+        <form #updCtComportamiento="ngForm" id="updC" (ngSubmit)="updCcComportamientos(updCtComportamiento)">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Modificar Comportamientos</h5>
@@ -173,7 +173,7 @@
                         <label class="col-md-4 col-form-label" style="margin-top: 10px;">Numero:</label>
                         <div class="col-md-8">
                             <div class="form-group has-default">
-                                <input type="text" id="numeroCtU" name="numeroCtU" [ngModel]="numeroCtU" class="form-control">
+                                <input type="text" id="numeroCcU" name="numeroCcU" [ngModel]="numeroCcU" class="form-control">
                             </div>
                         </div>
                     </div>
@@ -183,7 +183,7 @@
                         <label class="col-md-4 col-form-label" style="margin-top: 10px;">Nivel</label>
                         <div class="col-md-8">
                             <div class="form-group has-default">
-                                <input type="text" id="nivelCtU" name="nivelCtU" [ngModel]="nivelCtU" class="form-control">
+                                <input type="text" id="nivelCcU" name="nivelCcU" [ngModel]="nivelCcU" class="form-control">
                             </div>
                         </div>
                     </div>
@@ -193,7 +193,7 @@
                         <label class="col-md-4 col-form-label" style="margin-top: 10px;">Comportamiento:</label>
                         <div class="col-md-8">
                             <div class="form-group has-default">
-                                <input type="text" id="comportamientoCtU" name="comportamientoCtU" [ngModel]="comportamientoCtU" class="form-control">
+                                <input type="text" id="comportamientoCcU" name="comportamientoCcU" [ngModel]="comportamientoCcU" class="form-control">
                             </div>
                         </div>
                     </div>
@@ -204,9 +204,9 @@
 
                         <div class="form-group has-default">
                             <div class="input-group">
-                                <select id="competenciaCtU" class="form-control " name="competenciaCtU" ngModel data-title="Seleccionar" data-style="btn-default btn-block" data-menu-style="dropdown-blue">
+                                <select id="competenciaCcU" class="form-control " name="competenciaCcU" ngModel data-title="Seleccionar" data-style="btn-default btn-block" data-menu-style="dropdown-blue">
             <!-- <option [value]="pidProv" hidden>{{pnomProv}}</option> -->
-            <option  *ngFor="let competenciaTecnica of competenciasTecnicas"  [value]="competenciaTecnica._id">{{competenciaTecnica.denominacion}}</option>
+            <option  *ngFor="let competenciaConductual of competenciasConductuals"  [value]="competenciaConductual._id">{{competenciaConductual.denominacion}}</option>
         </select>
                                 <div class="input-group-addon">
                                     <i class="fa fa-plus" data-toggle="modal" data-target="#modaladdProv" style="cursor: pointer; color: #78b414;"></i>
@@ -217,7 +217,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                    <button type="submit" class="btn btn-success" id="updCtComportamiento" name="updCtComportamiento">Modificar</button>
+                    <button type="submit" class="btn btn-success" id="updCcComportamiento" name="updCcComportamiento">Modificar</button>
                 </div>
             </div>
         </form>

@@ -13,6 +13,9 @@ import { ExperienciaComponent } from './experiencia/experiencia.component';
 import { ExperienciaPuestoComponent } from './experiencia-puesto/experiencia-puesto.component';
 import { CompetenciaTecnicaComponent } from './competencia-tecnica/competencia-tecnica.component';
 import { CompetenciaConductualComponent } from './competencia-conductual/competencia-conductual.component';
+import { CTcomportamientoObsComponent } from './ctcomportamiento-obs/ctcomportamiento-obs.component';
+import { CccomportamientoObsComponent } from './cccomportamiento-obs/cccomportamiento-obs.component';
+import { CompTecPuestoComponent } from './comp-tec-puesto/comp-tec-puesto.component';
 
 
 
@@ -33,7 +36,10 @@ const pagesRoutes: Routes = [
         { path: 'experiencia', component: ExperienciaComponent},
         { path: 'experienciaPuesto', component: ExperienciaPuestoComponent},
         { path: 'competenciaTecnica', component: CompetenciaTecnicaComponent},
-        { path: 'competenciaConductual', component: CompetenciaConductualComponent},
+        { path: 'competenciaConductual', component: CompetenciaConductualComponent}, 
+        { path: 'ctComportamiento', component: CTcomportamientoObsComponent},
+        { path: 'ccComportamiento', component: CccomportamientoObsComponent},
+        { path: 'compTecPuesto', component: CompTecPuestoComponent},
         { path: '', redirectTo: '/login', pathMatch: 'full' }
         ]
     }

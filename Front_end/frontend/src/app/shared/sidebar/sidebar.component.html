@@ -116,7 +116,7 @@
                                     <li>
                                         <a [routerLink]="['/conocimiento']" href="#" class="nav-link" type="submit">
                                             <span class="sidebar-mini">CA</span>
-                                            <span class="sidebar-normal">Concomimientso Adicional</span>
+                                            <span class="sidebar-normal">Conocimiento Adicional</span>
                                         </a>
                                     </li>
                                 </ul>
@@ -157,45 +157,63 @@
                             <div class="collapse" id="competencias">
                                 <ul class="nav">
                                     <li>
-                                        <a [routerLink]="['/competenciaTecnica']" href="#" class="nav-link" type="submit">
-                                            <span class="sidebar-mini">CT</span>
-                                            <span class="sidebar-normal">Competencia Tecnica</span>
+                                        <a data-toggle="collapse" href="#competenciasT">
+                                            <i class="pe-7s-plugin"></i>
+                                            <p>Competencias Tecnicas
+                                                <b class="caret"></b>
+                                            </p>
                                         </a>
-                                    </li>
-                                    <li>
-                                        <a [routerLink]="['/competenciaConductual']" href="#" class="nav-link">
-                                            <span class="sidebar-mini">CC</span>
-                                            <span class="sidebar-normal">Competencia Conductual</span>
-                                        </a>
+                                        <div class="collapse" id="competenciasT">
+                                            <ul class="nav">
+                                                <li>
+                                                    <a [routerLink]="['/compTecPuesto']" href="#" class="nav-link">
+                                                        <span class="sidebar-mini">CP</span>
+                                                        <span class="sidebar-normal">Competencias Puesto</span>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a [routerLink]="['/ctComportamiento']" href="#" class="nav-link">
+                                                        <span class="sidebar-mini">CT</span>
+                                                        <span class="sidebar-normal">Competencias Tecnicas</span>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a [routerLink]="['/competenciaTecnica']" href="#" class="nav-link" type="submit">
+                                                        <span class="sidebar-mini">DT</span>
+                                                        <span class="sidebar-normal">Definiciones Competencia</span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
                                     </li>
 
+                                    <li>
+                                        <a data-toggle="collapse" href="#competenciasC">
+                                            <i class="pe-7s-plugin"></i>
+                                            <p>Competencias Conductuales
+                                                <b class="caret"></b>
+                                            </p>
+                                        </a>
+                                        <div class="collapse" id="competenciasC">
+                                            <ul class="nav">
+                                                <li>
+                                                    <a [routerLink]="['/ccComportamiento']" href="#" class="nav-link">
+                                                        <span class="sidebar-mini">CT</span>
+                                                        <span class="sidebar-normal">Competencias Conductuales</span>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a [routerLink]="['/competenciaConductual']" href="#" class="nav-link" type="submit">
+                                                        <span class="sidebar-mini">DT</span>
+                                                        <span class="sidebar-normal">Definiciones Competencia</span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </li>
                                 </ul>
                             </div>
                         </li>
-                        <!-- <li>
-                            <a data-toggle="collapse" href="#ExperienciaLaboral">
-                                <i class="pe-7s-plugin"></i>
-                                <p>Experienca Laboral
-                                    <b class="caret"></b>
-                                </p>
-                            </a>
-                            <div class="collapse" id="ExperienciaLaboral">
-                                <ul class="nav">
-                                    <li>
-                                        <a [routerLink]="['/experiencia]" href="#" class="nav-link">
-                                            <span class="sidebar-mini">EX</span>
-                                            <span class="sidebar-normal">Experiencias</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a [routerLink]="['/conocimiento']" href="#" class="nav-link" type="submit">
-                                            <span class="sidebar-mini">CA</span>
-                                            <span class="sidebar-normal">Concomimientso Adicional</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li> -->
                     </ul>
                 </div>
             </li>

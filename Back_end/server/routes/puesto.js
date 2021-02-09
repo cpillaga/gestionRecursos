@@ -28,7 +28,7 @@ app.get('/puesto/:idEmp', verificaToken, function(req, res) {
     Puesto.find({ empresa: ide /*, rol: idr, grupoOcupacional: idg, ambito: ida */ })
         .populate('empresa') //Se filtra todos los datos de las claves foraneas aquí se puede agregar varios populate
         .populate('ambito') //Se filtra todos los datos de las claves foraneas aquí se puede agregar varios populate
-        .populate('rol') //Se filtra todos los datos de las claves foraneas aquí se puede agregar varios populate
+        .populate('rol')
         .sort({ estado: -1 }) //El sort sirve para ordenar si no se le pone se ordena ascendente
         .exec((err, puesto) => {
             if (err) {
@@ -61,6 +61,7 @@ app.post('/puesto', verificaToken, function(req, res) {
         unidadAdmin: body.unidadAdmin,
         RIE: body.RIE,
         capacitacion: body.capacitacion,
+        grado: body.grado,
         rol: body.rol,
         grupoOcupacional: body.grupoOcupacional,
         ambito: body.ambito,
@@ -89,7 +90,7 @@ app.post('/puesto', verificaToken, function(req, res) {
 app.put('/puesto/:id', verificaToken, function(req, res) {
     let id = req.params.id;
 
-    let body = _.pick(req.body, ['codigo', 'denominacion', 'mision', 'nivel', 'unidadAdmin', 'rol', 'ambito', 'RIE', 'capacitacion', 'grupoOcupacional']); //Dentro de los corchetes va los campos a modificarse
+    let body = _.pick(req.body, ['codigo', 'denominacion', 'mision', 'nivel', 'unidadAdmin', 'grado', 'rol', 'ambito', 'RIE', 'capacitacion', 'grupoOcupacional']); //Dentro de los corchetes va los campos a modificarse
 
     //Condicion para saber si la clave se esta modificando
 

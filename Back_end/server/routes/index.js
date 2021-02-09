@@ -19,5 +19,9 @@ app.use(require('./competenciaConductual'));
 app.use(require('./competenciaTecnica'));
 app.use(require('./compTecObs'));
 app.use(require('./conocimientoAdicional'));
+app.use(require('./compTecPuesto'));
+app.use(require('./compCondPuesto'));
+
+
 
 module.exports = app;

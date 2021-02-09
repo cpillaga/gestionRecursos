@@ -45,16 +45,16 @@
                         <table class="table" *ngIf="coincidencia == true">
                             <thead>
                                 <tr>
-                                    <th>Puesto</th>
                                     <th>descripcion</th>
+                                    <th>Puesto</th>
                                     <th>Conocimiento Adicional</th>
                                     <th class="text-right">Acción</th>
                                 </tr>
                             </thead>
                             <tbody *ngFor="let actividadEsencial of actividadesEsenciales">
                                 <tr>
-                                    <td class="{{actividadEsencial.estado}}">{{actividadEsencial.puesto.denominacion}}</td>
                                     <td class="{{actividadEsencial.estado}}">{{actividadEsencial.descripcion}}</td>
+                                    <td class="{{actividadEsencial.estado}}">{{actividadEsencial.puesto.denominacion}}</td>
                                     <td class="{{actividadEsencial.estado}}">{{actividadEsencial.conocimientoAdicional.descripcion}}</td>
 
                                     <td class="td-actions text-right">
@@ -203,22 +203,37 @@
                         </div>
                     </div>
                 </div>
-                <div class="modal-body ">
-                    <div class="row">
-                        <label class="col-md-4 col-form-label" style="margin-top: 10px;">Conocimiento Adicional:</label>
-                        <div class="col-md-8">
-                            <div class="form-group has-default">
-                                <input type="text" id="concimientoActEseU" name="concimientoActEseU" [ngModel]="concimientoActEseU" class="form-control">
+                <div class="row">
+                    <label class="col-md-4 col-form-label" style="margin-top: 10px;">Conocimiento Adicional:</label>
+                    <div class="col-md-8">
+
+                        <div class="form-group has-default">
+                            <div class="input-group">
+                                <select id="concimientoActEseU" class="form-control " name="concimientoActEseU" ngModel data-title="Seleccionar" data-style="btn-default btn-block" data-menu-style="dropdown-blue">
+            <!-- <option [value]="pidProv" hidden>{{pnomProv}}</option> -->
+            <option  *ngFor="let conocimiento of conocimientos"  [value]="conocimiento._id">{{conocimiento.descripcion}}</option>
+        </select>
+                                <div class="input-group-addon">
+                                    <i class="fa fa-plus" data-toggle="modal" data-target="#modaladdProv" style="cursor: pointer; color: #78b414;"></i>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="modal-body ">
-                    <div class="row">
-                        <label class="col-md-4 col-form-label" style="margin-top: 10px;">Puesto:</label>
-                        <div class="col-md-8">
-                            <div class="form-group has-default">
-                                <input type="text" id="puestActEseU" name="puestActEseU" [ngModel]="puestActEseU" class="form-control">
+
+                <div class="row">
+                    <label class="col-md-4 col-form-label" style="margin-top: 10px;">Puesto:</label>
+                    <div class="col-md-8">
+
+                        <div class="form-group has-default">
+                            <div class="input-group">
+                                <select id="puestActEseU" class="form-control " name="puestActEseU" ngModel data-title="Seleccionar" data-style="btn-default btn-block" data-menu-style="dropdown-blue">
+            <!-- <option [value]="pidProv" hidden>{{pnomProv}}</option> -->
+            <option  *ngFor="let puesto of puestos"  [value]="puesto._id">{{puesto.denominacion}}</option>
+        </select>
+                                <div class="input-group-addon">
+                                    <i class="fa fa-plus" data-toggle="modal" data-target="#modaladdProv" style="cursor: pointer; color: #78b414;"></i>
+                                </div>
                             </div>
                         </div>
                     </div>

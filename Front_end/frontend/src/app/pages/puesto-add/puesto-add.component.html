@@ -5,138 +5,612 @@
                 <div class="card card-wizard" id="wizardCard">
                     <form id="wizardForm" method="" action="">
 
-                        <div class="header text-center">
+                        <!-- <div class="header text-center">
                             <h3 class="title">Awesome Wizard</h3>
                             <p class="category">Split a complicated flow in multiple steps</p>
-                        </div>
+                        </div> -->
 
                         <div class="content">
                             <ul class="nav">
-                                <li><a href="#tab1" data-toggle="tab">First Tab</a></li>
-                                <li><a href="#tab2" data-toggle="tab">Second Tab</a></li>
-                                <li><a href="#tab3" data-toggle="tab">Third Tab</a></li>
+                                <li><a href="#tab1" data-toggle="tab">Datos   </a></li>
+                                <li><a href="#tab2" data-toggle="tab">Mision  </a></li>
+                                <li><a href="#tab3" data-toggle="tab">Interfaz </a></li>
+                                <li><a href="#tab4" data-toggle="tab">Instrucc  </a></li>
+                                <li><a onclick="obtenerValor()" href="#tab5" data-toggle="tab">Experien  </a></li>
+                                <li><a href="#tab6" data-toggle="tab">Capacitac  </a></li>
+                                <li><a href="#tab7" data-toggle="tab">A.Esencial</a></li>
+                                <li><a href="#tab8" data-toggle="tab">Adicional</a></li>
+                                <li><a href="#tab9" data-toggle="tab">A.Puesto</a></li>
+                                <li><a href="#tab10" data-toggle="tab">Comp.Con</a></li>
+                                <li><a href="#tab11" data-toggle="tab">Comp.Tec</a></li>
                             </ul>
 
                             <div class="tab-content">
                                 <div class="tab-pane" id="tab1">
-                                    <h5 class="text-center">Please tell us more about yourself.</h5>
-                                    <div class="row">
-                                        <div class="col-md-5 col-md-offset-1">
-                                            <div class="form-group">
-                                                <label class="control-label">First Name</label>
-                                                <input class="form-control" type="text" name="first_name" placeholder="ex: Mike" />
-                                            </div>
-                                        </div>
-                                        <div class="col-md-5">
-                                            <div class="form-group">
-                                                <label class="control-label">Last Name</label>
-                                                <input class="form-control" type="text" name="last_name" required="true" placeholder="ex: Andrew" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-10 col-md-offset-1">
-                                            <div class="form-group">
-                                                <label class="control-label">Email</label>
-                                                <input class="form-control" type="text" name="email" email="true" placeholder="ex: hello@creative-tim.com" />
-                                            </div>
-                                        </div>
-                                    </div>
+                                    <!-- <form #addPuesto="ngForm" id="addC" (ngSubmit)="addPuestos(addPuesto); addPuesto.reset()"> -->
 
+                                    <br>
+                                    <br>
+                                    <h5 class="text-center">1. DATOS DE IDENTIFICACIÓN DEL PUESTO</h5>
+                                    <br>
+                                    <br>
+                                    <div class="row">
+
+                                        <div class="col-md-6 col-md-offset-1">
+                                            <div class="form-group">
+                                                <label class="control-label">Codigo</label>
+                                                <input type="text" id="codigoPuest" name="codigoPuest" [ngModel]="codigoPuest" class="form-control">
+
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="control-label">Denominacion del puesto</label>
+                                                <input type="text" id="denominacionPuest" name="denominacionPuest" [ngModel]="denominacionPuest" class="form-control">
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <br>
+                                    <div class="row">
+
+
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="control-label">Unidad Administrativa</label>
+                                                <input type="text" id="unidadAdminPuest" name="unidadAdminPuest" [ngModel]="unidadAdminPuest" class="form-control">
+
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="control-label">Grupo Ocupacional</label>
+                                                <input disabled type="text" id="grupoOcupacionalPuest" name="grupoOcupacionalPuest" [ngModel]="grupoOcupacionalPuest" class="form-control">
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <br>
+                                    <div class="row">
+                                        <div class="form-group">
+
+                                            <div class="col-md-6">
+
+                                                <div class="form-group has-default">
+                                                    <label class="control-label">Rol</label>
+                                                    <div class="input-group">
+                                                        <select id="rolPuest" class="form-control " name="rolPuest" ngModel data-title="Seleccionar" data-style="btn-default btn-block" data-menu-style="dropdown-blue">
+                                       
+                                        <option selected="" disabled="">- Seleccionar -</option>
+                                        <option  *ngFor="let rol of roles"  [value]="rol._id">{{rol.descripcion}}</option>
+                                    </select>
+                                                        <div class="input-group-addon">
+                                                            <i class="fa fa-plus" data-toggle="modal" data-target="#modaladdProv" style="cursor: pointer; color: #78b414;"></i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+
+                                            <div class="col-md-6">
+
+                                                <div class="form-group has-default">
+                                                    <label class="control-label">Nivel</label>
+                                                    <div class="input-group">
+                                                        <select id="nivelPuestU" class="form-control " name="nivelPuestU" ngModel data-title="Seleccionar" data-style="btn-default btn-block" data-menu-style="dropdown-blue">
+                                       
+                                        <option selected="" disabled="">- Seleccionar -</option>
+                                        <option >Profesional</option>
+                                        <option >No Profesional</option>
+                                    </select>
+                                                        <div class="input-group-addon">
+                                                            <i class="fa " data-toggle="modal" data-target="#modaladdProv" style="cursor: pointer; color: #78b414;"></i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                    <br>
+                                    <br>
+                                    <div class="row">
+
+                                        <div class="col-md-6">
+
+                                            <div class="form-group has-default">
+                                                <label class="control-label">Grado</label>
+                                                <div class="input-group">
+                                                    <select id="gradoPuest" class="form-control " name="gradoPuest" ngModel data-title="Seleccionar" data-style="btn-default btn-block" data-menu-style="dropdown-blue">
+                                   
+                                    <option selected="" disabled="">- Seleccionar -</option>
+                                    <option >1</option>
+                                    <option >2</option>
+                                    <option >3</option>
+                                    <option >4</option>
+                                    <option >5</option>
+                                    <option >6</option>
+                                    <option >7</option>
+                                    <option >8</option>
+                                    <option >9</option>
+                                    <option >10</option>
+                                    <option >11</option>
+                                    <option >12</option>
+                                    <option >13</option>
+                                    <option >14</option>
+                                    <option >15</option>
+                                    <option >16</option>
+                                    <option >17</option>
+                                    <option >18</option>
+                                    <option >19</option>
+                                    <option >20</option>
+                                    <option >21</option>
+                                    <option >22</option>
+                                    <option >23</option>
+                                    <option >24</option>
+                                    <option >25</option>
+                                </select>
+                                                    <div class="input-group-addon">
+                                                        <i class="fa " data-toggle="modal" data-target="#modaladdProv" style="cursor: pointer; color: #78b414;"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+
+
+                                        <div class="form-group">
+
+                                            <div class="col-md-6">
+
+                                                <div class="form-group has-default">
+                                                    <label class="control-label">Ambito</label>
+                                                    <div class="input-group">
+                                                        <select id="ambitoPuest" class="form-control " name="ambitoPuest" ngModel data-title="Seleccionar" data-style="btn-default btn-block" data-menu-style="dropdown-blue">
+                                       
+                                        <option selected="" disabled="">- Seleccionar -</option>
+                                        <option  *ngFor="let ambito of ambitos"  [value]="ambito._id">{{ambito.descripcion}}</option>
+                                    </select>
+                                                        <div class="input-group-addon">
+                                                            <i class="fa fa-plus" data-toggle="modal" data-target="#modaladdProv" style="cursor: pointer; color: #78b414;"></i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- </form> -->
                                 </div>
 
                                 <div class="tab-pane" id="tab2">
-                                    <h5 class="text-center">Please give us more details about your platform.</h5>
+                                    <!-- <form #addPuesto="ngForm" id="addC" (ngSubmit)="addPuestos(addPuesto); addPuesto.reset()"> -->
+
+                                    <br>
+                                    <br>
+                                    <h5 class="text-center">2. MISIÓN</h5>
+                                    <br>
+                                    <br>
                                     <div class="row">
-                                        <div class="col-md-10 col-md-offset-1">
+                                        <div class="col-md-12 col-md-offset-1">
                                             <div class="form-group">
-                                                <label class="control-label">Your Website</label>
-                                                <input class="form-control" type="text" name="website" url="true" placeholder="ex: http://www.creative-tim.com" />
+                                                <label class="control-label">Mision del Puesto</label>
+
+                                                <textarea cols="50" rows="5" class="form-control" id="misionPuest" name="misionPuest" [ngModel]="misionPuest" class="form-control"></textarea>
                                             </div>
                                         </div>
                                     </div>
 
+                                    <!-- </form> -->
+                                </div>
+
+
+                                <div class="tab-pane" id="tab3">
+                                    <!-- <form #addPuesto="ngForm" id="addC" (ngSubmit)="addPuestos(addPuesto); addPuesto.reset()"> -->
+
+                                    <br>
+                                    <br>
+                                    <h5 class="text-center">3. RELACIONES INTERNAS Y EXTERNAS</h5>
+                                    <br>
+                                    <br>
                                     <div class="row">
-                                        <div class="col-md-5 col-md-offset-1">
+                                        <div class="col-md-12 col-md-offset-1">
                                             <div class="form-group">
-                                                <label class="control-label">Framework Type</label>
-                                                <input class="form-control" type="text" name="framework" placeholder="ex: http://www.creative-tim.com" />
+                                                <label class="control-label">Interfaz</label>
+                                                <textarea cols="50" rows="5" class="form-control" id="RIEPuest" name="RIEPuest" [ngModel]="RIEPuest" class="form-control"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- </form> -->
+
+                                </div>
+
+                                <div class="tab-pane" id="tab4">
+                                    <br>
+                                    <br>
+                                    <h5 class="text-center">4. INSTRUCCIÓN FORMAL REQUERIDA</h5>
+                                    <br>
+                                    <br>
+                                    <div class="row">
+                                        <div class="col-md-6 col-md-offset-1">
+                                            <div class="row">
+                                                <div class="col-md-5">
+                                                    <div class="form-group">
+                                                        <label class="control-label">Nivel de Instruccion</label>
+                                                        <select name="cities" class="form-control" onchange="selecOp(event.target.value)">
+                                                              <option selected="" disabled="">- Area 1 -</option>
+                                                              <option >Bahasa Melayu</option>
+                                                         
+                                                          </select>
+                                                        <select name="cities" class="form-control" onchange="selecOp1(event.target.value)">
+                                                            <option selected="" disabled="">- Area 2 -</option>
+                                                            <option>Bahasa Melayu</option>
+                                                       
+                                                        </select>
+                                                        <select name="cities" class="form-control" onchange="selecOp2(event.target.value)">
+                                                            <option selected="" disabled="">- Area 3 -</option>
+                                                            <option >Bahasa Melayu</option>
+                                                       
+                                                        </select>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="control-label">Area de Conocimiento</label>
+                                                <input class="form-control" type="text" name="last_name" />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="tab-pane" id="tab5">
+                                    <br>
+                                    <br>
+                                    <h5 class="text-center">5. EXPERIENCIA LABORAL REQUERIDA</h5>
+                                    <br>
+                                    <br>
+                                    <div class="row">
+
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label class="control-label">Nivel de Instruccion</label>
+                                                <input disabled id="valorDeSelect" class="form-control" type="text" name="last_name" />
+                                                <input disabled id="valorDeSelect1" class="form-control" type="text" name="last_name" />
+                                                <input disabled id="valorDeSelect2" class="form-control" type="text" name="last_name" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-1">
+                                            <div class="form-group">
+                                                <label class="control-label">Tiempo</label>
+                                                <input class="form-control" type="text" name="last_name" />
+                                                <input class="form-control" type="text" name="last_name" />
+                                                <input class="form-control" type="text" name="last_name" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-8 col-md-offset-1">
+                                            <div class="form-group">
+                                                <label class="control-label">Especificidad de la Experiencia</label>
+                                                <textarea cols="60" rows="6" class="form-control" id="misionPuest" name="misionPuest" [ngModel]="misionPuest" class="form-control"></textarea>
                                             </div>
                                         </div>
 
-                                        <div class="col-md-5">
+
+                                    </div>
+
+                                </div>
+                                <div class="tab-pane" id="tab6">
+                                    <br>
+                                    <br>
+                                    <h5 class="text-center">6. CAPACITACION REQUERIDA PARA EL PUESTO</h5>
+                                    <br>
+                                    <br>
+                                    <div class="row">
+                                        <div class="col-md-12 col-md-offset-1">
+                                            <div class="form-group">
+                                                <label class="control-label">Tématica de la capacitación</label>
+                                                <textarea cols="50" rows="5" class="form-control" id="misionPuest" name="misionPuest" [ngModel]="misionPuest" class="form-control"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- <div class="row">
+                                      <div class="col-md-5">
                                             <div class="form-group">
                                                 <label class="control-label">Language</label>
-
-                                                <!--     IMPORTANT! - the "bootstrap select picker" is not compatible with jquery.validation.js, that's why we use the "default select" inside this wizard. We will try to contact the guys who are responsibble for the "bootstrap select picker" to find a solution. Thank you for your patience.
-                                                 -->
-
                                                 <select name="cities" class="form-control">
                                                     <option selected="" disabled="">- language -</option>
                                                     <option value="ms">Bahasa Melayu</option>
-                                                    <option value="ca">Català</option>
-                                                    <option value="da">Dansk</option>
-                                                    <option value="de">Deutsch</option>
-                                                    <option value="en">English</option>
-                                                    <option value="es">Español</option>
-                                                    <option value="el">Eλληνικά</option>
-                                                    <option value="fr">Français</option>
-                                                    <option value="it">Italiano</option>
-                                                    <option value="hu">Magyar</option>
-                                                    <option value="nl">Nederlands</option>
-                                                    <option value="no">Norsk</option>
-                                                    <option value="pl">Polski</option>
-                                                    <option value="pt">Português</option>
-                                                    <option value="fi">Suomi</option>
-                                                    <option value="sv">Svenska</option>
-                                                    <option value="tr">Türkçe</option>
-                                                    <option value="is">Íslenska</option>
-                                                    <option value="cs">Čeština</option>
-                                                    <option value="ru">Русский</option>
-                                                    <option value="th">ภาษาไทย</option>
-                                                    <option value="zh">中文 (简体)</option>
-                                                    <option value="zh-TW">中文 (繁體)</option>
-                                                    <option value="ja">日本語</option>
-                                                    <option value="ko">한국어</option>
+                                               
                                                 </select>
 
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> -->
+                                </div>
 
+                                <div class="tab-pane" id="tab7">
+                                    <br>
+                                    <br>
+                                    <h5 class="text-center">7. ACTIVIDADES ESENCIALES</h5>
+                                    <br>
+                                    <br>
                                     <div class="row">
-                                        <div class="col-md-5 col-md-offset-1">
+                                        <div class="col-md-12 col-md-offset-1">
                                             <div class="form-group">
-                                                <label class="control-label">Bootstrap Version</label>
+                                                <label class="control-label">Actividades Esenciales</label>
+                                                <label class="control-label">.             .</label>
+                                                <input style="align-content: center;" class="btn btn-info" type="button" title="Agregar Producto" Value="Agregar" onclick="agregar()">
+                                                <!--div que se encuentra en el script para agregar mas campos -->
+                                                <textarea cols="50" rows="3" class="form-control" id="nombre1" name="nombre1" [ngModel]="misionPuest" class="form-control" onkeyup="PasarValor();"></textarea>
+                                                <br>
+                                                <div id="plazos"></div>
+                                            </div>
+                                        </div>
+                                    </div>
 
-                                                <!--     IMPORTANT! - the "bootstrap select picker" is not compatible with jquery.validation.js, that's why we use the "default select" inside this wizard. We will try to contact the guys who are responsibble for the "bootstrap select picker" to find a solution. Thank you for your patience.
-                                                 -->
-
+                                    <!-- <div class="row">
+                                      <div class="col-md-5">
+                                            <div class="form-group">
+                                                <label class="control-label">Language</label>
                                                 <select name="cities" class="form-control">
-                                                    <option selected="" disabled="">- version -</option>
-                                                    <option value="1.1">Bootstrap 1.1</option>
-                                                    <option value="2.0">Bootstrap 2.0</option>
-                                                    <option value="3.0">Bootstrap 3.0</option>
-                                                    <option value="4.0">Bootstrap 4.0(alpha)</option>
+                                                    <option selected="" disabled="">- language -</option>
+                                                    <option value="ms">Bahasa Melayu</option>
+                                               
                                                 </select>
 
                                             </div>
                                         </div>
+                                    </div> -->
+                                </div>
 
-                                        <div class="col-md-5">
+                                <div class="tab-pane" id="tab8">
+                                    <br>
+                                    <br>
+                                    <h5 class="text-center">8. CONOCIMIENTO ADICIONAL RELACIONADO A LAS ACTIVIDADES ESENCIALES</h5>
+                                    <br>
+                                    <br>
+                                    <div class="row">
+                                        <div class="col-md-6 col-md-offset-1">
                                             <div class="form-group">
-                                                <label class="control-label">Price</label>
-                                                <input class="form-control" type="text" name="price" placeholder="ex: 19.00" />
+                                                <label class="control-label">Actividades Esenciales</label>
+                                                <label class="control-label">.             .</label>
+                                                <!-- <input style="align-content: center;" class="btn btn-info" type="button" title="Agregar Producto" Value="Agregar" onclick="agregar()"> -->
+                                                <!--div que se encuentra en el script para agregar mas campos -->
+                                                <textarea id="nombre2" disabled cols="50" rows="3" class="form-control" name="" [ngModel]="misionPuest" class="form-control"></textarea>
+                                                <br>
+                                                <div id="plazos1"></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-md-offset-1">
+                                            <div class="form-group">
+                                                <label class="control-label">Conocimiento Adicional</label>
+                                                <label class="control-label">.             .</label>
+                                                <!-- <input style="align-content: center;" class="btn btn-info" type="button" title="Agregar Producto" Value="Agregar" onclick="agregar()"> -->
+                                                <!--div que se encuentra en el script para agregar mas campos -->
+                                                <select select style="height:60px" name="cities" class="form-control">
+                                                    <option selected="" disabled="">- Area 1 -</option>
+                                                    <option >Bahasa Melayu</option>
+                                               
+                                                </select>
+                                                <br>
+                                                <div id="plazos2"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- <div class="row">
+                                      <div class="col-md-5">
+                                            <div class="form-group">
+                                                <label class="control-label">Language</label>
+                                                <select name="cities" class="form-control">
+                                                    <option selected="" disabled="">- language -</option>
+                                                    <option value="ms">Bahasa Melayu</option>
+                                               
+                                                </select>
+
+                                            </div>
+                                        </div>
+                                    </div> -->
+                                </div>
+
+                                <div class="tab-pane" id="tab9">
+                                    <br>
+                                    <br>
+                                    <h5 class="text-center">9. ACTIVIDADES DEL PUESTO</h5>
+                                    <br>
+                                    <br>
+                                    <div class="row">
+                                        <div class="col-md-8 col-md-offset-1">
+                                            <div class="form-group">
+                                                <label class="control-label">Actividades del Puesto</label>
+                                                <label class="control-label">.             .</label>
+                                                <input style="align-content: center;" class="btn btn-info" type="button" title="Agregar Producto" Value="Agregar" onclick="agregar1()">
+
+                                                <input type="text" id="codigoPuest" name="codigoPuest" [ngModel]="codigoPuest" class="form-control">
+
+                                                <!--div que se encuentra en el script para agregar mas campos -->
+                                                <!-- <textarea cols="50" rows="3" class="form-control" id="nombre1" name="nombre1" [ngModel]="misionPuest" class="form-control" onkeyup="PasarValor();"></textarea> -->
+                                                <br>
+                                                <div id="plazos3"></div>
                                             </div>
                                         </div>
 
+
+                                        <div class="col-md-1 col-md-offset-1">
+                                            <div class="form-group">
+                                                <label class="control-label">FR</label>
+                                                <label class="control-label">.             .</label>
+                                                <input type="text" id="codigoPuest" name="codigoPuest" [ngModel]="codigoPuest" class="form-control">
+
+                                                <!-- <input style="align-content: center;" class="btn btn-info" type="button" title="Agregar Producto" Value="Agregar" onclick="agregar1()"> -->
+                                                <!--div que se encuentra en el script para agregar mas campos -->
+                                                <!-- <textarea cols="50" rows="3" class="form-control" id="nombre1" name="nombre1" [ngModel]="misionPuest" class="form-control" onkeyup="PasarValor();"></textarea> -->
+                                                <br>
+                                                <div id="plazos4"></div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-1 col-md-offset-1">
+                                            <div class="form-group">
+                                                <label class="control-label">CO</label>
+                                                <label class="control-label">.             .</label>
+                                                <input type="text" id="codigoPuest" name="codigoPuest" [ngModel]="codigoPuest" class="form-control">
+
+                                                <!-- <input style="align-content: center;" class="btn btn-info" type="button" title="Agregar Producto" Value="Agregar" onclick="agregar1()"> -->
+                                                <!--div que se encuentra en el script para agregar mas campos -->
+                                                <!-- <textarea cols="50" rows="3" class="form-control" id="nombre1" name="nombre1" [ngModel]="misionPuest" class="form-control" onkeyup="PasarValor();"></textarea> -->
+                                                <br>
+                                                <div id="plazos5"></div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-1 col-md-offset-1">
+                                            <div class="form-group">
+                                                <label class="control-label">CM</label>
+                                                <label class="control-label">.             .</label>
+                                                <input type="text" id="codigoPuest" name="codigoPuest" [ngModel]="codigoPuest" class="form-control">
+
+                                                <!-- <input style="align-content: center;" class="btn btn-info" type="button" title="Agregar Producto" Value="Agregar" onclick="agregar1()"> -->
+                                                <!--div que se encuentra en el script para agregar mas campos -->
+                                                <!-- <textarea cols="50" rows="3" class="form-control" id="nombre1" name="nombre1" [ngModel]="misionPuest" class="form-control" onkeyup="PasarValor();"></textarea> -->
+                                                <br>
+                                                <div id="plazos6"></div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-1 col-md-offset-1">
+                                            <div class="form-group">
+                                                <label class="control-label">TOTAL</label>
+                                                <label class="control-label">.             .</label>
+                                                <input type="text" id="codigoPuest" name="codigoPuest" [ngModel]="codigoPuest" class="form-control">
+
+                                                <!-- <input style="align-content: center;" class="btn btn-info" type="button" title="Agregar Producto" Value="Agregar" onclick="agregar1()"> -->
+                                                <!--div que se encuentra en el script para agregar mas campos -->
+                                                <!-- <textarea cols="50" rows="3" class="form-control" id="nombre1" name="nombre1" [ngModel]="misionPuest" class="form-control" onkeyup="PasarValor();"></textarea> -->
+                                                <br>
+                                                <div id="plazos7"></div>
+                                            </div>
+                                        </div>
                                     </div>
+                                    <!-- <div class="row">
+                                      <div class="col-md-5">
+                                            <div class="form-group">
+                                                <label class="control-label">Language</label>
+                                                <select name="cities" class="form-control">
+                                                    <option selected="" disabled="">- language -</option>
+                                                    <option value="ms">Bahasa Melayu</option>
+                                               
+                                                </select>
 
+                                            </div>
+                                        </div>
+                                    </div> -->
                                 </div>
 
-                                <div class="tab-pane" id="tab3">
-                                    <h2 class="text-center text-space">Yuhuuu! <br><small> Click on "<b>Finish</b>" to join our community</small></h2>
+                                <div class="tab-pane" id="tab10">
+                                    <br>
+                                    <br>
+                                    <h5 class="text-center">10. COMPTENCIAS TECNICAS</h5>
+                                    <br>
+                                    <br>
+                                    <div class="row">
+                                        <div class="col-md-8 col-md-offset-1">
+                                            <div class="form-group">
+                                                <label class="control-label">Denominacion de la competencia</label>
+                                                <label class="control-label">.             .</label>
+                                                <input style="align-content: center;" class="btn btn-info" type="button" title="Agregar Producto" Value="Agregar" onclick="agregar1()">
+
+                                                <input type="text" id="codigoPuest" name="codigoPuest" [ngModel]="codigoPuest" class="form-control">
+
+                                                <!--div que se encuentra en el script para agregar mas campos -->
+                                                <!-- <textarea cols="50" rows="3" class="form-control" id="nombre1" name="nombre1" [ngModel]="misionPuest" class="form-control" onkeyup="PasarValor();"></textarea> -->
+                                                <br>
+                                                <div id="plazos3"></div>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="col-md-1 col-md-offset-1">
+                                            <div class="form-group">
+                                                <label class="control-label">Nivel</label>
+                                                <label class="control-label">.             .</label>
+                                                <input type="text" id="codigoPuest" name="codigoPuest" [ngModel]="codigoPuest" class="form-control">
+
+                                                <!-- <input style="align-content: center;" class="btn btn-info" type="button" title="Agregar Producto" Value="Agregar" onclick="agregar1()"> -->
+                                                <!--div que se encuentra en el script para agregar mas campos -->
+                                                <!-- <textarea cols="50" rows="3" class="form-control" id="nombre1" name="nombre1" [ngModel]="misionPuest" class="form-control" onkeyup="PasarValor();"></textarea> -->
+                                                <br>
+                                                <div id="plazos4"></div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-1 col-md-offset-1">
+                                            <div class="form-group">
+                                                <label class="control-label">Comportamiento Observable</label>
+                                                <label class="control-label">.             .</label>
+                                                <input type="text" id="codigoPuest" name="codigoPuest" [ngModel]="codigoPuest" class="form-control">
+
+                                                <!-- <input style="align-content: center;" class="btn btn-info" type="button" title="Agregar Producto" Value="Agregar" onclick="agregar1()"> -->
+                                                <!--div que se encuentra en el script para agregar mas campos -->
+                                                <!-- <textarea cols="50" rows="3" class="form-control" id="nombre1" name="nombre1" [ngModel]="misionPuest" class="form-control" onkeyup="PasarValor();"></textarea> -->
+                                                <br>
+                                                <div id="plazos5"></div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-1 col-md-offset-1">
+                                            <div class="form-group">
+                                                <label class="control-label">CM</label>
+                                                <label class="control-label">.             .</label>
+                                                <input type="text" id="codigoPuest" name="codigoPuest" [ngModel]="codigoPuest" class="form-control">
+
+                                                <!-- <input style="align-content: center;" class="btn btn-info" type="button" title="Agregar Producto" Value="Agregar" onclick="agregar1()"> -->
+                                                <!--div que se encuentra en el script para agregar mas campos -->
+                                                <!-- <textarea cols="50" rows="3" class="form-control" id="nombre1" name="nombre1" [ngModel]="misionPuest" class="form-control" onkeyup="PasarValor();"></textarea> -->
+                                                <br>
+                                                <div id="plazos6"></div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-1 col-md-offset-1">
+                                            <div class="form-group">
+                                                <label class="control-label">TOTAL</label>
+                                                <label class="control-label">.             .</label>
+                                                <input type="text" id="codigoPuest" name="codigoPuest" [ngModel]="codigoPuest" class="form-control">
+
+                                                <!-- <input style="align-content: center;" class="btn btn-info" type="button" title="Agregar Producto" Value="Agregar" onclick="agregar1()"> -->
+                                                <!--div que se encuentra en el script para agregar mas campos -->
+                                                <!-- <textarea cols="50" rows="3" class="form-control" id="nombre1" name="nombre1" [ngModel]="misionPuest" class="form-control" onkeyup="PasarValor();"></textarea> -->
+                                                <br>
+                                                <div id="plazos7"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- <div class="row">
+                                      <div class="col-md-5">
+                                            <div class="form-group">
+                                                <label class="control-label">Language</label>
+                                                <select name="cities" class="form-control">
+                                                    <option selected="" disabled="">- language -</option>
+                                                    <option value="ms">Bahasa Melayu</option>
+                                               
+                                                </select>
+
+                                            </div>
+                                        </div>
+                                    </div> -->
                                 </div>
+
 
                             </div>
                         </div>
@@ -144,7 +618,7 @@
                         <div class="footer">
                             <button type="button" class="btn btn-default btn-fill btn-wd btn-previous pull-left">Back</button>
 
-                            <button type="button" class="btn btn-info btn-fill btn-wd btn-next pull-right">Next</button>
+                            <button type="button" onclick="obtenerValor()" class="btn btn-info btn-fill btn-wd btn-next pull-right">Next</button>
                             <button type="button" class="btn btn-info btn-fill btn-wd btn-finish pull-right" onclick="onFinishWizard()">Finish</button>
 
                             <div class="clearfix"></div>

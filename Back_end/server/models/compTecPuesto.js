@@ -2,19 +2,7 @@ const mongoose = require('mongoose');
 
 let Schema = mongoose.Schema;
 
-let compTecObsSchema = new Schema({
-    numero: {
-        type: String,
-        required: false
-    },
-    nivel: {
-        type: String,
-        required: false
-    },
-    comportamiento: {
-        type: String,
-        required: false
-    },
+let compTecPuestoSchema = new Schema({
     empresa: {
         type: Schema.Types.ObjectId,
         ref: 'Empresa',
@@ -24,11 +12,16 @@ let compTecObsSchema = new Schema({
         type: String,
         default: true,
     },
+    puesto: {
+        type: Schema.Types.ObjectId,
+        ref: 'Puesto',
+        required: false
+    },
     competenciaTecnica: {
         type: Schema.Types.ObjectId,
-        ref: 'CompetenciaTecnica',
+        ref: 'ComptenciaTecnica',
         required: false
     }
 });
 
-module.exports = mongoose.model('CompTecObs', compTecObsSchema);
+module.exports = mongoose.model('CompTecPuesto', compTecPuestoSchema);

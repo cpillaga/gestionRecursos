@@ -33,6 +33,10 @@ let puestoSchema = new Schema({
         type: String,
         required: false
     },
+    grado: {
+        type: String,
+        required: false
+    },
     capacitacion: {
         type: String,
         required: [true, 'La capacitacion es obligatoria']

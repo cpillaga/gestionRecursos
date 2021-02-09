@@ -59,7 +59,7 @@ export class CompetenciaTecnicaComponent implements OnInit {
   
   getCompetenciaTecnica(){
     this._compTecn.getCompetenciaTecnica().subscribe(resp => {
-      console.log(resp.actividadEsencial);
+      console.log(resp);
       this.competenciasTecnicas = resp.competenciaTecnica;
     })
   }

@@ -22,7 +22,7 @@ app.get('/compCondObs/:idEmp', verificaToken, function(req, res) {
 
     CompCondObs.find({ empresa: id })
         .populate('empresa') //Se filtra todos los datos de las claves foraneas aquí se puede agregar varios populate
-        .populate('competenciaTecnica')
+        .populate('competenciaConductual')
         .sort({ estado: -1 }) //El sort sirve para ordenar si no se le pone se ordena ascendente
         .exec((err, compCondObs) => {
             if (err) {
@@ -174,8 +174,9 @@ app.get('/compCondObs/buscar/:termino/:empresa', verificaToken, function(req, re
     let regex = new RegExp(terminoB, "i");
     let empresaB = req.params.empresa;
 
-    CompCondObs.find({ descripcion: regex, empresa: empresaB })
+    CompCondObs.find({ comportamiento: regex, empresa: empresaB })
         .populate('empresa')
+        .populate('competenciaConductual')
         .exec((err, compCondObs) => {
             if (err) {
                 return res.status(400).json({

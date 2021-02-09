@@ -22,11 +22,13 @@ import { ExperienciaPuestoComponent } from './experiencia-puesto/experiencia-pue
 import { CompetenciaTecnicaComponent } from './competencia-tecnica/competencia-tecnica.component';
 import { CompetenciaConductualComponent } from './competencia-conductual/competencia-conductual.component';
 import { CTcomportamientoObsComponent } from './ctcomportamiento-obs/ctcomportamiento-obs.component';
+import { CccomportamientoObsComponent } from './cccomportamiento-obs/cccomportamiento-obs.component';
+import { CompTecPuestoComponent } from './comp-tec-puesto/comp-tec-puesto.component';
 
 
 
 @NgModule({
-  declarations: [HomeComponent, PagesComponent, RolComponent, GrupoOcupacionalComponent, AmbitoComponent, PuestoComponent, ValorizacionComponent, ConocimientoAdicionalComponent, ActividadEsencialComponent, ActividadCargoComponent, PuestoAddComponent, ExperienciaComponent, ExperienciaPuestoComponent, CompetenciaTecnicaComponent, CompetenciaConductualComponent, CTcomportamientoObsComponent],
+  declarations: [HomeComponent, PagesComponent, RolComponent, GrupoOcupacionalComponent, AmbitoComponent, PuestoComponent, ValorizacionComponent, ConocimientoAdicionalComponent, ActividadEsencialComponent, ActividadCargoComponent, PuestoAddComponent, ExperienciaComponent, ExperienciaPuestoComponent, CompetenciaTecnicaComponent, CompetenciaConductualComponent, CTcomportamientoObsComponent, CccomportamientoObsComponent, CompTecPuestoComponent],
   exports: [
     PagesComponent
 ],

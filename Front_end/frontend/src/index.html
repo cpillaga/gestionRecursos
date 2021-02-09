@@ -1,5 +1,6 @@
-<!DOCTYPE html>
-<html>
+<!DOCTYPE html >
+<html class=" scrollbar force-overflow" data-color="orange">
+
 
 <head>
     <meta charset="utf-8" />
@@ -32,6 +33,7 @@
 
 <body>
     <app-root></app-root>
+
 
 
     <script src="assets/dist/js/jquery.min.js" type="text/javascript"></script>
@@ -333,6 +335,165 @@
         }
     </script>
 
+    <script>
+        var valorEnvio = ""
+        var valorEnvio1 = ""
+        var valorEnvio2 = ""
+
+        function selecOp(valor) {
+
+            document.getElementById("valorDeSelect").value = valor //declararle el valor del select al input
+        }
+
+        function selecOp1(valor1) {
+
+            document.getElementById("valorDeSelect1").value = valor1 //declararle el valor del select al input
+        }
+
+        function selecOp2(valor2) {
+
+            document.getElementById("valorDeSelect2").value = valor2 //declararle el valor del select al input
+        }
+
+        function obtenerValor() {
+            valor = document.getElementById("valorDeSelect").value //obtener valor del input
+            valorEnvio = valor //declarar valor a la variable a usar en el ajax
+            console.log(valorEnvio)
+            valor1 = document.getElementById("valorDeSelect1").value //obtener valor del input
+            valorEnvio1 = valor1 //declarar valor a la variable a usar en el ajax
+            console.log(valorEnvio1)
+            valor2 = document.getElementById("valorDeSelect2").value //obtener valor del input
+            valorEnvio2 = valor2 //declarar valor a la variable a usar en el ajax
+            console.log(valorEnvio2)
+
+
+        }
+    </script>
+    <script language="JavaScript">
+        //Creacion de Variable incremental
+        var incremento = 0;
+
+        //Lo que se hará cuando se presione el boton de Agregar
+        function agregar(obj) {
+
+            incremento++;
+
+
+            //Obteniendo el Div "plazos"
+            bloque = document.getElementById('plazos');
+            bloque1 = document.getElementById('plazos1');
+            bloque2 = document.getElementById('plazos2');
+
+
+
+            //Creando el input que irá dentro del Div "plazos"
+            elemento = document.createElement('textarea');
+            elemento.setAttribute("class", "form-control");
+            elemento.id = 'textarea' + incremento;
+            bloque.appendChild(elemento);
+
+            elemento1 = document.createElement('textarea');
+            elemento1.setAttribute("class", "form-control");
+            elemento1.setAttribute("readonly", "readonly");
+            elemento1.id = 'textarea' + incremento;
+            bloque1.appendChild(elemento1);
+
+            elemento2 = document.createElement('select');
+            elemento2.setAttribute("class", "form-control ");
+            elemento2.setAttribute("style", "height:60px");
+            elemento2.id = 'select' + incremento;
+            bloque2.appendChild(elemento2);
+
+
+            var br = document.createElement('br');
+            bloque.appendChild(br);
+            var br1 = document.createElement('br');
+            bloque1.appendChild(br1);
+            var br2 = document.createElement('br');
+            bloque2.appendChild(br2);
+
+        }
+
+
+        //Lo que se hará cuando se presione el boton de Borrar
+        function borrar(obj) {
+            incremento = incremento - 1;
+            bloque = document.getElementById('plazos');
+            bloque.removeChild(bloque.lastChild);
+        }
+    </script>
+
+    <script language="JavaScript">
+        //Creacion de Variable incremental
+        var incremento = 0;
+
+        //Lo que se hará cuando se presione el boton de Agregar
+        function agregar1(obj) {
+
+            incremento++;
+
+            //otro wizard .8
+            bloque3 = document.getElementById('plazos3');
+            bloque4 = document.getElementById('plazos4');
+            bloque5 = document.getElementById('plazos5');
+            bloque6 = document.getElementById('plazos6');
+            bloque7 = document.getElementById('plazos7');
+
+
+
+            //otro wizard .8
+            elemento3 = document.createElement('input');
+            elemento3.setAttribute("class", "form-control ");
+            elemento3.id = 'input' + incremento;
+            bloque3.appendChild(elemento3);
+
+            elemento4 = document.createElement('input');
+            elemento4.setAttribute("class", "form-control ");
+            elemento4.id = 'input' + incremento;
+            bloque4.appendChild(elemento4);
+
+            elemento5 = document.createElement('input');
+            elemento5.setAttribute("class", "form-control ");
+            elemento5.id = 'input' + incremento;
+            bloque5.appendChild(elemento5);
+
+            elemento6 = document.createElement('input');
+            elemento6.setAttribute("class", "form-control ");
+            elemento6.id = 'input' + incremento;
+            bloque6.appendChild(elemento6);
+
+            elemento7 = document.createElement('input');
+            elemento7.setAttribute("class", "form-control ");
+            elemento7.id = 'input' + incremento;
+            bloque7.appendChild(elemento7);
+
+
+            //otro wizard .8
+            var br3 = document.createElement('br');
+            bloque3.appendChild(br3);
+            var br4 = document.createElement('br');
+            bloque4.appendChild(br4);
+            var br5 = document.createElement('br');
+            bloque5.appendChild(br5);
+            var br6 = document.createElement('br');
+            bloque6.appendChild(br6);
+            var br7 = document.createElement('br');
+            bloque7.appendChild(br7);
+        }
+
+
+        //Lo que se hará cuando se presione el boton de Borrar
+        function borrar(obj) {
+            incremento = incremento - 1;
+            bloque = document.getElementById('plazos');
+            bloque.removeChild(bloque.lastChild);
+        }
+    </script>
+    <script>
+        function PasarValor() {
+            document.getElementById("nombre2").value = document.getElementById("nombre1").value;
+        }
+    </script>
 </body>
 
 </html>

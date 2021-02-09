@@ -6,7 +6,7 @@ const _ = require('underscore');
 const SEED = require('../config/config').SEED;
 const cors = require('cors');
 
-const CompTecObs = require('../models/compTecObs');
+const CompCondPuesto = require('../models/compCondPuesto');
 const Empresa = require('../models/empresa');
 
 const app = express();
@@ -17,14 +17,15 @@ app.use(cors({ origin: '*' }));
 /*
     Método para obntener todos los campos de una tabla de una Rol
 */
-app.get('/compTecObs/:idEmp', verificaToken, function(req, res) {
+app.get('/compCondPuesto/:idEmp', verificaToken, function(req, res) {
     let id = req.params.idEmp;
 
-    CompTecObs.find({ empresa: id })
+    CompCondPuesto.find({ empresa: id })
         .populate('empresa') //Se filtra todos los datos de las claves foraneas aquí se puede agregar varios populate
-        .populate('competenciaTecnica')
+        .populate('competecniaConductual')
+        .populate('puesto')
         .sort({ estado: -1 }) //El sort sirve para ordenar si no se le pone se ordena ascendente
-        .exec((err, compTecObs) => {
+        .exec((err, compCondPuesto) => {
             if (err) {
                 return res.status(400).json({
                     ok: false,
@@ -36,7 +37,7 @@ app.get('/compTecObs/:idEmp', verificaToken, function(req, res) {
 
             res.json({
                 ok: true,
-                compTecObs
+                compCondPuesto
             });
         });
 });
@@ -45,18 +46,16 @@ app.get('/compTecObs/:idEmp', verificaToken, function(req, res) {
 /* 
     Metodo para agregar ambitos
 */
-app.post('/compTecObs', verificaToken, function(req, res) {
+app.post('/compCondPuesto', verificaToken, function(req, res) {
     let body = req.body;
 
-    let compTecObs = new CompTecObs({
-        comportamiento: body.comportamiento,
-        numero: body.numero,
-        nivel: body.nivel,
-        competenciaTecnica: body.competenciaTecnica,
+    let compCondPuesto = new CompCondPuesto({
+        puesto: body.puesto,
+        competenciaConductual: body.competenciaConductual,
         empresa: body.empresa
     });
 
-    compTecObs.save((err, compTecObsDB) => {
+    compCondPuesto.save((err, compCondPuestoDB) => {
         if (err) {
             return res.status(400).json({
                 ok: false,
@@ -66,7 +65,7 @@ app.post('/compTecObs', verificaToken, function(req, res) {
 
         res.json({
             ok: true,
-            compTecObs: compTecObsDB
+            compCondPuesto: compCondPuestoDB
         });
     });
 });
@@ -74,14 +73,14 @@ app.post('/compTecObs', verificaToken, function(req, res) {
 /*
     Método para modificar Grupos Ocupacionales
 */
-app.put('/compTecObs/:id', verificaToken, function(req, res) {
+app.put('/compCondPuesto/:id', verificaToken, function(req, res) {
     let id = req.params.id;
 
-    let body = _.pick(req.body, ['numero', 'nivel', 'comportamiento', 'competenciaTecnica']); //Dentro de los corchetes va los campos a modificarse
+    let body = _.pick(req.body, ['puesto', 'competenciaConductual']); //Dentro de los corchetes va los campos a modificarse
 
     //Condicion para saber si la clave se esta modificando
 
-    CompTecObs.findByIdAndUpdate(id, body, { new: true, runValidators: true }, (err, compTecObsDB) => {
+    CompCondPuesto.findByIdAndUpdate(id, body, { new: true, runValidators: true }, (err, compCondPuestoDB) => {
         if (err) {
             return res.status(400).json({
                 ok: false,
@@ -92,7 +91,7 @@ app.put('/compTecObs/:id', verificaToken, function(req, res) {
         //actividadDB.clave = null;
         res.json({
             ok: true,
-            compTecObs: compTecObsDB
+            compCondPuesto: compCondPuestoDB
         });
     });
 });
@@ -100,7 +99,7 @@ app.put('/compTecObs/:id', verificaToken, function(req, res) {
 /* 
     Método para dar de baja a un proceso
 */
-app.delete('/compTecObs/:id', verificaToken, function(req, res) {
+app.delete('/compCondPuesto/:id', verificaToken, function(req, res) {
     let id = req.params.id;
 
     let cambiaEstado = {
@@ -108,7 +107,7 @@ app.delete('/compTecObs/:id', verificaToken, function(req, res) {
     };
 
     //  Usuario.findByIdAndRemove(id, (err, usuarioBorrado) => { Find>ByAndRemove elimina al campo se puede reemplazar por la linea de abajo
-    CompTecObs.findByIdAndUpdate(id, cambiaEstado, { new: true }, (err, compTecObsBorrado) => {
+    CompCondPuesto.findByIdAndUpdate(id, cambiaEstado, { new: true }, (err, compCondPuestoBorrado) => {
         if (err) {
             return res.status(400).json({
                 ok: false,
@@ -116,17 +115,17 @@ app.delete('/compTecObs/:id', verificaToken, function(req, res) {
             });
         }
 
-        if (!compTecObsBorrado) {
+        if (!compCondPuestoBorrado) {
             return res.status(400).json({
                 ok: false,
                 err: {
-                    message: 'compTecObs no encontrado'
+                    message: 'compCondPuesto no encontrado'
                 }
             });
         }
         res.json({
             ok: true,
-            compTecObs: compTecObsBorrado
+            compCondPuesto: compCondPuestoBorrado
         });
     });
 });
@@ -134,7 +133,7 @@ app.delete('/compTecObs/:id', verificaToken, function(req, res) {
 /* 
     Método para habilitar un rol
 */
-app.delete('/compTecObs/habilitar/:id', verificaToken, function(req, res) {
+app.delete('/compCondPuesto/habilitar/:id', verificaToken, function(req, res) {
     let id = req.params.id;
 
     let cambiaEstado = {
@@ -142,7 +141,7 @@ app.delete('/compTecObs/habilitar/:id', verificaToken, function(req, res) {
     };
 
     //  Usuario.findByIdAndRemove(id, (err, usuarioBorrado) => {
-    CompTecObs.findByIdAndUpdate(id, cambiaEstado, { new: true }, (err, compTecObsActivado) => {
+    CompCondPuesto.findByIdAndUpdate(id, cambiaEstado, { new: true }, (err, compCondPuestoActivado) => {
         if (err) {
             return res.status(400).json({
                 ok: false,
@@ -150,34 +149,35 @@ app.delete('/compTecObs/habilitar/:id', verificaToken, function(req, res) {
             });
         }
 
-        if (!compTecObsActivado) {
+        if (!compCondPuestoActivado) {
             return res.status(400).json({
                 ok: false,
                 err: {
-                    message: 'Competencia Tecnica  no encontrado'
+                    message: 'Competencia Condnica  no encontrado'
                 }
             });
         }
 
         res.json({
             ok: true,
-            compTecObs: compTecObsActivado
+            compCondPuesto: compCondPuestoActivado
         });
     });
 });
 
 /* 
-    Método para buscar los compTecObss de una empresa
+    Método para buscar los compCondPuestos de una empresa
 */
-app.get('/compTecObs/buscar/:termino/:empresa', verificaToken, function(req, res) {
+app.get('/compCondPuesto/buscar/:termino/:empresa', verificaToken, function(req, res) {
     let terminoB = req.params.termino;
     let regex = new RegExp(terminoB, "i");
     let empresaB = req.params.empresa;
 
-    CompTecObs.find({ comportamiento: regex, empresa: empresaB })
+    CompCondPuesto.find({ comportamiento: regex, empresa: empresaB })
         .populate('empresa')
-        .populate('competenciaTecnica')
-        .exec((err, compTecObs) => {
+        .populate('competenciaConductual')
+        .populate('puesto')
+        .exec((err, compCondPuesto) => {
             if (err) {
                 return res.status(400).json({
                     ok: false,
@@ -188,15 +188,15 @@ app.get('/compTecObs/buscar/:termino/:empresa', verificaToken, function(req, res
             // proceso.clave = null;
             res.json({
                 ok: true,
-                compTecObs
+                compCondPuesto
             });
         });
 });
 
-app.get("/compTecObs/contar/:idEmp", verificaToken, (req, res) => {
+app.get("/compCondPuesto/contar/:idEmp", verificaToken, (req, res) => {
     let id = req.params.idEmp;
 
-    CompTecObs.count({ estado: true }).exec((err, total) => {
+    CompCondPuesto.count({ estado: true }).exec((err, total) => {
         if (err) {
             return res.status(500).json({
                 ok: false,
